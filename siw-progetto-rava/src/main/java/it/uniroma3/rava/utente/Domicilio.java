@@ -14,7 +14,7 @@ import lombok.ToString;
 
 @Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString
 @Entity
-@Table(name = "domicilii")
+@Table(name = "domicili")
 public class Domicilio {
 	
 	@Id

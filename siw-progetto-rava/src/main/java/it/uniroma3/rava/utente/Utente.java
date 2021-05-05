@@ -33,10 +33,10 @@ public class Utente {
 	private String telefono;
 	
 	@OneToMany(mappedBy = "utente")
-	private List<Domicilio> domicilio;
+	private List<Domicilio> domicilio;	//l'utente può definire una collezione di domicili (stile Amazon)
 	
 	@OneToMany(mappedBy = "utente")
-	private List<Prenotazione> prenotazioni;
+	private List<Prenotazione> prenotazioni;	//l'utente conosce tutte le sue prenotazioni
 	
 	/*l'utente deve conoscere tutta la lista dei suoi ordini?*/
 	@OneToMany(mappedBy="utente")

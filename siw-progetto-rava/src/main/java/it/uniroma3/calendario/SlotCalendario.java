@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import it.uniroma3.rava.prenotazione.Area;
@@ -33,8 +35,8 @@ public class SlotCalendario {
 	@Column(nullable = false)
 	private int postiDisponibili;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "area_id")
-	private Area area;
+	private Area area;					//ogni Slot è realtiva a 0 o 1 Area
 
 }

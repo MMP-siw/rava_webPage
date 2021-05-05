@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import it.uniroma3.calendario.SlotCalendario;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,6 +32,9 @@ public class Area {
 	private int personeMax;
 	
 	@OneToMany(mappedBy = "aree")
-	private List<Prenotazione> prenotazioni;
+	private List<Prenotazione> prenotazioni;	//ogni area ha una lista di prenotazioni da tener traccia
+	
+	@OneToMany(mappedBy="area")
+	private List<SlotCalendario> slots;		//ogni area ha N slot che caratterizzano gli orari di prenotazione
 
 }
