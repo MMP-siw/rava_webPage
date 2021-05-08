@@ -3,6 +3,7 @@ package it.uniroma3.rava.ristorante;
 import java.util.List;
 
 import it.uniroma3.calendario.Calendario;
+import it.uniroma3.rava.menu.Menu;
 import it.uniroma3.rava.prenotazione.Area;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -19,5 +20,6 @@ public class Rava {
 	private Calendario calendario;
 	private Area areaEsterno;
 	private Area areaInterno;
+	private Menu menu;
 
 }

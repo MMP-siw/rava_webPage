@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -14,6 +15,7 @@ import lombok.ToString;
 
 @Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString
 @Entity
+@NamedQuery(name="getAllDomicili",query="SELECT d FROM domicili d")
 @Table(name = "domicili")
 public class Domicilio {
 	
@@ -21,13 +23,13 @@ public class Domicilio {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	
-	@Column(nullable = false)
+	@Column
 	private String tipo; //per tipo si intende piazza, via, vicolo ecc...
-	@Column(nullable = false)
+	@Column
 	private String indirizzo;
-	@Column(nullable = false)
+	@Column
 	private int civico;
-	@Column(nullable = false)
+	@Column
 	private int cap;
 	
 

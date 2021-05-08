@@ -13,10 +13,12 @@ import it.uniroma3.rava.menu.Special;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString
+@NoArgsConstructor
 @Entity
 @Table(name = "lineeOrdine")
 public class LineaOrdine {
@@ -34,5 +36,8 @@ public class LineaOrdine {
 	
 	@OneToOne
 	private Special special;
+	
+	@Column
+	private float subTotale;
 
 }

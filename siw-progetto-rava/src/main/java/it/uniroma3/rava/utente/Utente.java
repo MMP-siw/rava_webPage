@@ -6,8 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
+
 import it.uniroma3.rava.ordine.Ordine;
 import it.uniroma3.rava.prenotazione.Prenotazione;
 import lombok.*;
@@ -21,15 +24,15 @@ public class Utente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	
-	@Column(nullable = false)
+	@Column
 	private String nome;
-	@Column(nullable = false)
+	@Column
 	private String cognome;
-	@Column(nullable = false)
+	@Column
 	private String email;
-	@Column(nullable = false)
+	@Column
 	private String psw;
-	@Column(nullable = false)
+	@Column
 	private String telefono;
 	
 	@OneToMany(mappedBy = "utente")
@@ -41,6 +44,22 @@ public class Utente {
 	/*l'utente deve conoscere tutta la lista dei suoi ordini?*/
 	@OneToMany(mappedBy="utente")
 	private List<Ordine> ordiniEffettuati;
+	
+	
+	
+	/*
+	 * Aggiunta di un ordine nella lista degli ordini
+	 */
+	public void addOrdine(Ordine o)
+	{
+		this.ordiniEffettuati.add(o);
+	}
+	
+	/*
+	 * Resitutuzione di un domiciolio specifico-->necessario per l'operazione di sistema
+	 *@selezionaDomiciolio
+	 */
+	
 
 
 }

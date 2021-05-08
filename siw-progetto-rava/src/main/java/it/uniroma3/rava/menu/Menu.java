@@ -24,7 +24,7 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	
-	@Column(nullable = false)
+	@Column
 	private String tipo; //se menu della sera, pranzo ecc...
 	
 	@ManyToMany(mappedBy = "menu")
