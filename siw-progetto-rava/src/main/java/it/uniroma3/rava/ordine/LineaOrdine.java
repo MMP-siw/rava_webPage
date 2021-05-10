@@ -9,7 +9,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import it.uniroma3.rava.menu.Prodotto;
-import it.uniroma3.rava.menu.Special;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,12 +29,8 @@ public class LineaOrdine {
 	@Column(nullable = false)
 	private int quantita;
 	
-	/*la linea d'ordine può avere o solo uno o solo l'altro, come si blocca la cosa?*/
 	@OneToOne
 	private Prodotto prodotto;
-	
-	@OneToOne
-	private Special special;
 	
 	@Column
 	private float subTotale;

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import it.uniroma3.calendario.SlotCalendario;
 import it.uniroma3.rava.utente.Utente;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -40,7 +42,7 @@ public class Prenotazione {
 	private Utente prenotante;
 	
 	@OneToOne
-	@JoinColumn(name = "area_id")
-	private Area area;
+	@JoinColumn(name = "slotcalendario_id")
+	private SlotCalendario slot;
 
 }
