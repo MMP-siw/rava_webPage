@@ -1,0 +1,20 @@
+.h2 {
+	position: center;
+}
+
+.buttons {
+	display: flex;
+	flex-direction: row;
+    align-items: left;
+    margin-top: 20px;
+}
+
+#submit {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#goBack {
+	margin-left: 20px;
+	margin-right: 20px;
+}
