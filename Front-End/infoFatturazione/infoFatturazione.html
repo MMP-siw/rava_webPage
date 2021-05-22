@@ -1,0 +1,49 @@
+<!--Info di fatturazione-->
+<!--Qui il cliente inserisce i dati relativi all'ordine, ovvero, l'orario di consegna/ritiro e un commento sull'ordine-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<!--Da modificare, rendere i title dinamico-->
+	<title>Info Fatturazione</title>
+	<link rel="stylesheet" href="infoFatt.css">
+</head>
+<body>
+		<nav>
+				<!--Inseriremo qui il collegamento al frammento della home page-->
+		</nav>
+		<head>
+			<!--I primi campi sono rimepiti di default-->
+			<div class="title"><h2>Info Fatturazione</h2></div>	<!--Il valore dovrebbe essere definito nel file di internazionalizzazione-->
+			<form method="POST" th:object="${ordine}">
+				
+					<div class="chiave">Nome: </div>
+					<div class="valore">
+							<input  class="nonModificabili" type="text" name="nomeCliente" value="nomeCliente" th:value="${persona.nome}" readonly>
+					</div>
+				<div class="chiave">Cognome:</div>
+					<div class="valore">
+						<input type="text" name="cognomeCliente" class="nonModificabili" value="cognomeCliente" th:values="${persona.cognome}" readonly>
+					</div>
+				</div>
+
+				<div class="orologio">
+					<span id="first">Orario Consegna/Ritiro:</span>
+					<span id="sec">
+						<input class="clock" type="time" min="09:00" max="23:00" th:field="*{orario}" name="consegna">
+						<input type="radio" name="consegna" >appna possibile
+					</span>
+				</div>
+				<div class="chiave">
+					Commento:</div>
+				<div class="valore">
+						<textarea placeholder="Insersci qulocosa che dovremmo sapere" rows="10" cols="30"></textarea>
+				</div>
+				<span><button type="submit" name="prosegui">Prosegui</button></span>
+				<span><button type="submit" name="Indietro">Indietro</button></span>
+
+
+			</form>
+		</head>
+</body>
+</html>

@@ -1,0 +1,151 @@
+body
+{
+  margin-left: 1%;
+}
+head
+{
+  height: 50%;
+}
+
+.title
+{
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+  
+  height: 10%;
+  width: 100%;
+
+}
+
+
+
+
+
+
+.chiave
+{
+  margin-left: 1%;
+  font-size: 1.4em;
+  display: block;
+
+}
+.valore
+{
+  
+  margin-top: 0.5%;
+  margin-left: 5%;
+  height: %;
+  width: 50%;
+}
+ input[type=text]
+ {
+  width: 100%;
+  height: 3em;
+  font-family: helvetica;
+  font-size:;
+  background-color: rgb(207, 220, 227);
+ }
+ textbox
+ {
+  height: 4em;
+ }
+ .orologio
+ {
+  display: flex;
+ 
+  width: 40%;
+  margin-top: 2%;
+  font-size: 1.4em;
+  
+  margin-left: 1%;
+   margin-right: 5%;
+ }
+ #first
+ {
+  margin-right: 5%;
+  margin-top: 3%;
+ }
+ .clock {
+  border: none;
+  
+  font-size: 14px;
+  font-family: helvetica;
+  width: 7em;
+  height: 5em;
+  border-radius: 10%;
+  border-style: solid;
+
+  
+}
+
+/* contenitore attorno a ai diversi oggetti (ora, minuti, am/pm e la x per reset)*/
+.clock::-webkit-datetime-edit-fields-wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: 200%;
+  width: 100%;
+
+}
+
+/* spazio tra le componenti i due punti*/
+.clock::-webkit-datetime-edit-text {
+  font-size: 2em;
+  height: 100%;
+  width: 10%;
+ 
+}
+
+/* Il  nome convenzionale per ogni singolo componente (ora, minuto...)
+`-webkit-datetime-edit-{field}-field` */
+
+/* Ore */
+.clock::-webkit-datetime-edit-hour-field {
+  font-size: 2em;
+  border-radius: 15%;
+  height: 100%;
+  width: 40%;
+ 
+  text-align: center;
+ 
+}
+
+/* Minuti*/
+.clock::-webkit-datetime-edit-minute-field {
+  font-size: 2em;
+  border-radius: 15%;
+  height: 100%;
+  width: 40%;
+  text-align: center;
+ }
+
+/* AM/PM */
+.clock::-webkit-datetime-edit-ampm-field {
+  
+  border-radius: 15%;
+  
+  
+}
+
+/* 'X' per resettare */
+.clock::-webkit-clear-button {
+  display: none;
+}
+
+/* frecce sue e giu*/
+.clock::-webkit-inner-spin-button {
+  display: none;
+}
+/*L'orologio*/
+.clock::-webkit-calendar-picker-indicator 
+{
+
+ font-size: 1em;  
+   
+}
+textarea
+{
+  resize: none; /*rimozione del fattarello giu a sinistra*/
+  outline: none; /*rimozione del glow blu alla selezione*/
+
+}
