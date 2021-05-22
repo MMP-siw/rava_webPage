@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title=#{title.formDomicilio})"> </head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<div>
+		<h4>Inserisci i dati del domicilio</h4>
+	</div>
+	<form th:action="@{/domicilio}" method="POST" th:object="${domicilio}">
+		<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>		
+		<div>
+			<div>
+				<span>Via/Vicolo/Piazza...:</span>
+				<span><input type="text" th:field="*{tipo}" /></span>
+				<span th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"></span>
+			</div>		
+			<div>
+				<span>Indirizzo:</span>
+				<span><input type="text" th:field="*{indirizzo}" /></span>
+				<span th:if="${#fields.hasErrors('indirizzo')}" th:errors="*{indirizzo}"></span>
+			</div>
+			<div>
+				<span>Civico:</span>
+				<span><input type="text" th:field="*{civico}" /></span>
+				<span th:if="${#fields.hasErrors('civico')}" th:errors="*{civico}"></span>
+			</div>
+			<div>
+				<span>Cap:</span>
+				<span><input type="text" th:field="*{cap}" /></span>
+				<span th:if="${#fields.hasErrors('cap')}" th:errors="*{cap}"></span>
+			</div>
+			<div>
+				<span><button type="submit">Invio</button></span>
+			</div>
+		</div>
+	</form>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>
