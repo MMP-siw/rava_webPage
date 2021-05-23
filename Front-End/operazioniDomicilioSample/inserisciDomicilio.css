@@ -58,16 +58,14 @@ body {
 }
 
 
-.input {
+.flex .input {
 	width: 35%
 	padding: 12px 20px;
 	border-radius: 4px;
 }
 
-.input[type=text] {
-	background-color: red;
-	padding: 12px 20px;
-	box-sizing: border-box;
+.flex .input[type=text] {
+	background-color: #f1f1f1;;
 }
 
 .buttons {
