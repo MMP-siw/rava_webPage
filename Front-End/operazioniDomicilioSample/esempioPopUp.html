@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="esempioPopUp.css">
+</head>
+<div class = "br">
+	<button class="open-button" onclick="openForm()">Open Pop-Up</button>
+	<script>
+		function openForm() {
+  		document.getElementById("popUp").style.display = "block";
+		}
+
+		function closeForm() {
+  		document.getElementById("popUp").style.display = "none";
+		}
+	</script>
+</div>
+<div class = "pop-up" id = "popUp">
+	<div class = "container">
+	<div class = "header"><p>Info Domicilio</p></div>
+	<div class ="dati">
+		<div class ="highlight"><p>Indirizzo ecc...</p></div>
+		<p>Citofono...</p>
+		<p>Palazzina..</p>
+		<p>Interno...</p>
+	</div>
+	<div class = "buttons">
+		<input type ="submit" id="submit" value="Elimina" onclick="closeForm()">
+		<button onclick="goBack()" id="goBack">Indietro</button>
+			<script>
+				function goBack() {
+ 				window.history.back();
+				}
+			</script>
+	</div>
+</div>
+</div>
+</body>
+</html>
