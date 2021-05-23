@@ -1,0 +1,37 @@
+*{
+	margin: 0;
+}
+
+body{
+	font-family: AdobeGothic Std;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.header h1 {
+	color: 202020ff;
+	margin-top: 20px;
+	margin-bottom: 25px;
+	font-size: x-large;
+}
+
+.header h3 {
+	color: 707070ff;
+	margin-top: 25px;
+	margin-bottom: 15px;
+	font-size: large;
+}
+
+.list {
+	color: 202020ff;
+	margin-top: 25px;
+}
+
+.inserisci a {
+	text-decoration: none;
+	color: 707070ff;
+}
+
+.inserisci a:hover {
+	text-decoration: none;
+}
