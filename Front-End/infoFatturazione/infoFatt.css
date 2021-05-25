@@ -1,80 +1,44 @@
 body
 {
   margin-left: 1%;
+  font-family: adobe-gothic-std, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+
 }
 head
 {
-  height: 50%;
+  height: 100%;
+  width: 100%;
 }
 
-.title
+#title
 {
   font-size: 2em;
-  display: flex;
-  align-items: center;
+  margin-left: 5%;
   
   height: 10%;
-  width: 100%;
-
 }
-
-
-
-
-
-
-.chiave
+#title p
 {
-  margin-left: 1%;
-  font-size: 1.4em;
-  display: block;
-
 }
-.valore
+.nonModificabili
 {
-  
-  margin-top: 0.5%;
-  margin-left: 5%;
-  height: %;
-  width: 50%;
+  color: rgb(179, 179, 179);
 }
- input[type=text]
- {
-  width: 100%;
-  height: 3em;
-  font-family: helvetica;
-  font-size:;
-  background-color: rgb(207, 220, 227);
- }
- textbox
- {
-  height: 4em;
- }
- .orologio
- {
-  display: flex;
- 
-  width: 40%;
-  margin-top: 2%;
-  font-size: 1.4em;
-  
-  margin-left: 1%;
-   margin-right: 5%;
- }
- #first
- {
-  margin-right: 5%;
-  margin-top: 3%;
- }
+
+
  .clock {
   border: none;
   
   font-size: 14px;
   font-family: helvetica;
-  width: 7em;
-  height: 5em;
+  width: 8%;
+  height: 2em;
   border-radius: 10%;
   border-style: solid;
+  margin-left: 2%;
 
   
 }
@@ -147,5 +111,50 @@ textarea
 {
   resize: none; /*rimozione del fattarello giu a sinistra*/
   outline: none; /*rimozione del glow blu alla selezione*/
+  background-color: rgb(237, 242, 239);
+  border-radius: 5%;
+  width: 50%;
 
 }
+#elements
+{
+  
+  margin-top: -2%;
+}
+
+#elements li
+{
+  list-style-type: none; /*rimozione dei bullet point della lista*/
+  padding: 15px;
+  margin-left: 5%;
+  margin-right: 10%;
+}
+#Pianifica
+{
+  margin-left: 3%;
+}
+.btn
+{
+  border-radius: 20%;
+  height: 10%;
+  width: 8%;
+  margin-left: 10%;
+   
+}
+#conferma:hover
+{
+  background-color: rgb(51, 255, 51);
+  color: white;
+  transition: 0.2s;
+}
+#indietro:hover
+{
+   background-color: red;
+  color: white;
+  transition: 0.2s;
+}
+.btn h3
+{
+  font-family:adobe-gothic-std, sans-serif;
+}
+

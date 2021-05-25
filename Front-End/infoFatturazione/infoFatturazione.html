@@ -13,37 +13,54 @@
 				<!--Inseriremo qui il collegamento al frammento della home page-->
 		</nav>
 		<head>
+			<!--Lo scrpit abilita la scelta dell'orario solo se è stato selezionato il radioBotton Pianifica-->
+			<script type="text/javascript">
+
+										
+   						 function abilitaOrario()
+   						  {
+       								 var radio = document.getElementById("Pianifica");	//prendi la radio orario
+       								 var orario = document.getElementById("PianificaOrario");	//prendi il l'input time 
+        							orario.disabled = radio.checked ? false : true;	//abilita orario in base a radio (se checked o meno)
+        							if (!orario.disabled) 	//se non è disabilitato
+        							{
+           							 	orario.focus();		//abilitalo
+       					 			}
+    						}
+
+							</script>
 			<!--I primi campi sono rimepiti di default-->
-			<div class="title"><h2>Info Fatturazione</h2></div>	<!--Il valore dovrebbe essere definito nel file di internazionalizzazione-->
-			<form method="POST" th:object="${ordine}">
-				
-					<div class="chiave">Nome: </div>
-					<div class="valore">
-							<input  class="nonModificabili" type="text" name="nomeCliente" value="nomeCliente" th:value="${persona.nome}" readonly>
-					</div>
-				<div class="chiave">Cognome:</div>
-					<div class="valore">
-						<input type="text" name="cognomeCliente" class="nonModificabili" value="cognomeCliente" th:values="${persona.cognome}" readonly>
-					</div>
-				</div>
-
-				<div class="orologio">
-					<span id="first">Orario Consegna/Ritiro:</span>
-					<span id="sec">
-						<input class="clock" type="time" min="09:00" max="23:00" th:field="*{orario}" name="consegna">
-						<input type="radio" name="consegna" >appna possibile
-					</span>
-				</div>
-				<div class="chiave">
-					Commento:</div>
-				<div class="valore">
-						<textarea placeholder="Insersci qulocosa che dovremmo sapere" rows="10" cols="30"></textarea>
-				</div>
-				<span><button type="submit" name="prosegui">Prosegui</button></span>
-				<span><button type="submit" name="Indietro">Indietro</button></span>
-
-
-			</form>
+			<div id="title">
+				<p >Info fatturazione</p>
+			</div>
+			<div id="elements">
+				<ul>
+					<li>Nome: <span class="nonModificabili"><!--Verra inserito tramite thymeleaf-->Pietro</span></li>
+					<li>Cognome: <span class="nonModificabili"><!--Verrà inseirto tramite tymeleaf-->Quadrini</span></li>
+					<li>Indirizzo: <span class="nonModificabili"><!--Verrà inserito tramite tymeleaf-->Via del Corso 139 Roma 00145</span></li>
+					<form id="form">
+						<li>Orario: 
+							<span>
+								<input type="radio" value="Prima possibile" id="Prima possibile" name="consegna" onclick="abilitaOrario()" >
+									<label for="Prima possibile">Prima possibile</label>
+								<input type="radio" value="" id="Pianifica" name="consegna" value="Pianifica" onclick="abilitaOrario()">
+									<label for="Pianifica"> Pianifica</label>
+								<input type="time" class="clock" name="orarioConsegna" id="PianificaOrario" min="9:00" max="23:00" disabled="disabled">
+								
+							</span>
+						</li>
+						<li>
+							<label for="commento">Commento:</label><br>
+							<textarea placeholder="Be nice" rows="10" cols="50"></textarea>
+						</li>
+						<span>
+							
+							<button  class="btn" id="indietro" type="submit" form="form" value="Indietro"><h3>Indietro</h3></button>
+							<button class="btn" id="conferma" type="submit" form="form" value="Conferma"><h3>Conferma</h3></button>
+						</span>
+					</form>
+				</ul>
+			</div>
 		</head>
 </body>
 </html>
