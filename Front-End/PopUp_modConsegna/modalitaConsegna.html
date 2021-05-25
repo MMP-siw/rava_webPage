@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+<head>
+	<title>Home</title>
+	
+	<link rel="stylesheet" type="text/css" href="../operazioniDomicilioSample/esempioPopUp.css">
+	<link rel="stylesheet" type="text/css" href="modalitaConsegna.css">
+</head>
+<div class = "br">
+	<button class="open-button" onclick="openForm()">Open Pop-Up</button>
+	<script>
+		function openForm() //Apuretura del pop-up
+		{
+  		document.getElementById("popUp").style.visibility = "visible";
+		}
+
+		function closeForm() //chiusura del pop-uè
+		{
+  		document.getElementById("popUp").style.visibility = "hidden";
+		}
+	</script>
+</div>
+<div  id="popUp" class="popUp">
+	<div class = "container">
+		<div class = "header"><p>Seleziona opzione</p></div>
+		<div class ="section"> 
+			<a href="#" class="btn"><h2>A domicilio</h2></a>
+			<br>
+			<a href="#" class="btn"><h2>Asporto</h2></a>
+		</div>
+		<div class="footer">
+			<button onclick="goBack()" id="goBack">Annulla</button>
+				<script>			
+					function goBack() 
+					{											
+ 						window.history.back();	//torna indietro alla pagina precedente
+					}
+				</script>
+		</div>
+	</div>
+	
+</div>
+</body>
+</html>
