@@ -139,11 +139,17 @@ textarea
   height: 10%;
   width: 8%;
   margin-left: 10%;
+ 
    
+}
+#conferma
+{
+  background-color: rgb(51, 255, 51);
+  
 }
 #conferma:hover
 {
-  background-color: rgb(51, 255, 51);
+  background-color: rgb(60, 255, 51);
   color: white;
   transition: 0.2s;
 }

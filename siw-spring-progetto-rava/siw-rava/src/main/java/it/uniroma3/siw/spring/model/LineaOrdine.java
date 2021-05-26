@@ -12,7 +12,7 @@ import lombok.*;
 
 @Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString
 @NoArgsConstructor
-@Entity
+@Entity @Data
 @Table(name = "lineeOrdine")
 public class LineaOrdine {
 	
