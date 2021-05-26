@@ -7,7 +7,6 @@
   width: 33.33%;
   height: 60%;
   
-  
  }
 
  .container
@@ -55,7 +54,7 @@
  	box-shadow: 2px 2px 2px #333333, 5px 6px 3px #707070ff;
  	background-color: rgb(255, 230, 110);
  }
- #goBack
+ #closeForm
  {
   appearance: button;
   font-size: 1em;
@@ -63,9 +62,8 @@
  	border-radius: 12px;
   z-index: 1;
  }
- #goBack:hover
+ #closeForm:hover
  {
  	color: white;
  	background-color: rgb(255, 71, 26);
- 	transition: 0.3s;
  }
