@@ -5,12 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.*;
 
 @Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "domicili")
 public class Domicilio {
 	
@@ -26,5 +29,7 @@ public class Domicilio {
 	private int civico;
 	@Column
 	private int cap;
+	@ManyToOne
+	private Cliente  utente;
 
 }

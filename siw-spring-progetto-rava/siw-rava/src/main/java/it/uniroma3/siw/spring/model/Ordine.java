@@ -2,6 +2,8 @@ package it.uniroma3.siw.spring.model;
 
 import java.sql.Date; 
 import java.sql.Time;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,11 +18,12 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString
-@Entity
+@Entity @NoArgsConstructor
 @Table(name = "ordini")
 
 public class Ordine {
@@ -45,11 +48,12 @@ public class Ordine {
 	private String stato;	//definisce lo stato in cui si trova l'ordine, una volta creato è in stato di 
 							//preparazione, una volta completato, l'amministratore lo setta a termiato
 	@Column
-	private Time orarioConsegna;
+	private LocalTime orarioConsegna;
 	
-	@Column(nullable = false)
-	private Time orarioPrevisto;
-	
+	/*
+	 * @Column(nullable = false)
+		private Time orarioPrevisto;
+	*/
 	@OneToOne
 	private Domicilio indirizzoConsegna; //deve essere selezionato dal domicilio dell'utente
 	   									 //però l'utente ha una lista di domicilii, come ci si arriva?
@@ -97,7 +101,41 @@ public class Ordine {
 	 */
 	public void confermaOrdine(Cliente c)
 	{
-		this.setDestinatario(c);
+		this.setDestinatario(c);	//
+		c.addOrdine(this);
+	}
+
+	/*
+	 * La logica dietro questo set è semplice:
+	 * 
+	 * CASE 1:
+	 * Se il cliente inserisce "prima Possibile" l'input time è null
+	 * Settiamo un orario di consegna indicativo( this.actualTime()+30/40 minuti (potrebbe essere migliorato associando
+	 * per ogni cap un tempo stimato di consegna [30 minuti di preparazione + tempo previsto di consegna])
+	 * 
+	 * CASE 2:
+	 * Se il cliente inserice "pianifica" e definisce un tempo di consegna 
+	 * Settimao l'orario di consegna all'orario indicato dal cliente
+	 * 
+	 * In entrambi i casi il commento viene settato
+	 * 
+	 * Vedi caso d'uso @NuovoOrdineDomicilio passo @inserisciOrario
+	 */
+	public void setInfoFatturazione(LocalTime time, String commento) 
+	{
+		//Prima possibile
+		if(time==null)
+		{
+			this.setOrarioConsegna(LocalTime.now().plusMinutes(30));		//per semplicità ipotizziamo 30 minuti
+		}
+		//pianificato
+		else
+		{
+			this.setOrarioConsegna(time);
+		}
+		this.setCommento(commento);
+		
+		
 	}
 
 }
