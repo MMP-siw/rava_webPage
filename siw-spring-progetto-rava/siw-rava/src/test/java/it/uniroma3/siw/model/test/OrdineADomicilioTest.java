@@ -12,8 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -21,13 +24,13 @@ import it.uniroma3.siw.spring.model.Cliente;
 import it.uniroma3.siw.spring.model.Domicilio;
 import it.uniroma3.siw.spring.model.Ordine;
 import it.uniroma3.siw.spring.model.Prodotto;
+import it.uniroma3.siw.spring.service.ClienteService;
 import it.uniroma3.siw.spring.service.DomicilioService;
 import it.uniroma3.siw.spring.service.LineaOrdineService;
 import it.uniroma3.siw.spring.service.OrdineService;
 import it.uniroma3.siw.spring.service.ProdottoService;
 
-@ExtendWith(SpringExtension.class)
-@DataJpaTest
+
 /*
  * Il floe di un ordine a domicilio è il seguente:
  * -1)Creazione dell'ordine
@@ -169,7 +172,7 @@ class OrdineADomicilioTest
 	{
 		this.ordine.confermaOrdine(cliente);
 		this.oS.inserisci(ordine);
-		this.cS.inserisci(cliente);
+		this.cs.inserisci(cliente);
 		
 		
 	}

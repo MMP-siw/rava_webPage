@@ -22,6 +22,6 @@ public interface DomicilioRepository extends CrudRepository<Domicilio, Long>
 	
 	
 	
-	public List<Domicilio>getByUtente(Cliente c);
+	public List<Domicilio>findByUtente(Cliente c);
 
 }
