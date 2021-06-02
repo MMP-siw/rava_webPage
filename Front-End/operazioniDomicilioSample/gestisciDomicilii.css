@@ -8,18 +8,24 @@ body{
 	margin-right: 50px;
 }
 
-.header h1 {
-	color: 202020ff;
-	margin-top: 20px;
-	margin-bottom: 25px;
-	font-size: x-large;
+.int {
+	height: 250px;
+	width: auto;
+	background-color: #ffdf6cff
 }
 
-.header h3 {
-	color: 707070ff;
-	margin-top: 25px;
-	margin-bottom: 15px;
-	font-size: large;
+.titolo h1 {
+	color: #202020ff;
+	font-size: 55px;
+	padding: 5px 20px;
+}
+
+.titolo h3 {
+	color: #707070ff;
+	font-size: 20px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	padding: 5px 20px;
 }
 
 .list {
@@ -27,9 +33,24 @@ body{
 	margin-top: 25px;
 }
 
+.testo a {
+	text-decoration: none;
+	color: 707070ff;
+	padding: 10px 12px;
+	font-size: 20px;
+	margin-bottom: 5px;
+}
+
+.testo a:hover {
+	text-decoration: none;
+}
+
 .inserisci a {
 	text-decoration: none;
 	color: 707070ff;
+	padding: 10px 12px;
+	font-size: 20px;
+	margin-top: 5px;
 }
 
 .inserisci a:hover {
