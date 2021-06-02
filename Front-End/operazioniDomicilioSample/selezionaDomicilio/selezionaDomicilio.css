@@ -1,5 +1,16 @@
-.h2 {
-	position: center;
+* {
+	font-family: AdobeGothic Std;
+}
+
+body {
+
+	font-family: adobe-gothic-std, sans-serif;
+	font-style: normal;
+}
+
+h2 {
+	padding: 25px 10px 0px 10px;
+	font-size: 35px;
 }
 
 .buttons {
@@ -9,12 +20,60 @@
     margin-top: 20px;
 }
 
+form {
+	padding: 10px 25px;
+}
+
+input[type=radio] {
+	padding: 5px 5px 5px 5px;
+}
+
+a {
+	padding: 0px 0px 5px 0px;
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #707070ff;
+}
+
 #submit {
 	margin-left: 20px;
 	margin-right: 20px;
+	color: black;
+	background-color: white;
+	border: none;
+	height: 50px;
+	font-size: 15px;
+	width: 150px;
+}
+
+#submit:hover {
+	background-color: green;
+	color: white;
+	border-radius: 5px;
 }
 
 #goBack {
 	margin-left: 20px;
 	margin-right: 20px;
+	background-color: white;
+	border: none;
+	height: 50px;
+	font-size: 15px;
+	width: 150px;
+}
+
+#goBack:hover {
+	background-color: red;
+	border-radius: 5px;
+	color: white;
+}
+
+.testa {
+	height: 300px;
+	width: 100%;
+	background-color: #ffdf6cff;
 }

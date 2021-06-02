@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="eliminaOrdine.css">
+</head>
+<div class = "pop-up">
+	<div class = "header"><p>Info Ordine</p></div>
+	<div class ="dati">
+		<div class ="highlight"><p>Sei sicuro di voler eliminare questo ordine?</p></div>
+		<p>Ordine xx</p>
+	</div>
+	<div class = "buttons">
+		<input type ="submit" id="submit" value="Elimina">
+		<button onclick="goBack()" id="goBack">Indietro</button>
+			<script>
+				function goBack() {
+ 				window.history.back();
+				}
+			</script>
+	</div>
+</div>
+</body>
+</html>
