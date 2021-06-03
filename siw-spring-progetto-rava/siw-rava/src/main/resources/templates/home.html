@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/fogliCss/provaTendinaUtente.css}">
+	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
+</head>
+<body>
+    <div class="navbar">
+        <div class ="user">
+            <button class="dropbtn"><img th:src="@{/images/svg/user.svg}" height="75px" width="75px">
+                <i class="fa fa-caret-down"></i>
+            </button>
+          <div class="dropdown-content">
+            <a href="#"> Operazione 1</a>
+            <a href="#"> Operazione 2</a>
+          </div>
+        </div>
+    	<div class="logo">
+    		<img th:src="@{/images/svg/logo.svg}">
+    		<p>Caffe'<br>Bistrot<br>Aperitivi</p>
+    	</div>
+    	<div class="nameAndMenu">
+    		<h1>HAMBURGERIA RAVA</h1>
+    		<ul>
+    			<li><a href="#">Menu</a></li>
+    			<li><a href="#" th:text="#{navbar.prenota}">Prenota</a></li>
+    			<li><a href="#" th:text="#{navbar.dovesiamo}">Dove Siamo</a></li>
+    			<li><a href="#" th:text="#{navbar.contattaci}">Contatti</a></li>
+    		</ul>
+    	</div>
+    	<div class="logoSocial">
+    		<a id="ig" href="#"><img th:src="@{/images/svg/ig.svg}"></a>
+    		<a  id="fb" href="#"><img th:src="@{/images/svg/fb.svg}"></a>
+    	</div>
+    </div>
+
+    <div class="header">
+    	<div class="fade">
+    		<img th:src="@{/images/svg/logo.svg}">
+    		<div class="bgBlack"></div>
+    		<h1>HAMBURGERIA RAVA</h1>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+    	</div>
+    	<img th:src="@{/images/png/rava.jpeg}">
+    </div>
+
+    <div class="boxes">
+    	<div class="box">
+    		<img th:src="@{/images/png/rava.jpeg}">
+    		<div class="bg"></div>
+    		<h1>Menu</h1>
+    		<p>Lorem Ipsum dolorit sit amet</p>
+    		<div class="bottomBar">
+    			<h1 th:text="#{box.scopri}">Scopri di piu' ></h1>
+    		</div>
+    	</div>
+
+    	<a  th:href="ordinaProdotto" class="box">
+    		<img th:src="@{/images/png/rava.jpeg}">
+    		<div class="bg"></div>
+    		<h1 th:text="#{box.Order2}">Prenota</h1>
+    		<p>Lorem Ipsum dolorit sit amet</p>
+    		<div class="bottomBar">
+    			<h1 th:text="#{box.Order2}">Prenota</h1>
+    		</div>
+    	</a>
+    </div>
+</body>
+</html>
