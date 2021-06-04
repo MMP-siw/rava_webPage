@@ -16,8 +16,15 @@
 				<span th:text="*{prodotto.nome}"></span>
 				<span th:text="*{prodotto.descrizione}"></span>
 				<span th:text="*{prodotto.prezzo}"></span>
+			</a>
 			</li>
 			</ul>
-	</div>
+		</div>
+		<div th:object="${ordine}">
+			
+				<span ><h1>Total : </h1> </span>
+				<span><h1 th:text="*{totale}">100</h1></span>	<!--Da stilizzare logica funziona-->
+			
+		</div>
  </body>
 </html>

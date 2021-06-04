@@ -13,9 +13,9 @@
 			
    		</div>
     	
- 		  <span>
+ 		  <span th:object="${prodotto}">
  		  <!--Potrebbero essere dei bottoni in un form-->
- 		  <a th:href="inserisci" >Inserisci</a>
+ 		  <a th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'inserisci'}">Inserisci</a>
  		  <a href="selezionaProdotto.html">Back</a> 
  
     </div>
