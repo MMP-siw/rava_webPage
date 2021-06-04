@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import lombok.AllArgsConstructor;
@@ -26,11 +29,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
 @Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString
-@Entity @NoArgsConstructor
+@Entity 
 @Table(name = "ordini")
 
+
 public class Ordine {
+	
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,6 +73,15 @@ public class Ordine {
 	
 	@OneToMany( cascade= {CascadeType.PERSIST, CascadeType.REMOVE})	//in quanto è una composizione,
 	private List<LineaOrdine> lineeOrdine;												//le operaizoni devono riflettersi sulle linee
+	
+	
+	//Ho inserito il cotruttore poichè in @Noargs, non crea la cllezione
+	public Ordine ()
+	{
+		this.lineeOrdine=new ArrayList<>();
+	}
+	
+	
 	/*
 	 * vedi operazione @SelezionaProdotto
 	 * 
@@ -82,8 +97,11 @@ public class Ordine {
 		lio.setProdotto(p);					//settaggio del prodotto associato alla linea d'ordine
 		lio.setQuantita(qnt);				//settaggio del quantitativo selezionato
 		lio.setSubTotale(lio.getProdotto().getPrezzo()*qnt);	//settaggio del subtotale della linea(prezzoprodotto*qnt)
-		this.setTotale(totale+lio.getSubTotale());	//settaggio del totale dell'ordine
+		this.setTotale(totale+p.getPrezzo());	//settaggio del totale dell'ordine
+		 LoggerFactory.getLogger(this.getClass()).debug("Ho creato una nuova linea d'ordine: " + lio.toString());
 		this.lineeOrdine.add(lio);
+		 LoggerFactory.getLogger(this.getClass()).debug("Ho inserito la linea d'ordine nella lista [Size= "+ lineeOrdine.size()+ " ]");
+		 LoggerFactory.getLogger(this.getClass()).debug("Ecco il contenuto: "+ lineeOrdine.toString());
 	}
 	
 	/*

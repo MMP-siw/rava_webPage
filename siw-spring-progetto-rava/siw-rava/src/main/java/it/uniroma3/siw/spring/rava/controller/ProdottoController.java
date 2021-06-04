@@ -25,30 +25,30 @@ public class ProdottoController
 	
 	//Il validator non serve ancora
 	
-	/*
-	 * Utile nel caso d'uso @OrdineADomicilio e @OrdineDaAsporto
-	 * 
-	 */
-	@RequestMapping(value="/ordinaProdotto", method=RequestMethod.GET)
-	public String prendiTuttiIProdotti(Model model)
-	{
-		
-		model.addAttribute("prodotti", this.prodottoSer.tutti());
-		logger.debug(model.getAttribute("prodotti").toString());
-		return "selezionaProdotto.html";
-	}
-	/*
-	 * 
-	 * Utile nel caso d'uso @OrdineADomicilio e @OrdineDaAsporto
-	 * 
-	 */
-	@RequestMapping(value = "/prodotto/{id}", method = RequestMethod.GET)
-    public String getPersona(@PathVariable("id") Long id, Model model) {
-    	Prodotto prodotto = this.prodottoSer.prodottoPerId(id);
-		model.addAttribute("prodotto", prodotto);
-    	logger.debug("Hai selezionato il prodotto"+ prodotto.toString() );
-    	return "prodotto.html";
-    }	
+//	/*
+//	 * Utile nel caso d'uso @OrdineADomicilio e @OrdineDaAsporto
+//	 * 
+//	 */
+//	@RequestMapping(value="/ordinaProdotto", method=RequestMethod.GET)
+//	public String prendiTuttiIProdotti(Model model)
+//	{
+//		
+//		model.addAttribute("prodotti", this.prodottoSer.tutti());
+//		logger.debug(model.getAttribute("prodotti").toString());
+//		return "selezionaProdotto.html";
+//	}
+//	/*
+//	 * 
+//	 * Utile nel caso d'uso @OrdineADomicilio e @OrdineDaAsporto
+//	 * 
+//	 */
+//	@RequestMapping(value = "/prodotto/{id}", method = RequestMethod.GET)
+//    public String getPersona(@PathVariable("id") Long id, Model model) {
+//    	Prodotto prodotto = this.prodottoSer.prodottoPerId(id);
+//		model.addAttribute("prodotto", prodotto);
+//    	logger.debug("Hai selezionato il prodotto"+ prodotto.toString() );
+//    	return "prodotto.html";
+//    }	
 	
 	
 
