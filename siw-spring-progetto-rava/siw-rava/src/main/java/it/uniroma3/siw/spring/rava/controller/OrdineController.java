@@ -45,7 +45,7 @@ public class OrdineController
 	{
 		Prodotto prodotto=(Prodotto)model.getAttribute("prodotto");	//prendo il prodotto selezionato
 		logger.debug("Info sul prodotto inserito"+ prodotto.toString());
-		//ordine.creaLineaOrdine(prodotto, 1);				//creo la linea d'ordine e inserisco il prodotto
+		ordine.creaLineaOrdine(prodotto, 1);				//creo la linea d'ordine e inserisco il prodotto
 		model.addAttribute("ordine", ordine);
 		return "selezionaProdotto.html";
 		
