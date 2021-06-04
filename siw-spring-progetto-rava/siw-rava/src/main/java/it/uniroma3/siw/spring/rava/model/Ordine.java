@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -71,7 +72,7 @@ public class Ordine {
 	@ManyToOne
 	private Cliente utente;
 	
-	@OneToMany( cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy="ordine")	//in quanto è una composizione,
+	@OneToMany( cascade= {CascadeType.ALL},fetch=FetchType.EAGER, mappedBy="ordine")	//in quanto è una composizione,
 	private List<LineaOrdine> lineeOrdine;												//le operaizoni devono riflettersi sulle linee
 	
 	

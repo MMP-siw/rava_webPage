@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Home</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/fogliCss/provaTendinaUtente.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/esempioPopUp.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/modalitaConsegna.css}">
 	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
 </head>
 <body>
@@ -26,5 +27,40 @@
 				<span><h1 th:text="*{totale}">100</h1></span>	<!--Da stilizzare logica funziona-->
 			
 		</div>
+		<!--Potremmo inserire un if, cove se, l'ordine ha tot=0, allora non permette di andare avanti'-->
+		<button class="open-button" onclick="openForm()">Open Pop-Up</button>
+		<a href="home.html">Indietro</a>
+		<div class = "br"> 
+	
+		<script>
+		function openForm() //Apuretura del pop-up
+				{
+		  		document.getElementById("popUp").style.visibility = "visible";
+				}
+		
+				function closeForm() //chiusura del pop-uè
+				{
+		  		document.getElementById("popUp").style.visibility = "hidden";
+				}
+			</script>
+		</div>
+	<div  id="popUp" class="popUp"> 
+	<div class = "container">
+		<div class = "header"><p>Seleziona opzione</p></div>
+		<div class ="section"> 
+			<a th:href="settaDomicilio" class="btn"><h2>A domicilio</h2></a>
+			<br>
+			<a href="settaAsporto" class="btn"><h2>Asporto</h2></a>
+		</div>
+		<div class="footer">
+			<a onclick="closeForm()" id="closeForm" ><h2>Annulla</h2></a>
+		</div>
+		<script>			
+			function goBack() {											
+ 				window.history.back();	//torna indietro alla pagina precedente
+			}
+		</script>
+	</div>	
+</div>
  </body>
 </html>
