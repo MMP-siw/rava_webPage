@@ -30,7 +30,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 
-@Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString
+@Getter @Setter @AllArgsConstructor 
 @Entity 
 @Table(name = "ordini")
 
@@ -71,7 +71,7 @@ public class Ordine {
 	@ManyToOne
 	private Cliente utente;
 	
-	@OneToMany( cascade= {CascadeType.PERSIST, CascadeType.REMOVE})	//in quanto è una composizione,
+	@OneToMany( cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy="ordine")	//in quanto è una composizione,
 	private List<LineaOrdine> lineeOrdine;												//le operaizoni devono riflettersi sulle linee
 	
 	
@@ -91,17 +91,18 @@ public class Ordine {
 	 * aggiunge la linea d'ordine nella sua lista
 	 * @Matteo
 	 */
-	public void creaLineaOrdine(Prodotto p, int qnt)
+	public LineaOrdine creaLineaOrdine(Prodotto p, int qnt)
 	{
 		LineaOrdine lio= new LineaOrdine();	//creazione della linea di prodotto
 		lio.setProdotto(p);					//settaggio del prodotto associato alla linea d'ordine
 		lio.setQuantita(qnt);				//settaggio del quantitativo selezionato
+		lio.setOrdine(this);
 		lio.setSubTotale(lio.getProdotto().getPrezzo()*qnt);	//settaggio del subtotale della linea(prezzoprodotto*qnt)
 		this.setTotale(totale+p.getPrezzo());	//settaggio del totale dell'ordine
-		 LoggerFactory.getLogger(this.getClass()).debug("Ho creato una nuova linea d'ordine: " + lio.toString());
-		this.lineeOrdine.add(lio);
-		 LoggerFactory.getLogger(this.getClass()).debug("Ho inserito la linea d'ordine nella lista [Size= "+ lineeOrdine.size()+ " ]");
-		 LoggerFactory.getLogger(this.getClass()).debug("Ecco il contenuto: "+ lineeOrdine.toString());
+		
+		this.aggoungiLineaOrdine(lio);
+		
+		 return lio;
 	}
 	
 	/*
@@ -116,6 +117,14 @@ public class Ordine {
 		this.totale+=this.indirizzoConsegna.getCostoConsegna();
 	}*/
 	
+	public void aggoungiLineaOrdine(LineaOrdine lio) 
+	{
+		this.lineeOrdine.add(lio);
+		
+		
+	}
+
+
 	/*
 	 * Vedi operazione @condermaOrdine Progetto @NuovoOrdineADomicilio
 	 * @Matteo
