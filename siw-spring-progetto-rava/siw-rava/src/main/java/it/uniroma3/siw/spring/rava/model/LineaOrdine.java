@@ -5,12 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.*;
 
-@Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString
+@Getter @Setter @AllArgsConstructor 
 @NoArgsConstructor
 @Entity @Data
 @Table(name = "lineeOrdine")
@@ -28,5 +29,8 @@ public class LineaOrdine {
 	
 	@Column
 	private float subTotale;
+	
+	@ManyToOne
+	private Ordine ordine;
 
 }

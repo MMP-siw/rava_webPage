@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString
+@Getter @Setter @AllArgsConstructor 
 @Entity @NoArgsConstructor
 @Table(name = "prodotti")
 public class Prodotto {
