@@ -6,16 +6,16 @@
     <div>
     	
     	
-    	<div th:object="${prodotto}">
-    		<!--Nome del prodotto--><h4 th:text="*{nome}"></h4>
-			<span th:text="*{descrizione}">qui-va-titolo</span>
-			<span th:text="*{prezzo}">qui-va-cognome</span>
+    	<div>
+    		<!--Nome del prodotto--><h4 th:text="${prodotto.nome}"></h4>
+			<span th:text="${prodotto.descrizione}">qui-va-titolo</span>
+			<span th:text="${prodotto.prezzo}">qui-va-cognome</span>
 			
    		</div>
     	
- 		  <span th:object="${prodotto}">
+ 		  <span>
  		  <!--Potrebbero essere dei bottoni in un form-->
- 		  <a th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'inserisci'}">Inserisci</a>
+ 		  <a th:href="@{/ordine/{id}/prodotto/{id2}/inserisci (id=${ordine.id}, id2=${prodotto.id})}">Inserisci</a>
  		  <a href="selezionaProdotto.html">Back</a> 
  
     </div>
