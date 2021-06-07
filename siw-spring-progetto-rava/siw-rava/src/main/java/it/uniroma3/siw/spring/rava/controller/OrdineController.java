@@ -108,7 +108,7 @@ public class OrdineController
 		
 	}
 	
-	@RequestMapping(value="prodotto/{id}/settaDomicilio", method=RequestMethod.GET)
+	@RequestMapping(value="/prodotto/{id}/settaDomicilio", method=RequestMethod.GET)
 	public String settaModalitàDomicilio(Model model, @ModelAttribute("ordine") Ordine ordine, RedirectAttributes attributes)
 	{
 		ordine.setTipo("Domicilio");
