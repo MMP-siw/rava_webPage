@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.rava.service;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +26,10 @@ public class OrdineService
 		
 	}
 	
+	@Transactional 
+	public Ordine getOrdineById (Long id) {
+		Optional<Ordine> ris = this.ordineRepo.findById(id);
+		return ris.orElse(null);
+	}
 
 }

@@ -77,8 +77,6 @@ public class OrdineController
     	return "prodotto.html";
     }
 	
-	
-	
 	/*
 	 * Inserimento di un prodotto nell'ordine
 	 *passo 4)Inserimento del prodotto nell'ordine
@@ -108,6 +106,14 @@ public class OrdineController
 		
 	}
 	
+	@RequestMapping(value="ordine/{id}", method=RequestMethod.GET) 
+	public String ricapitoloOrdine(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("ordine", this.ordineService.getOrdineById(id));
+		return "ordine.html";
+			
+	}
+
+	
 	@RequestMapping(value="prodotto/{id}/settaDomicilio", method=RequestMethod.GET)
 	public String settaModalitàDomicilio(Model model, @ModelAttribute("ordine") Ordine ordine, RedirectAttributes attributes)
 	{
@@ -118,21 +124,6 @@ public class OrdineController
 		
 		return "selezionaDomicilio.html";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@RequestMapping(value="/domicilio", method=RequestMethod.GET)		//nel templeat va creato il link sul bottone
 																				//th:href="@{/domicilio}

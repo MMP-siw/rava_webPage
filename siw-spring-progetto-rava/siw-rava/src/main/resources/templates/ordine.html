@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/esempioPopUp.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/modalitaConsegna.css}">
+	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
+</head>
+<body>
+<div th:if="${ordine}" th:object="${ordine}">
+<h1>Ricapitolo ordine</h1>
+<th:block th:each = "lio : ${lineeOrdine}">
+	<div th:text="*{${lio.prodotto} + ' ' + ${lio.quantita} + ' ' + ${lio.subTotale}}">ccc</div>
+</th:block>
+</div>
