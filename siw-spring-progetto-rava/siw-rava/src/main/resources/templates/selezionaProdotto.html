@@ -29,9 +29,13 @@
 		</div>
 		<!--Potremmo inserire un if, cove se, l'ordine ha tot=0, allora non permette di andare avanti'-->
 		<button class="open-button" onclick="openForm()">Open Pop-Up</button>
+
 		<a href="/home">Indietro</a>
+		<a href="home.html">Indietro</a>
+		<a href="ordine.html" th:href="@{'/ordine' + '/' + ${ordine.id}}"><button class = "button">Conferma</button></a>
+
 		<div class = "br"> 
-	
+	    
 		<script>
 		function openForm() //Apuretura del pop-up
 				{
