@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.spring.rava.model.Ordine;
+import it.uniroma3.siw.spring.rava.model.Prodotto;
 import it.uniroma3.siw.spring.rava.repository.OrdineRepository;
 
 @Service
@@ -26,10 +27,15 @@ public class OrdineService
 		
 	}
 	
-	@Transactional 
-	public Ordine getOrdineById (Long id) {
-		Optional<Ordine> ris = this.ordineRepo.findById(id);
-		return ris.orElse(null);
-	}
+	@Transactional
+	public Ordine trovaPerId(Long id)
+	{
+		Optional<Ordine> optional = this.ordineRepo.findById(id);
+		if (optional.isPresent())
+			return optional.get();
+		else 
+			return null;
+		}
+	
 
 }

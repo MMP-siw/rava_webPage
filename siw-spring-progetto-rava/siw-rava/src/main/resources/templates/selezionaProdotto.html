@@ -13,7 +13,7 @@
 		<ul th:each="prodotto : ${prodotti}">
 			<li>
 			<a href="prodotto.html"
-				   th:href="@{'/prodotto' + '/' + ${prodotto.id}}">
+				th:href="@{/ordine/{id}/prodotto/{id2} (id=${ordine.id}, id2=${prodotto.id})}">
 				<span th:text="*{prodotto.nome}"></span>
 				<span th:text="*{prodotto.descrizione}"></span>
 				<span th:text="*{prodotto.prezzo}"></span>
@@ -21,10 +21,10 @@
 			</li>
 			</ul>
 		</div>
-		<div th:object="${ordine}">
+		<div>
 			
 				<span ><h1>Total : </h1> </span>
-				<span><h1 th:text="*{totale}">100</h1></span>	<!--Da stilizzare logica funziona-->
+				<span><h1 th:text="${ordine.totale}">100</h1></span>	<!--Da stilizzare logica funziona-->
 			
 		</div>
 		<!--Potremmo inserire un if, cove se, l'ordine ha tot=0, allora non permette di andare avanti'-->
@@ -49,7 +49,7 @@
 	<div class = "container">
 		<div class = "header"><p>Seleziona opzione</p></div>
 		<div class ="section"> 
-			<a th:href="settaDomicilio" class="btn"><h2>A domicilio</h2></a>
+			<a th:href="@{'/ordine' + '/' + ${ordine.id} + '/' + 'settaDomicilio'}" class="btn"><h2>A domicilio</h2></a>
 			<br>
 			<a href="settaAsporto" class="btn"><h2>Asporto</h2></a>
 		</div>

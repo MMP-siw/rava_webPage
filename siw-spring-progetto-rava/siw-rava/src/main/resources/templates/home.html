@@ -1,39 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<title>Home</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/fogliCss/provaTendinaUtente.css}">
-	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
-</head>
+<head th:replace="fragments/fragment.html :: head(title='Home', style='/fogliCss/provaTendinaUtente.css',icon='/images/svg/logo.svg')"></head>
 <body>
-    <div class="navbar">
-        <div class ="user">
-            <button class="dropbtn"><img th:src="@{/images/svg/user.svg}" height="75px" width="75px">
-                <i class="fa fa-caret-down"></i>
-            </button>
-          <div class="dropdown-content">
-            <a href="#"> Operazione 1</a>
-            <a href="#"> Operazione 2</a>
-          </div>
-        </div>
-    	<div class="logo">
-    		<img th:src="@{/images/svg/logo.svg}">
-    		<p>Caffe'<br>Bistrot<br>Aperitivi</p>
-    	</div>
-    	<div class="nameAndMenu">
-    		<h1>HAMBURGERIA RAVA</h1>
-    		<ul>
-    			<li><a href="#">Menu</a></li>
-    			<li><a href="#" th:text="#{navbar.prenota}">Prenota</a></li>
-    			<li><a href="#" th:text="#{navbar.dovesiamo}">Dove Siamo</a></li>
-    			<li><a href="#" th:text="#{navbar.contattaci}">Contatti</a></li>
-    		</ul>
-    	</div>
-    	<div class="logoSocial">
-    		<a id="ig" href="#"><img th:src="@{/images/svg/ig.svg}"></a>
-    		<a  id="fb" href="#"><img th:src="@{/images/svg/fb.svg}"></a>
-    	</div>
-    </div>
+   <nav th:replace="fragments/fragment.html :: intestazione"></nav>
 
     <div class="header">
     	<div class="fade">

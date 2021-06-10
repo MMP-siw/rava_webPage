@@ -50,5 +50,15 @@ public class DomicilioService {
 	{
 		return this.domRep.findByUtente(c);			//è una costum query
 	}
+	
+	/*
+	 * Non necessario poichè la ricerca dei domicili è relativa al singolo utente.
+	 * La utilizzo per il tes
+	 */
+	@Transactional
+	public List<Domicilio> tutti()
+	{
+		return (List<Domicilio>) this.domRep.findAll();
+	}
 
 }
