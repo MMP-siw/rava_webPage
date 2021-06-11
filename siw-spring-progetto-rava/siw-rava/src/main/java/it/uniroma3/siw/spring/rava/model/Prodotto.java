@@ -28,5 +28,11 @@ public class Prodotto {
 	private String nome;
 	@Column
 	private float prezzo;
+	
+	@Override
+	public String toString()
+	{
+		return (this.nome);
+	}
 
 }

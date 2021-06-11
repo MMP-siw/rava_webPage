@@ -33,34 +33,38 @@
 			<div id="title">
 				<p >Info fatturazione</p>
 			</div>
+			
 			<div id="elements">
 				<ul>
 					<li>Nome: <span class="nonModificabili"><!--Verra inserito tramite thymeleaf-->Pietro</span></li>
 					<li>Cognome: <span class="nonModificabili"><!--Verrà inseirto tramite tymeleaf-->Quadrini</span></li>
-					<li>Indirizzo: <span class="nonModificabili"><!--Verrà inserito tramite tymeleaf-->Via del Corso 139 Roma 00145</span></li>
-					<form id="form">
-						<li>Orario: 
+					<li>Indirizzo: <span class="nonModificabili" th:text="${domicilio}"><!--Verrà inserito tramite tymeleaf-->Via del Corso 139 Roma 00145</span></li>
+					<form id="form" method="POST" th:action="@{@{'/ordine' + '/' + ${ordine.id} + '/' + 'infoFatt'}} ">
+						<li ><span th:if="${ordine.tipo} == 'Asporto'">Orario ritiro: </span>
+							<span th:if="${ordine.tipo} eq 'Domicilio'">Orario consegna: </span>
 							<span>
-								<input type="radio" value="Prima possibile" id="Prima possibile" name="consegna" onclick="abilitaOrario()" >
+								<input type="radio" value="Prima possibile" id="Prima possibile"  th:field="${ordine.tipologiaDiConsegna} "name="consegna" onclick="abilitaOrario()" >
 									<label for="Prima possibile">Prima possibile</label>
-								<input type="radio" value="" id="Pianifica" name="consegna" value="Pianifica" onclick="abilitaOrario()">
+								<input type="radio" id="Pianifica" name="consegna"  value="Pianifica" th:field="${ordine.tipologiaDiConsegna}"  onclick="abilitaOrario()">
 									<label for="Pianifica"> Pianifica</label>
-								<input type="time" class="clock" name="orarioConsegna" id="PianificaOrario" min="9:00" max="23:00" disabled="disabled">
+								<input type="time" class="clock"  th:field="${ordine.orarioConsegna}" name="orarioConsegna" id="PianificaOrario" min="9:00" max="23:00" disabled="disabled">
 								
 							</span>
 						</li>
 						<li>
 							<label for="commento">Commento:</label><br>
-							<textarea placeholder="Be nice" rows="10" cols="50"></textarea>
+							<textarea placeholder="Citofono, piano..." rows="10" cols="50" th:field="${ordine.commento}"></textarea>
 						</li>
 						<span>
 							
-							<button  class="btn" id="indietro" type="submit" form="form" value="Indietro"><h3>Indietro</h3></button>
-							<button class="btn" id="conferma" type="submit" form="form" value="Conferma"><h3>Conferma</h3></button>
+								<a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}" id="goBack" >Torna all'ordine</a>
+
+							<input  type="submit" class="btn" id="conferma"  value="Conferma"><h3></h3></a>
 						</span>
 					</form>
 				</ul>
 			</div>
+			
 		</head>
 </body>
 </html>
