@@ -9,7 +9,34 @@
 <body>
 <div th:if="${ordine}" th:object="${ordine}">
 <h1>Ricapitolo ordine</h1>
-<th:block th:each = "lio : ${lineeOrdine}">
-	<div th:text="*{${lio.prodotto} + ' ' + ${lio.quantita} + ' ' + ${lio.subTotale}}">ccc</div>
-</th:block>
+	<th:block th:each = "lio : ${lineeOrdine}">
+		<div th:text="${lio}">ccc</div>
+	</th:block>
+	<span><h1>TOT:</h1><h1 th:text ="${ordine.totale}">122</h1></span>
+	
+	
+	<button class="open-button" onclick="openForm()">Conferma</button>
+	<a th:href="@{/ordine +'/'+ ${ordine.id} + '/' + infoFatturazione}">Torna all'ordine</a>
+	<script>
+		function openForm() //Apuretura del pop-up
+				{
+		  		document.getElementById("popUp").style.visibility = "visible";
+				}
+		
+				function closeForm() //chiusura del pop-uè
+				{
+		  		document.getElementById("popUp").style.visibility = "hidden";
+				}
+			</script>
+	<div  id="popUp" class="popUp"> 
+	<div class = "container">
+		<div class = "header"><p>Ordine #<span th:text="${ordine.id}">numero ordine</span> confermato</p></div>
+		<div class ="section"> 
+			<span><b>Orario di arrivo: </b><b th:text="${ordine.orarioConsegna}"> orario</b>
+			<br>
+			<!--Problema nella stampe dell'orario'-->
+			<a th:href="@{/home}" class=""><h2>Torna alla home</h2></a>
+		</div>
+		
+	</div>	
 </div>

@@ -32,5 +32,11 @@ public class LineaOrdine {
 	
 	@ManyToOne
 	private Ordine ordine;
+	
+	@Override
+	public String toString()
+	{
+		return (this.getProdotto().toString()+" "+ this.quantita +" "+ this.subTotale );
+	}
 
 }

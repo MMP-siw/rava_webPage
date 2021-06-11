@@ -3,7 +3,10 @@ package it.uniroma3.siw.spring.rava.model;
 import java.sql.Date; 
 import java.sql.Time;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,7 @@ import javax.persistence.Table;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import lombok.AllArgsConstructor;
@@ -58,8 +62,12 @@ public class Ordine {
 	@Column
 	private String stato;	//definisce lo stato in cui si trova l'ordine, una volta creato è in stato di 
 							//preparazione, una volta completato, l'amministratore lo setta a termiato
+	
 	@Column
-	private LocalTime orarioConsegna;
+	private String tipologiaDiConsegna;		//può essere prima possibile o pianificata
+	
+	@Column
+	private String orarioConsegna;
 	
 	/*
 	 * @Column(nullable = false)
@@ -99,7 +107,7 @@ public class Ordine {
 		lio.setQuantita(qnt);				//settaggio del quantitativo selezionato
 		lio.setOrdine(this);
 		lio.setSubTotale(lio.getProdotto().getPrezzo()*qnt);	//settaggio del subtotale della linea(prezzoprodotto*qnt)
-		this.setTotale(totale+p.getPrezzo());	//settaggio del totale dell'ordine
+		
 		
 		this.aggoungiLineaOrdine(lio);
 		
@@ -120,6 +128,7 @@ public class Ordine {
 	
 	public void aggoungiLineaOrdine(LineaOrdine lio) 
 	{
+		this.totale+=lio.getSubTotale();
 		this.lineeOrdine.add(lio);
 		
 		
@@ -152,12 +161,17 @@ public class Ordine {
 	 * 
 	 * Vedi caso d'uso @NuovoOrdineDomicilio passo @inserisciOrario
 	 */
-	public void setInfoFatturazione(LocalTime time, String commento) 
+	public void setInfoFatturazione(String time, String commento) 
 	{
 		//Prima possibile
 		if(time==null)
 		{
-			this.setOrarioConsegna(LocalTime.now().plusMinutes(30));		//per semplicità ipotizziamo 30 minuti
+			int  ora=LocalTime.now().plusMinutes(30).getHour();
+			int minuti=LocalTime.now().plusMinutes(30).getMinute();
+			String orario=new String(ora+":"+minuti);
+			this.setOrarioConsegna(orario);
+			
+				
 		}
 		//pianificato
 		else
@@ -165,6 +179,7 @@ public class Ordine {
 			this.setOrarioConsegna(time);
 		}
 		this.setCommento(commento);
+		this.data =Date.valueOf(LocalDate.now());	//si assume che la consegna sia nello stesso giorno
 		
 		
 	}

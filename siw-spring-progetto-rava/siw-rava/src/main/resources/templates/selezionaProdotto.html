@@ -28,11 +28,11 @@
 			
 		</div>
 		<!--Potremmo inserire un if, cove se, l'ordine ha tot=0, allora non permette di andare avanti'-->
-		<button class="open-button" onclick="openForm()">Open Pop-Up</button>
+		<button th:if="${ordine.totale>0}" class="open-button" onclick="openForm()">Conferma</button>
 
 		<a href="/home">Indietro</a>
-		<a href="home.html">Indietro</a>
-		<a href="ordine.html" th:href="@{'/ordine' + '/' + ${ordine.id}}"><button class = "button">Conferma</button></a>
+		
+		
 
 		<div class = "br"> 
 	    
@@ -54,7 +54,7 @@
 		<div class ="section"> 
 			<a th:href="@{'/ordine' + '/' + ${ordine.id} + '/' + 'settaDomicilio'}" class="btn"><h2>A domicilio</h2></a>
 			<br>
-			<a href="settaAsporto" class="btn"><h2>Asporto</h2></a>
+			<a th:href="@{'/ordine'+'/'+${ordine.id}+ '/'+ settaAsporto}" class="btn"><h2>Asporto</h2></a>
 		</div>
 		<div class="footer">
 			<a onclick="closeForm()" id="closeForm" ><h2>Annulla</h2></a>

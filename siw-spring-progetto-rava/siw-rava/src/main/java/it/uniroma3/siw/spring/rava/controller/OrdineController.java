@@ -1,6 +1,6 @@
 package it.uniroma3.siw.spring.rava.controller;
 
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.List;
 import java.util.Map;
 
@@ -200,6 +200,7 @@ public class OrdineController
 		logger.debug("STAI LAVORANDO CON L'ORDINE NUMERO:"+ ordine.getId());
 		Prodotto prod = this.prodService.prodottoPerId(id2);
 		logger.debug("HAI SELEZIONATO IL PRODOTTO :"+ prod.getId());
+		logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
 		model.addAttribute("prodotto", prod);
 		model.addAttribute("ordine",ordine);
 		return "prodotto.html";
@@ -225,6 +226,7 @@ public class OrdineController
 		logger.debug("TOTALE DELL'ORDINE "+ordine.getId().toString()+" è: " + ordine.getTotale());
 		logger.debug("INFO ORDINE: " +ordine.getLineeOrdine().toString());
 		logger.debug("ORDINE ID= "+ordine.toString());
+		logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
 		model.addAttribute("ordine",ordine);
 		return "selezionaProdotto.html";
 
@@ -244,13 +246,27 @@ public class OrdineController
 		
 		Ordine ordine=this.ordineService.trovaPerId(id);
 		ordine.setTipo("Domicilio");
-		model.addAttribute(ordine);
+		model.addAttribute("ordine",ordine);
 		model.addAttribute("domicili", this.domService.tutti());
-		model.addAttribute("domicilio", new Domicilio());		
+		model.addAttribute("domicilio", new Domicilio());
+		logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
 		this.ordineService.inserisci(ordine);
 		logger.debug("L'ORDINE NUMERO " + ordine.getId()+ "è STATO SETTATO A  domicilio");
 
 		return "selezionaDomicilio.html";
+	}
+	/*
+	 * Selezione della modalità di consegna ad asporto
+	 */
+	@RequestMapping(value="/ordine/{id}/settaAsporto", method=RequestMethod.GET)
+	public String settaModalitàAsporto(Model model, @PathVariable("id")Long id)
+	{
+		Ordine ordine=this.ordineService.trovaPerId(id);
+		ordine.setTipo("Asporto");
+		model.addAttribute("ordine",ordine);
+		this.ordineService.inserisci(ordine);
+		logger.debug("L'ORDINE NUMERO " + ordine.getId()+ "è STATO SETTATO A  asporto");
+		return "infoFatturazione.html";
 	}
 	/*
 	 * L'utetnte seleziona un domicilio precedentemente inserito 
@@ -264,8 +280,39 @@ public class OrdineController
 		logger.debug("E' STATO SELEZIONATO IL DOMICILIO : "+ domicilio.getIndirizzo());
 		Ordine or=this.ordineService.trovaPerId(id);
 		or.setIndirizzoConsegna(dom);
+		logger.debug("TOTALE ORDINE = "+ or.getTotale());
 		this.ordineService.inserisci(or);
+		model.addAttribute("ordine",or);
+		model.addAttribute("domicilio",domicilio);
+		
 		return "infoFatturazione.html";
+	}
+	@RequestMapping(value="/ordine/{id}/indietro", method=RequestMethod.GET)
+	public String goBak(Model model, @PathVariable("id")Long id)
+	{
+		Ordine or=this.ordineService.trovaPerId(id);
+		List<Prodotto> listaProdotti=this.prodService.tutti();
+		model.addAttribute("prodotti",listaProdotti);
+		model.addAttribute("ordine",or);
+		
+		return "selezionaProdotto.html";
+	}
+	
+	@RequestMapping(value="/ordine/{id}/infoFatt", method=RequestMethod.POST)
+	public String ricapitoloOrdine(Model model, @ModelAttribute("id")Long id)
+	{
+		Ordine or= this.ordineService.trovaPerId(id);
+		logger.debug("SI sta per confermare l'ordine"+ or.getId());
+		logger.debug("TIPO CONSEGNA: "+ or.getTipologiaDiConsegna());
+		logger.debug("ORARIO: "+ or.getOrarioConsegna());
+		logger.debug("TOTALE ORDINE = "+ or.getTotale());
+		String orario=or.getOrarioConsegna();
+		or.setInfoFatturazione(or.getOrarioConsegna(), or.getCommento());
+		this.ordineService.inserisci(or);
+		List<LineaOrdine> lio=this.linea.prendiLineeOrdinePerOrdine( or);
+		model.addAttribute("ordine", or);
+		model.addAttribute("lineeOrdine",lio);
+		return "ordine.html";
 	}
 	
 	

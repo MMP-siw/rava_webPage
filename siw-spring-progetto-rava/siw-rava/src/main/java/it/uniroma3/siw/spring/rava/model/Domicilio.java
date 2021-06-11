@@ -31,5 +31,11 @@ public class Domicilio {
 	private int cap;
 	@ManyToOne
 	private Cliente  utente;
+	
+	@Override
+	public String toString()
+	{
+		return (this.tipo + this.indirizzo + " (" +this.civico + " )");
+	}
 
 }

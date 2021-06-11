@@ -28,12 +28,8 @@
        		<div> <a href="#">+ Aggiungi domicilio...</a></div>
 		<div class ="buttons">
 			<input type ="submit" id="submit">
-			<button onclick="goBack()" id="goBack">Indietro</button>
-				<script>
-					function goBack() {
- 					window.history.back();
-					}
-				</script>
+			<a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}" id="goBack" >Indietro</a>
+				
 		</div>
 	</form>
 	</section>
