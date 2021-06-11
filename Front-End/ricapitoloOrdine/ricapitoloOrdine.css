@@ -1,0 +1,72 @@
+body
+{
+  margin-left: 1%;
+  font-family: adobe-gothic-std, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+
+}
+head
+{
+  height: 100%;
+  width: 100%;
+}
+section
+{
+	display: flex;
+	margin-top: 10%;
+	width: 100%;
+	height: 100vh;
+	border: solid;
+	background-color: orange;
+	margin-right:  5%;
+	flex-direction: column;
+}
+#container
+{
+	height: 100%;
+	width: 90%;
+	margin-left: 10%;
+}
+.title
+{
+	background-color: red;
+	border: solid;
+	height: 10%;
+
+}
+.title p
+{
+	margin-bottom: 0px;
+	font-size: 2em;
+	padding-right: : ;
+}
+.corpo
+{
+	height: 70%;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	
+	margin-top: 2%;
+}
+.elements
+{
+	border: solid;
+	border-radius: 20px;
+	height: 80%;
+	width: 45%;
+}
+#lineeOrdine
+{
+	border: solid;
+	border-radius: 20px;
+	
+	background-color: lightgray;
+	margin-right: 5%;
+}
+#infoFatturazione
+{
+	background-color: pink;
+}

@@ -1,0 +1,126 @@
+* {
+	font-family: AdobeGothic Std;
+}
+
+body {
+
+	font-family: adobe-gothic-std, sans-serif;
+	font-style: normal;
+	font-size: 1.2em;
+}
+header
+{
+	padding-left: 12vh;
+}
+
+h2 {
+	padding: 25px 10px 0px 10px;
+	font-size: 35px;
+}
+
+
+
+form {
+	padding: 10px 25px;
+}
+
+ul
+{
+	margin-top:0px;
+	padding: 0;
+	list-style-type: none;
+	margin-left: 0px;	
+}
+li
+{
+	margin-left: 0px;
+}
+a {
+	
+	text-decoration: none;
+	color: black;
+}
+#newDom
+{
+	color:gray;
+	margin-left: 2vh;
+	font-size: 1em;
+	margin-top: 0;
+}
+
+#newDom:hover {
+	text-decoration: none;
+	color:	rgb(51, 51, 51);
+	transaction: 0.2s;
+}
+
+.title
+{
+	border:solid;
+	
+}
+.title h2
+{
+	margin-bottom: 0;
+	font-size: 2.5em;
+}
+
+#form
+{
+	margin-top: 0;
+	border:solid;
+	font-size: 1.3em;
+}
+.buttons {
+	display: flex;
+	flex-direction: row;
+	margin-top: 5vh;
+    
+}
+
+.submit {
+	margin-left: 20px;
+	margin-right: 20px;
+	
+	background-color: white;
+	border: none;
+	height: 50px;
+	font-size: 15px;
+	width: 150px;
+	margin-right: 10vh;
+	font-size: 1.3em;
+	border-radius: 5px;
+	
+}
+
+.submit:hover {
+	
+	
+	border-radius: 5px;
+}
+#conferma
+{
+	color: rgb(51, 255, 51);
+	height:55px;
+}
+#conferma:hover
+{
+	background-color: rgb(51, 255, 51);
+	color:white;
+}
+
+#goBack 
+{
+	
+	text-align: center;
+	color:red;	
+	align-items: flex-start;
+	padding-top:0.6vh;
+}
+
+#goBack:hover {
+	background-color: red;
+	
+	color: white;
+}
+
