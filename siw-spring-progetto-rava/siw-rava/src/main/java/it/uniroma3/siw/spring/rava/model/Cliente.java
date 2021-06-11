@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import lombok.*;
 
-@Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString
+@Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString @NoArgsConstructor
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -26,8 +26,6 @@ public class Cliente {
 	private String cognome;
 	@Column
 	private String email;
-	@Column
-	private String psw;
 	@Column
 	private String telefono;
 	
