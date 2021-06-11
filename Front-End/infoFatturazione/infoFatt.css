@@ -20,9 +20,7 @@ head
   
   height: 10%;
 }
-#title p
-{
-}
+
 .nonModificabili
 {
   color: rgb(179, 179, 179);
@@ -133,34 +131,64 @@ textarea
 {
   margin-left: 3%;
 }
-.btn
-{
-  border-radius: 20%;
-  height: 10%;
-  width: 8%;
-  margin-left: 10%;
- 
+
    
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5vh;
+    
+}
+
+.submit {
+  margin-left: 8%;
+  margin-right: 20px;
+  
+  background-color: white;
+  border: none;
+  height: 50px;
+  font-size: 15px;
+  width: 150px;
+  margin-right: 10vh;
+  font-size: 1.3em;
+  
+}
+
+.submit:hover {
+  
+  
+  border-radius: 10px;
+
 }
 #conferma
 {
-  background-color: rgb(51, 255, 51);
-  
+  color: rgb(51, 255, 51);
+  height:55px;
+  font-family: adobe-gothic-std, sans-serif;
+
 }
 #conferma:hover
 {
-  background-color: rgb(60, 255, 51);
-  color: white;
-  transition: 0.2s;
+  background-color: rgb(51, 255, 51);
+  color:white;
 }
-#indietro:hover
+
+#goBack 
 {
-   background-color: red;
+  
+  appearance:button;
+  text-align: center;
+  color:red;
+  width: 210px;  
+  align-items: flex-start;
+  padding-top:1.2vh;
+}
+
+#goBack:hover {
+  background-color: red;
+  
   color: white;
-  transition: 0.2s;
 }
-.btn h3
-{
-  font-family:adobe-gothic-std, sans-serif;
-}
+
 

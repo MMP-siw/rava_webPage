@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 import lombok.*;
 
-@Getter @Setter @AllArgsConstructor @EqualsAndHashCode @ToString
+@Getter @Setter @AllArgsConstructor @EqualsAndHashCode 
 @Entity
 @Data
 @NoArgsConstructor
@@ -35,7 +35,7 @@ public class Domicilio {
 	@Override
 	public String toString()
 	{
-		return (this.tipo + this.indirizzo + " (" +this.civico + " )");
+		return (this.tipo + "  " + this.indirizzo + ", " +this.civico + " ( " + this.cap + " )");
 	}
 
 }
