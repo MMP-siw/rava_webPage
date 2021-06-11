@@ -16,6 +16,8 @@ import lombok.Setter;
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Credentials {
 	
+	public static final String DEFAULT_ROLE = "DEFAULT";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -26,6 +28,7 @@ public class Credentials {
 	@Column(nullable = false)
 	private String password;
 	
+	//in caso serva dopo
 	@Column(nullable = false)
 	private String role;
 	

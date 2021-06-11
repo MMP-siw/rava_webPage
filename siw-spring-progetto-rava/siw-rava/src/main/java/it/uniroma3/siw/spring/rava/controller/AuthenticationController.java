@@ -1,6 +1,8 @@
 package it.uniroma3.siw.spring.rava.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,18 +23,28 @@ public class AuthenticationController {
 	public String showRegisterForm (Model model) {
 		model.addAttribute("user", new Cliente());
 		model.addAttribute("credentials", new Credentials());
-		return "registerUser";
+		return "authentication/registrationForm";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET) 
 	public String showLoginForm (Model model) {
-		return "loginForm";
+		return "authentication/loginForm";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
 	public String logout(Model model) {
-		return "index";
+		return "home";
 	}
+	
+	@RequestMapping(value = "/default", method = RequestMethod.GET)
+    public String defaultAfterLogin(Model model) {
+        
+    	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+    	
+        return "home";
+    }
+	
 	
 	@RequestMapping(value = { "/register" }, method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("user") Cliente user,
@@ -42,7 +54,7 @@ public class AuthenticationController {
                  Model model) {
        credentials.setUser(user);
        credentialsService.saveCredentials(credentials);
-       return "registrationSuccessful";
+       return "authentication/registrationSuccesful";
     }
 
 }

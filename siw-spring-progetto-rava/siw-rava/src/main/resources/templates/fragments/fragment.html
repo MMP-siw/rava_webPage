@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head(title, style, icon)">
-    <link rel="stylesheet" href="css/fragmentStyle.css">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:fragment="head(title, icon)">
 	<link th:href="@{${style}}" rel="stylesheet">
+    <link rel="stylesheet" href="css/fragmentStyle.css">
 	<title th:text="${title}"></title>
 	<link rel="icon" th:href="@{${icon}}" type="image/icon type">
 </head>
@@ -14,8 +15,9 @@
 				<i class="fa fa-caret-down"></i>
 			</button>
 			<div class="dropdown-content">
-				<a href="#"> Operazione 1</a>
-				<a href="#"> Operazione 2</a>
+				<a href="/authentication/loginForm" th:href="@{/login}" sec:authorize="isAnonymous()">Login</a>
+				<a href="/authentication/registrationForm" th:href="@{/register}" sec:authorize="isAnonymous()">Registrati</a>
+				<a href="home" th:href="@{/logout}" sec:authorize="isAuthenticated()">Esci</a>
 			</div>
 		</div>
 		<div class="logo">
