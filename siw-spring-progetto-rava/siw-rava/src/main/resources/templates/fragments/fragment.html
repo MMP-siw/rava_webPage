@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head(title, style)">
-    <link rel="stylesheet" href="css/fragmentStyle.css">
-=======
-<html xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:fragment="head(title, icon)">
->>>>>>> 694c1a6591c128948ca13b7a773caae8ca64b90e
-	<link th:href="@{${style}}" rel="stylesheet">
+    <link th:href="@{${style}}" rel="stylesheet">
     <link rel="stylesheet" href="css/fragmentStyle.css">
 	<title th:text="${title}"></title>
-	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
+	<link rel="icon" href="/images/svg/logo.svg" type="image/icon type">
 </head>
 
 <body>
@@ -33,7 +26,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 		<div class="nameAndMenu">
 			<h1>HAMBURGERIA RAVA</h1>
 			<ul>
-				<li><a href="#">Menu</a></li>
+				<li><a href="menu">Menu</a></li>
 				<li><a href="#" th:text="#{navbar.prenota}">Prenota</a></li>
 				<li><a href="#" th:text="#{navbar.dovesiamo}">Dove Siamo</a></li>
 				<li><a href="#" th:text="#{navbar.contattaci}">Contatti</a></li>

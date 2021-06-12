@@ -1,70 +1,83 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<title>Home</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/esempioPopUp.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/modalitaConsegna.css}">
-	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
+
+<head th:replace="fragments/fragment.html :: head(title='Home', style='/css/modalitaConsegna.css')">
+	<link th:href="@{/css/esempioPopUp.css}">
 </head>
+
 <body>
+	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
 	<!--Da stilizzare -->
-		<div>
+	<div>
 		<h1 th:text="#{prodotti.titolo}">Seleziona Prodotti</h1>
 		<ul th:each="prodotto : ${prodotti}">
 			<li>
-			<a href="prodotto.html"
-				th:href="@{/ordine/{id}/prodotto/{id2} (id=${ordine.id}, id2=${prodotto.id})}">
-				<span th:text="*{prodotto.nome}"></span>
-				<span th:text="*{prodotto.descrizione}"></span>
-				<span th:text="*{prodotto.prezzo}"></span>
-			</a>
+				<a href="prodotto.html" th:href="@{/ordine/{id}/prodotto/{id2} (id=${ordine.id}, id2=${prodotto.id})}">
+					<span th:text="*{prodotto.nome}"></span>
+					<span th:text="*{prodotto.descrizione}"></span>
+					<span th:text="*{prodotto.prezzo}"></span>
+				</a>
 			</li>
-			</ul>
-		</div>
-		<div>
-			
-				<span ><h1>Total : </h1> </span>
-				<span><h1 th:text="${ordine.totale}">100</h1></span>	<!--Da stilizzare logica funziona-->
-			
-		</div>
-		<!--Potremmo inserire un if, cove se, l'ordine ha tot=0, allora non permette di andare avanti'-->
-		<button th:if="${ordine.totale>0}" class="open-button" onclick="openForm()">Conferma</button>
+		</ul>
+	</div>
+	<div>
 
-		<a href="/home">Indietro</a>
-		
-		
+		<span>
+			<h1>Total : </h1>
+		</span>
+		<span>
+			<h1 th:text="${ordine.totale}">100</h1>
+		</span>
+		<!--Da stilizzare logica funziona-->
 
-		<div class = "br"> 
-	    
+	</div>
+	<!--Potremmo inserire un if, cove se, l'ordine ha tot=0, allora non permette di andare avanti'-->
+	<button th:if="${ordine.totale>0}" class="open-button" onclick="openForm()">Conferma</button>
+
+	<a href="/home">Indietro</a>
+
+
+
+	<div class="br">
+
 		<script>
-		function openForm() //Apuretura del pop-up
-				{
-		  		document.getElementById("popUp").style.visibility = "visible";
-				}
-		
-				function closeForm() //chiusura del pop-uè
-				{
-		  		document.getElementById("popUp").style.visibility = "hidden";
+			function openForm() //Apuretura del pop-up
+			{
+				document.getElementById("popUp").style.visibility = "visible";
+			}
+
+			function closeForm() //chiusura del pop-uè
+			{
+				document.getElementById("popUp").style.visibility = "hidden";
+			}
+		</script>
+	</div>
+	<div id="popUp" class="popUp">
+		<div class="container">
+			<div class="header">
+				<p>Seleziona opzione</p>
+			</div>
+			<div class="section">
+				<a th:href="@{'/ordine' + '/' + ${ordine.id} + '/' + 'settaDomicilio'}" class="btn">
+					<h2>A domicilio</h2>
+				</a>
+				<br>
+				<a th:href="@{'/ordine'+'/'+${ordine.id}+ '/'+ settaAsporto}" class="btn">
+					<h2>Asporto</h2>
+				</a>
+			</div>
+			<div class="footer">
+				<a onclick="closeForm()" id="closeForm">
+					<h2>Annulla</h2>
+				</a>
+			</div>
+			<script>
+				function goBack() {
+					window.history.back();	//torna indietro alla pagina precedente
 				}
 			</script>
 		</div>
-	<div  id="popUp" class="popUp"> 
-	<div class = "container">
-		<div class = "header"><p>Seleziona opzione</p></div>
-		<div class ="section"> 
-			<a th:href="@{'/ordine' + '/' + ${ordine.id} + '/' + 'settaDomicilio'}" class="btn"><h2>A domicilio</h2></a>
-			<br>
-			<a th:href="@{'/ordine'+'/'+${ordine.id}+ '/'+ settaAsporto}" class="btn"><h2>Asporto</h2></a>
-		</div>
-		<div class="footer">
-			<a onclick="closeForm()" id="closeForm" ><h2>Annulla</h2></a>
-		</div>
-		<script>			
-			function goBack() {											
- 				window.history.back();	//torna indietro alla pagina precedente
-			}
-		</script>
-	</div>	
-</div>
- </body>
+	</div>
+</body>
+
 </html>
