@@ -2,6 +2,7 @@
 <html>
 <head>
 	<link href="ricapitoloOrdine.css" rel="stylesheet">
+	<link href="../operazioniDomicilioSample/esempioPopUp.css" rel="stylesheet">
 	<title></title>
 </head>
 <body>
@@ -12,17 +13,111 @@
 			</div>
 			<div class="corpo">
 				<div id="lineeOrdine" class="elements">
-					<table>
+					<div id="intestazione">
+						<div class="empty"></div>
+						<div class="noEmp" > <p>Quantità</p></div>
+						<div class="noEmp" id="totInt"> <p>Tot</p></div>
+					</div>
+					<div id="linea">
+						<div class="empty" id="prodotto">Nome prodotto</div>
+						<div class="noEmpLinea">1</div>
+						<div  class="noEmpLinea">8</div>
+
+					</div>
+					<div id="linea">
+						<div class="empty" id="prodotto">Nome prodotto</div>
+						<div class="noEmpLinea">1</div>
+						<div  class="noEmpLinea">8</div>
 						
-					</table>
+					</div>
+					<div id="linea">
+						<div class="empty" id="prodotto">Nome prodotto</div>
+						<div class="noEmpLinea">1</div>
+						<div  class="noEmpLinea">8</div>
+						
+					</div>
+					<div id="linea">
+						<div class="empty" id="prodotto">Nome prodotto</div>
+						<div class="noEmpLinea">1</div>
+						<div  class="noEmpLinea">8</div>
+						
+					</div>
+					<div id="linea">
+						<div class="empty" id="prodotto">Nome prodotto</div>
+						<div class="noEmpLinea">1</div>
+						<div  class="noEmpLinea">8</div>
+						
+					</div>
+					<div id="totale">
+						<span>TOT €</span><span id="tot">65</span>
+					</div>
 				</div>
 				<div id="infoFatturazione" class="elements">
 					<ul>
+						<li>
+							<span>Nome: </span><span class="value"> Matteo</span>
+						</li>
+						<li>
+							<span>Cognome: </span><span class="value"> Wissel</span>
+						</li>
+						<li>
+							<span>Indirizzo: </span><span class="value"></span>
+						</li>
+						<li>
+							<span>Tipo: </span><span class="value"></span>
+						</li>
+						<li>
+							<span>Orario: </span><span class="value"></span>
+						</li>
+						<li>
+							<span>Commento: </span><span class="value"> Citofono wissel, interno 20</span>
+						</li>
 						
 					</ul>
 				</div>
 			</div>
 		</div>
+		<div id="piePagina">
+			
+		
+			<button class="submit" id="conferma" onclick="openForm()">Conferma</button>
+			<a  id ="goBack1" class="submit" th:href="@{/ordine +'/'+ ${ordine.id} + '/' + infoFatturazione}">Torna all'ordine</a>
+		</div>
+	<script>
+		function openForm() //Apuretura del pop-up
+				{
+		  		document.getElementById("popUp").style.visibility = "visible";
+				}
+		
+				function closeForm() //chiusura del pop-uè
+				{
+		  		document.getElementById("popUp").style.visibility = "hidden";
+				}
+			</script>
+	<div  id="popUp" class="popUp"> 
+	<div class = "container">
+			
+
+			
+			
+		<div class ="sectionPp"> 
+			<span th:text="${ordine.id}">numero ordine</span> creato
+			<br>
+			<br>
+			<h2>Numero ordine</h2>
+
+			
+			
+			
+			
+		</div>
+		<div id="img">
+				<img  id="imgConf" src="checkSVG.png">
+			</div>
+		<div class="footer">
+			<a th:href="@{/home}" class="btn"><b>Torna alla home</b></a>
+		</div>
+
 	</section>
 </body>
 </html>
