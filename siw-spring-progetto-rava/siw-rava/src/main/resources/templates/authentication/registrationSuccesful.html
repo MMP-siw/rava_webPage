@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/fragment.html :: head(title='Login', style='fogliCss/registrationSuccesful.css', icon='/images/svg/logo.svg')">
+</head>
+<body>
+   <nav th:replace="fragments/fragment.html :: intestazione"></nav>
+   
+   <div class="container">
+   	<script>
+   		var seconds = 5; // seconds for HTML
+   		var foo; // variable for clearInterval() function
+
+   		function redirect() {
+   	    	document.location.href = 'home';
+   		}
+
+   		function updateSecs() {
+   	    	document.getElementById("seconds").innerHTML = seconds;
+   	    	seconds--;
+   	    	if (seconds == -1) {
+   	        	clearInterval(foo);
+   	        	redirect();
+   	    	}
+   		}
+
+   		function countdownTimer() {
+   	    	foo = setInterval(function () {
+   	        	updateSecs()
+   	    	}, 1000);
+   		}
+
+   		countdownTimer();
+   	</script>
+   	
+   	<p><b>Registrazione avvenuta con successo!</b></p>
+   	<p>Verrai reindirizzato in <span id="seconds">5</span> secondi</p>
+   </div>
+
+</body>

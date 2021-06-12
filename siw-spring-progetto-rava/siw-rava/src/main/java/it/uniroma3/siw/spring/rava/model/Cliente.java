@@ -32,7 +32,7 @@ public class Cliente {
 	@OneToMany(mappedBy = "utente")
 	private List<Domicilio> domicilio;	//l'utente può definire una collezione di domicili (stile Amazon)
 	
-	@OneToMany(mappedBy = "prenotante")
+	@OneToMany(mappedBy = "cliente")
 	private List<Prenotazione> prenotazioni;	//l'utente conosce tutte le sue prenotazioni
 	
 	/*l'utente deve conoscere tutta la lista dei suoi ordini?*/

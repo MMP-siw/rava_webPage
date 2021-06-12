@@ -7,13 +7,18 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import it.uniroma3.siw.spring.rava.model.Cliente;
+import it.uniroma3.siw.spring.rava.model.Credentials;
 import it.uniroma3.siw.spring.rava.repository.ClienteRepository;
+import it.uniroma3.siw.spring.rava.repository.CredentialsRepository;
 
 @Service
 public class ClienteService {
 
 	@Autowired
 	private ClienteRepository clienteRepo;
+	
+	@Autowired
+	private CredentialsRepository credRepo;
 	
 	/*
 	 * Memorizzazione di un cliente all'interno del database
@@ -38,5 +43,4 @@ public class ClienteService {
 	            result.add(cliente);
 	        return result;
 	    }
-
 }

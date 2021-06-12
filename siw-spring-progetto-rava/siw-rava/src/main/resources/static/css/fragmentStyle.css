@@ -35,10 +35,6 @@ nav{
   transition-duration: 0.4s;
 }
 
-.user button:hover >img {
-	height: 120%;
-}
-
 /* Dropdown content (hidden by default) */
 .dropdown-content {
   display: none;

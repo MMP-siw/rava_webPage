@@ -1,9 +1,6 @@
 package it.uniroma3.siw.spring.rava.controller;
-
-import java.util.HashMap; 
+ 
 import java.util.List;
-import java.util.Map;
-
 import org.slf4j.Logger;  
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import it.uniroma3.siw.spring.rava.model.Domicilio;
 import it.uniroma3.siw.spring.rava.model.LineaOrdine;
 import it.uniroma3.siw.spring.rava.model.Ordine;
@@ -312,8 +306,14 @@ public class OrdineController
 		or.setInfoFatturazione(or.getOrarioConsegna(), or.getCommento());
 		this.ordineService.inserisci(or);
 		List<LineaOrdine> lio=this.linea.prendiLineeOrdinePerOrdine( or);
-		model.addAttribute("ordine", or);
-		model.addAttribute("lineeOrdine",lio);
+		if(or.getTipo().equals("Domicilio"))
+		{
+			Domicilio dom=this.domService.domicilioPerId(or.getIndirizzoConsegna().getId());
+			model.addAttribute("domicilio",dom);
+		}
+			model.addAttribute("ordine", or);
+			model.addAttribute("lineeOrdine",lio);
+		
 		return "ordine.html";
 	}
 	

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/fragment.html :: head(title='Login', style='/fogliCss/loginForm.css', icon='/images/svg/logo.svg')"></head> 
+<body>
+	<nav th:replace="fragments/fragment.html :: intestazione(index='/default')"></nav>
+	<div class="form">
+   <div id="title"><b>Login Cliente</b></div>
+   <div>
+   		<form th:action="@{/login}" method="POST">
+   			<div class="box">
+				<div class = "container">
+					<div class="element">
+						<span><input name="username" type="text" placeholder="Inserisci username" required /></span>
+					</div>		
+					<div class="element">
+						<span><input name="password" type="password" placeholder="Inserisci password" required /></span>
+					</div>
+					<div class="element">
+						<span><button type="submit"><b>LOGIN</b></button></span>
+					</div>
+				</div>
+			</div>
+		</form>
+   </div>
+   </div>
+
+</body>

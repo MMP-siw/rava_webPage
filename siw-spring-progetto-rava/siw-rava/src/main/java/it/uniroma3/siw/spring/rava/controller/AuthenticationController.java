@@ -7,6 +7,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import it.uniroma3.siw.spring.rava.controller.validator.ClienteValidator;
+import it.uniroma3.siw.spring.rava.controller.validator.CredentialsValidator;
 import it.uniroma3.siw.spring.rava.model.Cliente;
 import it.uniroma3.siw.spring.rava.model.Credentials;
 import it.uniroma3.siw.spring.rava.service.CredentialsService;
@@ -17,22 +20,38 @@ public class AuthenticationController {
 	@Autowired
 	private CredentialsService credentialsService;
 	
+	@Autowired
+	private CredentialsValidator credentialValidator;
+	
+	@Autowired
+	private ClienteValidator clienteValidator;
+	
 	@RequestMapping(value = "/register", method = RequestMethod.GET) 
 	public String showRegisterForm (Model model) {
 		model.addAttribute("user", new Cliente());
 		model.addAttribute("credentials", new Credentials());
-		return "registerUser";
+		return "authentication/registrationForm";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET) 
 	public String showLoginForm (Model model) {
-		return "loginForm";
+		return "authentication/loginForm";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
 	public String logout(Model model) {
-		return "index";
+		return "home";
 	}
+	
+	@RequestMapping(value = "/default", method = RequestMethod.GET)
+    public String defaultAfterLogin(Model model) {
+        
+    	//UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	//Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+    	
+        return "home";
+    }
+	
 	
 	@RequestMapping(value = { "/register" }, method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("user") Cliente user,
@@ -40,9 +59,18 @@ public class AuthenticationController {
                  @ModelAttribute("credentials") Credentials credentials,
                  BindingResult credentialsBindingResult,
                  Model model) {
-       credentials.setUser(user);
-       credentialsService.saveCredentials(credentials);
-       return "registrationSuccessful";
+		
+		this.clienteValidator.validate(user, userBindingResult);
+        this.credentialValidator.validate(credentials, credentialsBindingResult);
+        
+        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
+        	credentials.setUser(user);
+            credentialsService.saveCredentials(credentials);
+            return "authentication/registrationSuccesful";
+        }
+		
+        return "authentication/registrationForm";
+       
     }
 
 }

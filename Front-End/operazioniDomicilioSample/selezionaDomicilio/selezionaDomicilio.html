@@ -1,38 +1,34 @@
 <!--Seleziona domicilio-->
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" content="width=device-width, initial-scale=1">
-    <title>Seleziona Domicilio</title>
-    <link rel="stylesheet" href="selezionaDomicilio.css" />
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+   	<link th:href="@{''}" rel="stylesheet">	
   </head>
   <body>
   	
-  	<nav>
-  		<!--if needed-->
-  	</nav>
+  	 <!----<nav th:replace="fragments/fragment.html :: intestazione"></nav>-->
+  	
 
   	<div class="testa">
   	</div>
   	<div class="title">
   		<h2>Seleziona domicilio</h2>
   	</div>
+  	<nav>
+  	</nav>
   	<section>
-  		<form>
-  			<!--qua è necessario usare thymeleaf!-->
-  			<input type="radio" name="domicilii" id="dom1">
-  			<label for="1">Domicilio 1</label><br>
-  			<input type="radio" name="domicilii" id="dom2">
-  			<label for="2">Domicilio 2</label>
+  		<form method="POST"  th:object="${domicilio}">
+  			<ul>
+            <li th:each="domicilioTemp : ${domicili}">
+                <input type="radio" th:field="${domicilio.id}" th:value="${domicilioTemp.id}"/>
+                <label  th:for="${domicilio.id}" th:text="${domicilioTemp}">Via u ue</label>
+            </li>
+        </ul>
        		<div> <a href="#">+ Aggiungi domicilio...</a></div>
 		<div class ="buttons">
 			<input type ="submit" id="submit">
-			<button onclick="goBack()" id="goBack">Indietro</button>
-				<script>
-					function goBack() {
- 					window.history.back();
-					}
-				</script>
+			<a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}" id="goBack" >Indietro</a>
+				
 		</div>
 	</form>
 	</section>
