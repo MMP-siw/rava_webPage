@@ -7,10 +7,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import it.uniroma3.siw.spring.rava.controller.validator.PrenotazioneValidator;
 import it.uniroma3.siw.spring.rava.model.Cliente;
 import it.uniroma3.siw.spring.rava.model.Credentials;
 import it.uniroma3.siw.spring.rava.model.Prenotazione;
@@ -18,13 +22,14 @@ import it.uniroma3.siw.spring.rava.service.CredentialsService;
 import it.uniroma3.siw.spring.rava.service.PrenotazioneService;
 
 @Controller
-@SessionAttributes("prenotazione")
 public class PrenotazioneController {
 	
 	@Autowired
 	private PrenotazioneService prenotazioneService;
 	@Autowired
 	private CredentialsService credentialsService;
+	@Autowired
+	private PrenotazioneValidator prenotazioneValidator;
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -36,11 +41,24 @@ public class PrenotazioneController {
 	public String nuovaPrenotazione(Model model) {
 		
 		Prenotazione prenotazione = new Prenotazione();
-		logger.debug("HAI CREATO l'ORDINE NUMERO : ", prenotazione.getId());
-		this.prenotazioneService.inserisci(prenotazione);
+		logger.debug("HAI CREATO la PRENOTAZIONE NUMERO : ", prenotazione.getId());
 		model.addAttribute("prenotazione",prenotazione);
-		return "prenotazioneForm";
+		return "prenotazione/prenotazioneForm";
 		
+	}
+	
+	@RequestMapping(value="/prenota", method=RequestMethod.POST)
+	public String nuovaPrenotazionePost(@ModelAttribute("prenotazione") Prenotazione prenotazione, Model model,
+			BindingResult bindingResult) {
+		
+		this.prenotazioneValidator.validate(prenotazione, bindingResult);
+		if (!bindingResult.hasErrors()) {
+			this.prenotazioneService.inserisci(prenotazione);
+			logger.debug("Prenotazion salvata con id: " + prenotazione.getId());
+			logger.debug("Prenotazioni salvate in fascia: " + prenotazioneService.getByDataAndOrario(prenotazione.getData(), prenotazione.getOrario()).size());
+			return "prenotazione/prenotazione";
+		}
+		return "prenotazione/prenotazioneForm";
 	}
 	
 	/**
@@ -51,7 +69,7 @@ public class PrenotazioneController {
 	public String getPrenotazione(Model model, @PathVariable("id") Long id) {
 		Prenotazione p = this.prenotazioneService.prenotazionePerId(id);
 		model.addAttribute("prenotazione", p);
-		return "prenotazione";
+		return "prenotazione/prenotazione";
 	}
 	
 	/**
@@ -75,7 +93,7 @@ public class PrenotazioneController {
 		
 		//popola pagina
 		model.addAttribute("prenotazioni", this.prenotazioneService.getByCliente(cliente));
-		return "prenotazioni";
+		return "prenotazione/prenotazioni";
 	}
 
 }
