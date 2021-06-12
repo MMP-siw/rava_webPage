@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/fragment.html :: head(titolo='menu', style='/static/css/menuOrdineStyle.css')"></head>
+
+<body>
+	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+	<div class="content">
+	    <div class="item">
+	      <img src="images/panino.jpg">
+	      <h1>Nome Panino</h1>
+	      <h2>8.00</h2>
+	    </div>
+	</div>
+</body>
+
+</html>

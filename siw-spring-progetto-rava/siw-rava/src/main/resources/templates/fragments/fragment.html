@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head(title, style, icon)">
+<head th:fragment="head(title, style)">
     <link rel="stylesheet" href="css/fragmentStyle.css">
 	<link th:href="@{${style}}" rel="stylesheet">
 	<title th:text="${title}"></title>
-	<link rel="icon" th:href="@{${icon}}" type="image/icon type">
+	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
 </head>
 
 <body>
