@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<div class="title"><p>Inserisci dati prenotazione</p></div>
+		<form th:action="@{/prenota}" method="POST" th:object="${prenotazione}">
+			<div th:if="${#fields.hasGlobalErrors()}">
+  				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>	
+		<div class="inserisci">
+			<div class ="row">
+				<div class="col-1"><label>Data:</label></div>
+				<div class="col-2"><input type="date" th:field="*{data}" /></div>
+				<div th:if="${#fields.hasErrors('data')}" th:errors="*{data}"></div>
+			</div>	
+			<div class="row">
+				<div class="col-1"><label>Fascia oraria:</label></div>
+				<div class="col-2"><select id="orario" th:field="*{orario}">
+					<option th:each="orario : ${T(it.uniroma3.siw.spring.rava.model.FasciaOraria).values()}" 
+							th:value="${orario}" th:text="${orario.getValue()}"></option>
+      			</select></div>
+      		</div>
+      		<div class ="row">
+				<div class="col-1"><label>Numero Persone:</label></div>
+				<div class="col-2"><input type="number" th:field="*{numeroPersone}" /></div>
+				<div th:if="${#fields.hasErrors('numeroPersone')}" th:errors="*{numeroPersone}"></div>
+			</div>
+			<div class ="row">
+				<div class="col-1"><label>Commento:</label></div>
+				<div class="col-2"><textarea th:field="*{commento}" class="bio" style="height:200px; width:50%" /></textarea></div>
+				<div th:if="${#fields.hasErrors('commento')}" th:errors="*{commento}"></div>
+			</div>
+			<div class ="row">
+				<span><button type="submit" id="invio">Invio</button></span>
+			</div>
+		</div>
+		</form>
+	</body>
+</html>
