@@ -310,8 +310,14 @@ public class OrdineController
 		or.setInfoFatturazione(or.getOrarioConsegna(), or.getCommento());
 		this.ordineService.inserisci(or);
 		List<LineaOrdine> lio=this.linea.prendiLineeOrdinePerOrdine( or);
-		model.addAttribute("ordine", or);
-		model.addAttribute("lineeOrdine",lio);
+		if(or.getTipo().equals("Domicilio"))
+		{
+			Domicilio dom=this.domService.domicilioPerId(or.getIndirizzoConsegna().getId());
+			model.addAttribute("domicilio",dom);
+		}
+			model.addAttribute("ordine", or);
+			model.addAttribute("lineeOrdine",lio);
+		
 		return "ordine.html";
 	}
 	
