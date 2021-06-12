@@ -25,24 +25,28 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 // authorization paragraph: qui definiamo chi può accedere a cosa
-                .authorizeRequests()
+                .authorizeRequests().
+                antMatchers(HttpMethod.GET, "/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/**").permitAll()
                 // chiunque (autenticato o no) può accedere alle pagine index, login, register, ai css e alle immagini
                 /**
                  * qui vanno aggiunte le pagine del menu, informazioni ecc... così l'utente qualsiasi può vederle mentre per
                  * accedere alla pagina di composizione dell'ordine o della prenotazione (ad esempio) possano entrare
                  * solo gli utenti loggati
                  * **/
-                .antMatchers(HttpMethod.GET, "/", "/home", "/login", "/register", "/css/**", "/images/**", "/fogliCss/**").permitAll()
+                //.antMatchers(HttpMethod.GET, "/", "/home", "/login", "/register", "/css/**", "/images/**", "/fogliCss/**").permitAll()
                 // chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login e register 
-                .antMatchers(HttpMethod.POST, "/login", "/register").permitAll()
+                //.antMatchers(HttpMethod.POST, "/login", "/register", "/domicilio").permitAll()
                 // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**
                 /**
                  * operazioni per gli admin (se decidiamo di aggiungere questa possibilità
                  */
                 //.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
                 //.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
+                //.antMatchers(HttpMethod.POST).permitAll()
+                //.antMatchers(HttpMethod.GET).permitAll()
                 // tutti gli utenti autenticati possono accere alle pagine rimanenti 
-                .anyRequest().authenticated()
+                //.anyRequest().permitAll()
 
                 // login paragraph: qui definiamo come è gestita l'autenticazione
                 // usiamo il protocollo formlogin 
@@ -58,7 +62,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 // il logout è attivato con una richiesta GET a "/logout"
                 .logoutUrl("/logout")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                // in caso di successo, si viene reindirizzati alla /index page
+                // in caso di successo, si viene reindirizzati alla /home page
                 .logoutSuccessUrl("/home")        
                 .invalidateHttpSession(true)
                 .clearAuthentication(true).permitAll();
