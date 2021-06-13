@@ -1,3 +1,4 @@
+package it.uniroma3.siw.spring.rava.model;
 //package it.uniroma3.siw.model.test;
 //
 //import static org.junit.jupiter.api.Assertions.*;

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <meta charset="utf-8" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+      <section>
+      	<div class="list">
+          <p>Lista di prenotazioni</p>
+          <ul>
+			<li th:each="prenotazione : ${prenotazioni}">
+				<a href="prenotazione.html" 
+				   th:href="@{'/prenotazione' + '/' + ${prenotazione.id}}" 
+				   th:text="'Prenotazione del ' + ${prenotazione.data.toString()}">Titolo</a>
+			</li>
+		</ul>
+        </div>
+       </section>
+      </body>
+     </html>

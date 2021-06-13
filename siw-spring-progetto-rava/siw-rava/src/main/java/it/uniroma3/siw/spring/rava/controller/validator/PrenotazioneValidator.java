@@ -8,8 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
+import static it.uniroma3.siw.spring.rava.model.Rava.postiMax;
 import it.uniroma3.siw.spring.rava.model.Prenotazione;
+import it.uniroma3.siw.spring.rava.model.Rava;
 import it.uniroma3.siw.spring.rava.service.PrenotazioneService;
 
 @Component
@@ -29,8 +30,6 @@ public class PrenotazioneValidator implements Validator {
 	public boolean supports(Class<?> clazz) {
 		return Prenotazione.class.equals(clazz);
 	}
-	
-	private int postiMax = 10;
 
 	@Override
 	public void validate(Object o, Errors errors) {
@@ -42,7 +41,7 @@ public class PrenotazioneValidator implements Validator {
 			totaleDataOrario += p.getNumeroPersone();
 		}
 		totaleDataOrario += prenotazione.getNumeroPersone();
-		if (totaleDataOrario > this.postiMax) {
+		if (totaleDataOrario > Rava.postiMax) {
 			errors.rejectValue("orario", "numero");
 		}
 	}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <meta charset="utf-8" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+      <section>
+      <div th:if="${prenotazione}" th:object="${prenotazione}">
+        <h1 class="title"><b>Prenotazione</b></h1>
+      <div class = "row">
+        <div class = "column"><b>Data: </b><p class = "infot" th:text="*{data.toString()}">xx</p></div>
+        <div class = "column"><b>Orario: </b><p class = "infot" th:text="*{orario.getValue()}">xx</p></div>
+        <div class = "column"><b>Numero di persone: </b><p class = "infot" th:text="*{numeroPersone}">xx</p></div>
+        <div class = "column"><b>Commento: </b><p class = "infot" th:text="*{commento}">xx</p></div>
+      </div>
+      </div>
+      </section>
+  </body>
+</html>
