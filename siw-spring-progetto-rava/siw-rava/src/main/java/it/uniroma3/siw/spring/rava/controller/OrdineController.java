@@ -299,11 +299,13 @@ public class OrdineController
 		logger.debug("SI sta per confermare l'ordine"+ or.getId());
 		logger.debug("TIPO CONSEGNA: "+ or.getTipologiaDiConsegna());
 		logger.debug("ORARIO: "+ or.getOrarioConsegna());
+		logger.debug("COMMENTO: "+ or.getCommento());
 		logger.debug("TOTALE ORDINE = "+ or.getTotale());
 		String orario=or.getOrarioConsegna();
 		or.setInfoFatturazione(or.getOrarioConsegna(), or.getCommento());
 		this.ordineService.inserisci(or);
 		List<LineaOrdine> lio=this.linea.prendiLineeOrdinePerOrdine( or);
+		//se l'ordine è d'asporto, non c'è necessita di inserire il domicilio
 		if(or.getTipo().equals("Domicilio"))
 		{
 			Domicilio dom=this.domService.domicilioPerId(or.getIndirizzoConsegna().getId());
