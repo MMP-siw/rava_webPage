@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/fragment.html :: head(title='Home', style='/css/modalitaConsegna.css')">
+<head>
 	<link th:href="@{/css/esempioPopUp.css}">
+
 	<link th:href="@{/css/modalidaConsegna.css}"
+
+	<link th:href="@{/css/modalitaConsegna.css}" rel="stylesheet">
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+	<title>Prodotti</title>
 </head>
 
 <body>
 	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
 	<!--Da stilizzare -->
+
 	<div>
 		<h1 th:text="#{prodotti.titolo}">Seleziona Prodotti</h1>
 		<ul th:each="prodotto : ${prodotti}">
@@ -45,11 +51,13 @@
 			function openForm() //Apuretura del pop-up
 			{
 				document.getElementById("popUp").style.visibility = "visible";
+
 			}
 
 			function closeForm() //chiusura del pop-uè
 			{
 				document.getElementById("popUp").style.visibility = "hidden";
+
 			}
 		</script>
 	</div>
