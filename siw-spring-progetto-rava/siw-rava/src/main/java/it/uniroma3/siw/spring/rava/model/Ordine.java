@@ -48,7 +48,7 @@ public class Ordine {
     private Long id;
 	
 	@Column
-	private Date data;
+	private String data;
 	
 	@Column
 	private float totale;
@@ -109,6 +109,8 @@ public class Ordine {
 		lio.setSubTotale(lio.getProdotto().getPrezzo()*qnt);	//settaggio del subtotale della linea(prezzoprodotto*qnt)
 		
 		
+	
+		
 		this.aggoungiLineaOrdine(lio);
 		
 		 return lio;
@@ -128,7 +130,7 @@ public class Ordine {
 	
 	public void aggoungiLineaOrdine(LineaOrdine lio) 
 	{
-		this.totale+=lio.getSubTotale();
+		
 		this.lineeOrdine.add(lio);
 		
 		
@@ -141,7 +143,7 @@ public class Ordine {
 	 */
 	public void confermaOrdine(Cliente c)
 	{
-		this.setUtente(c);	//
+		this.setUtente(c);	
 		c.addOrdine(this);
 	}
 
@@ -161,7 +163,7 @@ public class Ordine {
 	 * 
 	 * Vedi caso d'uso @NuovoOrdineDomicilio passo @inserisciOrario
 	 */
-	public void setInfoFatturazione(String time, String commento) 
+	public void setInfoFatturazione(String time, String commento, String tipoConsegna) 
 	{
 		//Prima possibile
 		if(time==null)
@@ -178,10 +180,22 @@ public class Ordine {
 		{
 			this.setOrarioConsegna(time);
 		}
+		this.setTipologiaDiConsegna(tipoConsegna);
 		this.setCommento(commento);
-		this.data =Date.valueOf(LocalDate.now());	//si assume che la consegna sia nello stesso giorno
+		this.data =Date.valueOf(LocalDate.now()).toString();	//si assume che la consegna sia nello stesso giorno
 		
 		
+	}
+	
+	@Override
+	public String toString()
+	{
+		return ( "id " + this.id 
+				+ "   Data [" + this.data.toString() + " ]" 
+				+ "   Totale: ( " + this.totale +   " )" +
+				"   Stato: ( " + this.stato + " ) "+
+				"   Tipo: ( " + this.tipo + " ) "+
+				" Orario consegna/ritiro: [ " + this.orarioConsegna) + " ]";  
 	}
 	
 }

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/fragment.html :: head(title='Login', style='fogliCss/registrationSuccesful.css', icon='/images/svg/logo.svg')">
+<head>
+	<link th:href="@{fogliCss/registrationSuccesful.css}" rel="stylesheet">
+	<link th:href="@{css/fragmentStyle.css}" rel="stylesheet">
+	<link rel="icon" href="/images/svg/logo.svg" type="image/icon type">
 </head>
 <body>
    <nav th:replace="fragments/fragment.html :: intestazione"></nav>

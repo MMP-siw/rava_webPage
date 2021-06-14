@@ -1,4 +1,5 @@
 body{
+	font-family: Market Deco;
 	display:flex;
 	flex-direction: column;
 	justify-content: flex-start;
