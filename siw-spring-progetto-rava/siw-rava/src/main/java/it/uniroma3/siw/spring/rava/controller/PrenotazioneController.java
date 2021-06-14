@@ -74,7 +74,7 @@ public class PrenotazioneController {
 		return "prenotazione/prenotazioneForm";
 	}
 	
-	/**
+	/***
 	 * l'utente vuole visualizzare i dati di una determinata prenotazione,
 	 * anche passata
 	 */

@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.rava.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,8 @@ public class AuthenticationController {
 	@Autowired
 	private ClienteValidator clienteValidator;
 	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());	//per le stampe di log
+	
 	@RequestMapping(value = "/register", method = RequestMethod.GET) 
 	public String showRegisterForm (Model model) {
 		model.addAttribute("user", new Cliente());
@@ -34,7 +38,9 @@ public class AuthenticationController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET) 
-	public String showLoginForm (Model model) {
+	public String showLoginForm (Model model) 
+	{
+		
 		return "authentication/loginForm";
 	}
 	

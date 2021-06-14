@@ -4,6 +4,8 @@ import java.util.List;
 import org.slf4j.Logger;  
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,10 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import it.uniroma3.siw.spring.rava.model.Cliente;
+import it.uniroma3.siw.spring.rava.model.Credentials;
 import it.uniroma3.siw.spring.rava.model.Domicilio;
 import it.uniroma3.siw.spring.rava.model.LineaOrdine;
 import it.uniroma3.siw.spring.rava.model.Ordine;
 import it.uniroma3.siw.spring.rava.model.Prodotto;
+import it.uniroma3.siw.spring.rava.service.CredentialsService;
 import it.uniroma3.siw.spring.rava.service.DomicilioService;
 import it.uniroma3.siw.spring.rava.service.LineaOrdineService;
 import it.uniroma3.siw.spring.rava.service.OrdineService;
@@ -36,6 +42,9 @@ public class OrdineController
 	
 	@Autowired
 	private DomicilioService domService;
+	
+	@Autowired
+	private CredentialsService credentialsService;
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());	//per le stampe di log
 
@@ -172,16 +181,28 @@ public class OrdineController
 	@RequestMapping(value="/ordinaProdotto", method=RequestMethod.GET)
 	public String prendiTuttiIProdotti(Model model)
 	{
+		Cliente cliente=getCliente();
+				logger.debug("L'UTETNE LOGGATO HA ID : " +  cliente.getId());
+				logger.debug("NOME: " +cliente.getNome() + "COGNOME: "+ cliente.getCognome());
+				
+
 
 		Ordine ordineCorrente=new Ordine();
+		//se non è loggato
+		if(cliente==null)
+		{
+			return "error/registatiOLogga.html";
+		}
 		List<Prodotto> listaProdotti=this.prodService.tutti();
 		logger.debug("HAI CREATO l'ORDINE NUMERO : ", ordineCorrente.getId());
+		ordineCorrente.setUtente(cliente);
+		cliente.addOrdine(ordineCorrente);
 		this.ordineService.inserisci(ordineCorrente);
 		model.addAttribute("ordine",ordineCorrente);
 		model.addAttribute("prodotti",listaProdotti);
 
 
-		return "selezionaProdotto.html";
+		return "ordine/selezionaProdotto.html";
 	}
 	
 	
@@ -199,7 +220,7 @@ public class OrdineController
 		logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
 		model.addAttribute("prodotto", prod);
 		model.addAttribute("ordine",ordine);
-		return "prodotto.html";
+		return "ordine/prodotto.html";
 	}
 	/*
 	 * L'utetne inserisce il prodotto nell'ordine
@@ -224,7 +245,7 @@ public class OrdineController
 		logger.debug("ORDINE ID= "+ordine.toString());
 		logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
 		model.addAttribute("ordine",ordine);
-		return "selezionaProdotto.html";
+		return "ordine/selezionaProdotto.html";
 
 	}
 
@@ -240,16 +261,19 @@ public class OrdineController
 	public String settaModalitàDomicilio(Model model,@PathVariable("id")Long id)
 	{
 		
+		Cliente cliente = getCliente();
+		
 		Ordine ordine=this.ordineService.trovaPerId(id);
 		ordine.setTipo("Domicilio");
 		model.addAttribute("ordine",ordine);
-		model.addAttribute("domicili", this.domService.tutti());
+		//model.addAttribute("domicili", this.domService.tutti());
+		model.addAttribute("domicili",this.domService.domiciliPerUtente(cliente));	//prendiamo i domicili del solo cliente loggato
 		model.addAttribute("domicilio", new Domicilio());
 		logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
 		this.ordineService.inserisci(ordine);
 		logger.debug("L'ORDINE NUMERO " + ordine.getId()+ "è STATO SETTATO A  domicilio");
 
-		return "selezionaDomicilio.html";
+		return "ordine/selezionaDomicilio.html";
 	}
 	/*
 	 * Selezione della modalità di consegna ad asporto
@@ -262,7 +286,7 @@ public class OrdineController
 		model.addAttribute("ordine",ordine);
 		this.ordineService.inserisci(ordine);
 		logger.debug("L'ORDINE NUMERO " + ordine.getId()+ "è STATO SETTATO A  asporto");
-		return "infoFatturazione.html";
+		return "ordine/infoFatturazione.html";
 	}
 	/*
 	 * L'utetnte seleziona un domicilio precedentemente inserito 
@@ -272,6 +296,7 @@ public class OrdineController
 	@RequestMapping(value="/ordine/{id}/settaDomicilio", method=RequestMethod.POST)
 	public String settaDomicilioDiConsegna (Model model, @ModelAttribute("domicilio")Domicilio dom, @PathVariable("id")Long id)
 	{
+		
 		Domicilio domicilio=this.domService.domicilioPerId(dom.getId());
 		logger.debug("E' STATO SELEZIONATO IL DOMICILIO : "+ domicilio.getIndirizzo());
 		Ordine or=this.ordineService.trovaPerId(id);
@@ -280,23 +305,58 @@ public class OrdineController
 		this.ordineService.inserisci(or);
 		model.addAttribute("ordine",or);
 		model.addAttribute("domicilio",domicilio);
-		
-		return "infoFatturazione.html";
+		Cliente cliente=getCliente();		//prendo il cliente corrente
+		model.addAttribute("cliente",cliente);	
+		return "ordine/infoFatturazione.html";
 	}
 	@RequestMapping(value="/ordine/{id}/indietro", method=RequestMethod.GET)
 	public String goBak(Model model, @PathVariable("id")Long id)
 	{
+		
 		Ordine or=this.ordineService.trovaPerId(id);
 		List<Prodotto> listaProdotti=this.prodService.tutti();
 		model.addAttribute("prodotti",listaProdotti);
 		model.addAttribute("ordine",or);
 		
-		return "selezionaProdotto.html";
+		return "ordine/selezionaProdotto.html";
+	}
+
+
+	private  Cliente getCliente() {
+		//Necessito delle info dell'utente loggato per inserirle in automatico
+				//retrieve current user
+				Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				String username;
+
+				if (principal instanceof UserDetails) {
+					username = ((UserDetails)principal).getUsername();
+				} else {
+					username = principal.toString();
+				}
+						
+				Credentials c = this.credentialsService.getCredentials(username);
+				Cliente cliente = c.getUser();
+				return cliente;
 	}
 	
 	@RequestMapping(value="/ordine/{id}/infoFatt", method=RequestMethod.POST)
 	public String ricapitoloOrdine(Model model, @ModelAttribute("id")Long id)
 	{
+		//Necessito delle info dell'utente loggato per inserirle in automatico
+		//retrieve current user
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails)principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+				
+		Credentials c = this.credentialsService.getCredentials(username);
+		Cliente cliente = c.getUser();
+		
+		logger.debug("L'UTETNE LOGGATO HA ID : " +  cliente.getId());
 		Ordine or= this.ordineService.trovaPerId(id);
 		logger.debug("SI sta per confermare l'ordine"+ or.getId());
 		logger.debug("TIPO CONSEGNA: "+ or.getTipologiaDiConsegna());
@@ -315,8 +375,9 @@ public class OrdineController
 		}
 			model.addAttribute("ordine", or);
 			model.addAttribute("lineeOrdine",lio);
+			
 		
-		return "ordine.html";
+		return "ordine/ordine.html";
 	}
 	
 	
