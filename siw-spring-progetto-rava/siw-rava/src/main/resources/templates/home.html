@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/fragment.html :: head(title='Home', style='/fogliCss/provaTendinaUtente.css',icon='/images/svg/logo.svg')"></head>
+<head th:replace="fragments/fragment.html :: head(title='Home', style='/fogliCss/provaTendinaUtente.css')"></head>
 <body>
    <nav th:replace="fragments/fragment.html :: intestazione"></nav>
 
@@ -15,7 +15,7 @@
     </div>
 
     <div class="boxes">
-    	<div class="box">
+    	<a class="box" href="prenotazione/prenotazioneForm" th:href="@{/prenota}">
     		<img th:src="@{/images/png/rava.jpeg}">
     		<div class="bg"></div>
     		<h1>Menu</h1>
@@ -23,7 +23,7 @@
     		<div class="bottomBar">
     			<h1 th:text="#{box.scopri}">Scopri di piu' ></h1>
     		</div>
-    	</div>
+    	</a>
 
     	<a  th:href="ordinaProdotto" class="box">
     		<img th:src="@{/images/png/rava.jpeg}">

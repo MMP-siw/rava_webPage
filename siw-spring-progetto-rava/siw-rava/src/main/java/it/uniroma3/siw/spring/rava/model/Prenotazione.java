@@ -1,7 +1,6 @@
 package it.uniroma3.siw.spring.rava.model;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,9 +30,11 @@ public class Prenotazione {
     private Long id;
 	
 	@Column(nullable = false)
-	private Date data;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate data;
 	@Column(nullable = false)
-	private Time orario;
+	private FasciaOraria orario;
+	
 	@Column(nullable = false)
 	private int numeroPersone;
 	@Column(nullable = false)
@@ -40,8 +44,9 @@ public class Prenotazione {
 	@JoinColumn(name = "utenti_id")
 	private Cliente cliente;
 	
+	/**
 	@ManyToOne
 	@JoinColumn(name = "slotcalendario_id")
-	private Slot slot;
+	private Slot slot;**/
 
 }

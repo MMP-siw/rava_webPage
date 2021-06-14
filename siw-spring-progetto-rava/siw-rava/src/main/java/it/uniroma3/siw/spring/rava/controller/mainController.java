@@ -14,5 +14,9 @@ public class mainController
 		return "home.html";
 	}
 	
+	@RequestMapping(value="/menu", method=RequestMethod.GET)
+	public String goToMenuPage(Model model) {
+		return "menu.html";
+	}
 
 }
