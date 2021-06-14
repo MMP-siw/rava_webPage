@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<link th:href="@{fogliCss/registerForm.css}" rel="stylesheet">
-	<link th:href="@{css/fragmentStyle.css}" rel="stylesheet">
-	<link rel="icon" href="/images/svg/logo.svg" type="image/icon type">
-</head>
+
+
+<head th:replace="fragments/fragment.html :: head('Registrazione')"></head>
+
 <body>
    <nav th:replace="fragments/fragment.html :: intestazione"></nav>
    

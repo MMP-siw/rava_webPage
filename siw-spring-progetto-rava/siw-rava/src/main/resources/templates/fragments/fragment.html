@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link rel="stylesheet" th:href="@{/css/fragmentStyle.css}">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:fragment="head(title)">
+	<link rel="stylesheet" th:href="@{/css/fragmentStyle.css}">
+	<title th:text="title"></title>
+	<link rel="icon" href="/images/svg/logo.svg" type="image/icon type">
 </head>
-
 <body>
 	<nav th:fragment="intestazione">
 		<div class="user">
