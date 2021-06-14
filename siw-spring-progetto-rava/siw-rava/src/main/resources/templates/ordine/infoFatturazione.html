@@ -37,9 +37,9 @@
 			
 			<div id="elements">
 				<ul>
-					<li>Nome: <span class="nonModificabili"><!--Verra inserito tramite thymeleaf-->Pietro</span></li>
-					<li>Cognome: <span class="nonModificabili"><!--Verrà inseirto tramite tymeleaf-->Quadrini</span></li>
-					<li>Indirizzo: <span class="nonModificabili" th:text="${domicilio}"><!--Verrà inserito tramite tymeleaf-->Via del Corso 139 Roma 00145</span></li>
+					<li>Nome: <span class="nonModificabili" th:text="${cliente.nome}">Pietro</span></li>
+					<li>Cognome: <span class="nonModificabili" th:text="${cliente.cognome}">Quadrini</span></li>
+					<li>Indirizzo: <span class="nonModificabili" th:text="${domicilio}">Via del Corso 139 Roma 00145</span></li>
 					<form id="form" method="POST" th:action="@{@{'/ordine' + '/' + ${ordine.id} + '/' + 'infoFatt'}} ">
 						<li ><span th:if="${ordine.tipo} == 'Asporto'">Orario ritiro: </span>
 							<span th:if="${ordine.tipo} eq 'Domicilio'">Orario consegna: </span>
@@ -54,7 +54,7 @@
 						</li>
 						<li>
 							<label for="commento">Commento:</label><br>
-							<textarea placeholder="Citofono, piano..." rows="10" cols="50" th:field="${ordine.commento}"></textarea>
+							<input type="text" id="commento" th:field="${ordine.commento}"></textarea>
 						</li>
 						<div class="buttons">
 							

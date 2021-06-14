@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
-
 import it.uniroma3.siw.spring.rava.controller.validator.PrenotazioneValidator;
 import it.uniroma3.siw.spring.rava.model.Cliente;
 import it.uniroma3.siw.spring.rava.model.Credentials;
@@ -51,17 +49,32 @@ public class PrenotazioneController {
 	public String nuovaPrenotazionePost(@ModelAttribute("prenotazione") Prenotazione prenotazione, Model model,
 			BindingResult bindingResult) {
 		
+		//retrieve current user
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails)principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+				
+		Credentials c = this.credentialsService.getCredentials(username);
+		Cliente cliente = c.getUser();
+		
 		this.prenotazioneValidator.validate(prenotazione, bindingResult);
 		if (!bindingResult.hasErrors()) {
+			prenotazione.setCliente(cliente);
 			this.prenotazioneService.inserisci(prenotazione);
 			logger.debug("Prenotazion salvata con id: " + prenotazione.getId());
 			logger.debug("Prenotazioni salvate in fascia: " + prenotazioneService.getByDataAndOrario(prenotazione.getData(), prenotazione.getOrario()).size());
-			return "prenotazione/prenotazione";
+			model.addAttribute("prenotazione", prenotazione);
+			return ("prenotazione/prenotazione") ;
 		}
 		return "prenotazione/prenotazioneForm";
 	}
 	
-	/**
+	/***
 	 * l'utente vuole visualizzare i dati di una determinata prenotazione,
 	 * anche passata
 	 */

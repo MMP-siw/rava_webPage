@@ -191,5 +191,12 @@ textarea
   
   color: white;
 }
+#commento
+{
+	height:10vh;
+	width:50vh;
+	text-align: left;
+	padding: 0px;
+}
 
 

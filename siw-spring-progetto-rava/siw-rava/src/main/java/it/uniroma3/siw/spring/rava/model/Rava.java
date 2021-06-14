@@ -17,6 +17,6 @@ public class Rava {
 	private List<String> capValidi = new ArrayList<>();
 	private Menu menu;
 	private List<Prenotazione> prenotazioniTotali;
-	private int postiMax;
+	public final static int postiMax = 10;
 
 }
