@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" th:herf="@{/fogliCss/gestisciOrdini.css}">
+	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+	
+</head>
+<body>
+	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+	<header>
+			<div class="gestioneTitle">
+			<p> <b th:text="#{gestioneOrdine.title}">Gli ordini di</b> <b th:text="${cliente.nome}">Matteo Wissel</b> </p>
+			</div>
+			<!--Lista di ordini non modificabili-->
+			<div class="ordiniTerminati">
+			<p th:text="#{gestisciOrdine.nonMod}">Non modificabili</p>
+			<ul th:each="ordine : ${ordiniTerminati}">
+				<li><a th:href="@{/visualizzaOrdine/{id} (id=ordine.id)}" th:text="${ordine}"></a>
+				</li>
+			</ul>
+			</div>
+			<div class="ordiniInCorso">
+			<p>Modificabili</p>
+			<ul th:each="ordine : ${ordiniInCorso}">
+				<li><a th:href="@{/gestisciOrdine/{id} (id=ordine.id)}" th:text="${ordine}"></a>
+				</li>
+			</ul>
+			</div>
+		<a th:href="@{/home}" id="goBack1"><b th:text="#{gestioneOrdine.vaiAllaHome}">Torna alla home</b></a>
+	</header>
+	
+	
+		
+</body>
+</html>

@@ -28,7 +28,7 @@
 
 					
 					<div id="totale">
-						<span>TOT €</span><span th:text ="${ordine.totale}" id="tot">65</span>
+						<span>TOT €</span><span th:text="${ordine.totale}" id="tot">65</span>
 					</div>
 				</div>
 				<div id="infoFatturazione" class="elements">
@@ -46,16 +46,55 @@
 							<span>Tipo: </span><span class="value" th:text="${ordine.tipo}"></span>
 						</li>
 						<li>
-							<span>Orario: </span><span class="value" th:if="${ordine.tipo=='Domicilio'}" th:text="${ordine.orarioConsegna}"></span>
+							<span>Orario: </span><span class="value" th:text="${ordine.orarioConsegna}"></span>
 						</li>
-						
+						<li>
+							<span>Commento: </span><span class="value" th:text="${ordine.commento}"> Citofono wissel, interno 20</span>
+						</li>
 						
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div id="piePagina">
-			<a href="/home" >torna alla home</a>
+			
+		
+			<button class="submit" id="conferma" onclick="openForm()">Conferma</button>
+			<a  id ="goBack1" class="submit" th:href="@{/ordine +'/'+ ${ordine.id} + '/' + infoFatturazione}">Torna all'ordine</a>
+		</div>
+	<script>
+		function openForm() //Apuretura del pop-up
+				{
+		  		document.getElementById("popUp").style.visibility = "visible";
+				}
+		
+				function closeForm() //chiusura del pop-uè
+				{
+		  		document.getElementById("popUp").style.visibility = "hidden";
+				}
+			</script>
+	<div  id="popUp" class="popUp"> 
+	<div class = "container">
+			
+
+			
+			
+		<div class ="sectionPp"> 
+			<span>Nuovo ordine creato</span>
+			<br>
+			<br>
+			<h2 th:text="${ordine.id}">Numero ordine</h2>
+
+			
+			
+			
+			
+		</div>
+		<div id="img">
+				<img  id="imgConf" th:src="@{/images/png/checkSVG.png}">
+			</div>
+		<div class="footer">
+			<a th:href="@{/home}" class="btn"><b>Torna alla home</b></a>
 		</div>
 
 	</section>

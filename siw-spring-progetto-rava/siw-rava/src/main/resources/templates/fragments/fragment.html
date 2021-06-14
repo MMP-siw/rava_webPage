@@ -14,8 +14,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 			</button>
 			<div class="dropdown-content">
 				<a href="/authentication/loginForm" th:href="@{/login}" sec:authorize="isAnonymous()">Login</a>
-				<a href="/authentication/registrationForm" th:href="@{/register}" sec:authorize="isAnonymous()">Registrati</a>
+				<a href="/authentication/registrationForm" th:href="@{/register}" sec:authorize="isAnonymous()"
+				th:text="#{tendina.registrati}">Registrati</a>
 				<a href="user" th:href="@{/utente}" sec:authorize="isAuthenticated()">Utente</a>
+				<a href="/ordini/gestisciOrdini" th:href="@{/gestisciOrdini}" sec:authorize="isAuthenticated()"
+				th:text="#{tendina.gestisciOrdini}">Gestisci ordini</a>
+				
 				<a href="home" th:href="@{/logout}" sec:authorize="isAuthenticated()">Esci</a>
 			</div>
 		</div>

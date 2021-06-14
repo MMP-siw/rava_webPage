@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" th:herf="@{/fogliCss/gestisciOrdini.css}">
+	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
+	<link rel="stylesheet" href="gestisciOrdini.css">
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+	
+</head>
+<body>
+	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+	<header>
+			<div class="gestioneTitle">
+			<p> <b th:text="#{gestioneOrdine.title}">Gli ordini di</b> <b th:text="${cliente.nome}">Matteo Wissel</b> </p>
+			</div>
+			<!--Lista di ordini non modificabili-->
+			<div class="ordiniTerminati">
+				<p class="type">Non modicibili</p>
+			<ul th:each="ordine : ${ordiniTerminati}">
+				<li><a th:href="@{/visualizzaOrdine/{id} (id=ordine.id)}" th:text="${ordine}">Ordine 1</a>
+				</li>
+				<li><a th:href="@{/visualizzaOrdine/{id} (id=ordine.id)}" th:text="${ordine}">Ordine 2</a>
+				</li>
+				<li><a th:href="@{/visualizzaOrdine/{id} (id=ordine.id)}" th:text="${ordine}">Ordine 3</a>
+				</li>
+			</ul>
+			</div>
+			<div class="ordiniInCorso">
+				<p class="type">Modificabili</p>
+			<ul th:each="ordine : ${ordiniInCorso}">
+				<li><a th:href="@{/gestisciOrdine/{id} (id=ordine.id)}" th:text="${ordine}">Ordine 4</a>
+				</li>
+				<li><a th:href="@{/gestisciOrdine/{id} (id=ordine.id)}" th:text="${ordine}">Ordine 5</a>
+				</li>
+				<li><a th:href="@{/gestisciOrdine/{id} (id=ordine.id)}" th:text="${ordine}">Ordine 6</a>
+				</li>
+	</header>
+	
+		
+</body>
+</html>
