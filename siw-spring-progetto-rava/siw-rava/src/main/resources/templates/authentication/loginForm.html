@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/fragment.html :: head(title='Login', style='/fogliCss/loginForm.css', icon='/images/svg/logo.svg')"></head> 
+<link rel="stylesheet" href="fogliCss/loginForm.css">
+<head th:replace="fragments/fragment.html :: head(title='Login')"></head> 
 <body>
 	<nav th:replace="fragments/fragment.html :: intestazione(index='/default')"></nav>
 	<div class="form">
