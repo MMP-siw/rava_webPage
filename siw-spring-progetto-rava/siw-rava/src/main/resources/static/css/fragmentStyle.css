@@ -99,6 +99,11 @@ nav{
 	width: 50%;
 }
 
+.nameAndMenu a {
+	text-decoration: none;
+	color: black;
+}
+
 .nameAndMenu h1{
     font-size: 6vh;
 }

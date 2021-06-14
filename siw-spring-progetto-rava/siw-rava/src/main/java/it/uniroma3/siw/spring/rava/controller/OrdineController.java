@@ -189,7 +189,7 @@ public class OrdineController
 
 		Ordine ordineCorrente=new Ordine();
 		//se non è loggato
-		if(cliente==null)
+		if(cliente.equals(null))
 		{
 			return "error/registatiOLogga.html";
 		}

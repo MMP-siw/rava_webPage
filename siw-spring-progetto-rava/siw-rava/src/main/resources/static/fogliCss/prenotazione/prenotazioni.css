@@ -1,0 +1,42 @@
+* {
+	margin:0;
+	font-family: adobe-gothic-std, sans-serif; 
+}
+
+section {
+	padding: 65px 50px 50px 50px;
+}
+
+.list p {
+	font-size:30px;
+	text-align:center;
+}
+
+ul {
+	padding: 40px 25px 25px 775px;
+	font-size: 17px;
+}
+
+.elimina {
+	padding-left: 250px;
+}
+
+ul li a {
+	text-decoration: none;
+	color: black;
+}
+
+ul li a:hover {
+	text-decoration: none;
+	color: #A9A9A9;
+}
+
+.elimina a {
+	text-decoration: none;
+	color: red;
+}
+
+.elimina a:hover {
+	text-decoration: none;
+	color: #CD5C5C;
+}

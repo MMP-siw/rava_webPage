@@ -31,6 +31,22 @@ public class PrenotazioneController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	public Cliente getCliente() {
+		//retrieve current user
+				Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				String username;
+
+				if (principal instanceof UserDetails) {
+					username = ((UserDetails)principal).getUsername();
+				} else {
+					username = principal.toString();
+				}
+						
+				Credentials c = this.credentialsService.getCredentials(username);
+				Cliente cliente = c.getUser();
+				return cliente;
+	}
+	
 	/**
 	 * l'utente vuole effettuare una nuova prenotazione, viene creato il nuovo
 	 * oggetto "vuoto" e restituito il form da compilare
@@ -48,19 +64,8 @@ public class PrenotazioneController {
 	@RequestMapping(value="/prenota", method=RequestMethod.POST)
 	public String nuovaPrenotazionePost(@ModelAttribute("prenotazione") Prenotazione prenotazione, Model model,
 			BindingResult bindingResult) {
-		
-		//retrieve current user
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username;
 
-		if (principal instanceof UserDetails) {
-			username = ((UserDetails)principal).getUsername();
-		} else {
-			username = principal.toString();
-		}
-				
-		Credentials c = this.credentialsService.getCredentials(username);
-		Cliente cliente = c.getUser();
+		Cliente cliente = getCliente();
 		
 		this.prenotazioneValidator.validate(prenotazione, bindingResult);
 		if (!bindingResult.hasErrors()) {
@@ -91,22 +96,21 @@ public class PrenotazioneController {
 	@RequestMapping(value="/prenotazioni", method=RequestMethod.GET) 
 	public String getPrenotazioni(Model model) {
 		
-		//retrieve current user
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username;
-
-		if (principal instanceof UserDetails) {
-			username = ((UserDetails)principal).getUsername();
-		} else {
-			username = principal.toString();
-		}
-		
-		Credentials c = this.credentialsService.getCredentials(username);
-		Cliente cliente = c.getUser();
+		Cliente cliente = getCliente();
 		
 		//popola pagina
 		model.addAttribute("prenotazioni", this.prenotazioneService.getByCliente(cliente));
 		return "prenotazione/prenotazioni";
 	}
-
+	
+	/**
+	 * l'utente vuole eliminare una prenotazione
+	 */
+	@RequestMapping(value="/elimina/prenotazione/{id}", method=RequestMethod.GET) 
+	public String deletePrenotazione(@PathVariable("id") Long id, Model model) {
+	    Cliente cliente = getCliente();
+	    this.prenotazioneService.cancella(id);
+	    model.addAttribute("prenotazioni", this.prenotazioneService.getByCliente(cliente));
+	    return "prenotazione/prenotazioni";
+	   }
 }

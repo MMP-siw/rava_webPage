@@ -47,4 +47,9 @@ public class PrenotazioneService {
 		return (List<Prenotazione>)this.prenotazioneRepository.findByDataAndOrario(data, orario);
 	}
 
+	@Transactional
+	public void cancella(Long id) {
+		this.prenotazioneRepository.deleteById(id);		
+	}
+
 }
