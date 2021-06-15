@@ -50,10 +50,25 @@ public class Prenotazione {
 	@JoinColumn(name = "slotcalendario_id")
 	private Slot slot;**/
 	
+	/**
+	 * verifica che la prenotazione non sia già passata
+	 * @return boolean
+	 */
 	public boolean isCorrente() {
 		LocalTime ora = LocalTime.now();
 		LocalTime oraPren = LocalTime.parse(this.orario.getOraMax());
-		return ora.isBefore(oraPren);
+		LocalDate oggi = LocalDate.now();
+		if (ora.isAfter(oraPren)) {
+			return !(oggi.isEqual(this.data));
+		}
+		return true;
+	}
+	
+	public void updatePrenotazione(Prenotazione p) {
+		this.orario = p.getOrario();
+		this.commento = p.getCommento();
+		this.data = p.getData();
+		this.numeroPersone = p.getNumeroPersone();
 	}
 
 }
