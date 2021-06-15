@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="fogliCss/user.css" rel="stylesheet">
+<head th:replace="fragments/fragment.html :: head(title='Pagina utente')"></head>
+<body>
+   <nav th:replace="fragments/fragment.html :: intestazione"></nav>
+   
+   <section>
+   	<div class="title">
+   		<p><b>Pagina personale dell'utente</b></p>
+   	</div>
+   	<div class="info" th:if="${utente}" th:object="${utente}">
+   		<div class="element">
+   			<p th:text="*{nome} + ' ' + *{cognome}">Nome e Cognome</p> 
+   		</div>
+   		<div class="element">
+   			<p th:text="*{email}">email</p> 
+   		</div>
+   		<div class="element">
+   			<p th:text="*{telefono}">telefono</p> 
+   		</div>
+   		<div class="domicilii">
+   			<ul>
+   				<li th:each="dom : ${domicilio}">
+   					<p th:text="*{dom.tipo} + ' ' + *{dom.indirizzo} + ' ' + *{dom.civico} + ' ' + *{dom.cap}">indirizzo</p>
+   					<span><!-- qui va il riferimento all'operazione di eliminazione domicilio --></span>
+   				</li>
+   			</ul>
+   			<!-- qui andrà il riferimento all'operazione di creazione di un nuovo domicilio -->
+   		</div>
+   		<div class ="element">
+   			<a href="prenotazioni" th:href="@{/prenotazioni}">Visualizza le prenotazioni precedenti</a>
+   		</div>
+   		<div class ="element">
+   			<!-- qui andrà il riferimento allo storico ordini -->
+   		</div>
+   	</div>
+   </section>
+   
+</body>
+</html>

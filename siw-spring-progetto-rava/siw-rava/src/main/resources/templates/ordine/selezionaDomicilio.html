@@ -18,7 +18,7 @@
   		<form th:action="@{@{'/ordine' + '/' + ${ordine.id} + '/' + 'settaDomicilio'}}" method="POST"  th:object="${domicilio}" id="form">
   			<ul>
             <li th:each="domicilioTemp : ${domicili}">
-                <input type="radio" th:field="${domicilio.id}" th:value="${domicilioTemp.id}"/>
+                <input type="radio" th:field="${domicilio.id}" th:value="${domicilioTemp.id}" required/>
                 <label  th:for="${domicilio.id}" th:text="${domicilioTemp}">Via u ue</label>
             </li>
         </ul>

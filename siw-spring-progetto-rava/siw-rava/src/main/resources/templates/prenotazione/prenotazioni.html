@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="fogliCss/prenotazione/prenotazioni.css">
+<head th:replace="fragments/fragment.html :: head(title='Prenotazioni')"></head>
     <meta charset="utf-8" content="width=device-width, initial-scale=1">
   <body>
+  
+  	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+  
       <section>
       	<div class="list">
-          <p>Lista di prenotazioni</p>
+          <p><b>Lista di prenotazioni</b></p>
           <ul>
 			<li th:each="prenotazione : ${prenotazioni}">
 				<a href="prenotazione.html" 
 				   th:href="@{'/prenotazione' + '/' + ${prenotazione.id}}" 
 				   th:text="'Prenotazione del ' + ${prenotazione.data.toString()}">Titolo</a>
+				<span class ="elimina"><a th:href="@{'/elimina/prenotazione/' + ${prenotazione.id}}">Elimina</a></span>
 			</li>
 		</ul>
         </div>

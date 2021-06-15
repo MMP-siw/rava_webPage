@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="fogliCss/prenotazione/prenotazioneForm.css">
+<head th:replace="fragments/fragment.html :: head(title='Prenota')"></head>
 	<body>
-		<div class="title"><p>Inserisci dati prenotazione</p></div>
+	
+	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+	
+	<section>
+	
+		<div class="title"><p><b>Inserisci i dati della prenotazione</b></p></div>
 		<form th:action="@{/prenota}" method="POST" th:object="${prenotazione}">
 			<div th:if="${#fields.hasGlobalErrors()}">
-  				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+  				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}" style="text-align: center">...</p>
 			</div>	
 		<div class="inserisci">
 			<div class ="row">
@@ -34,5 +41,8 @@
 			</div>
 		</div>
 		</form>
+		
+	  </section>
+		
 	</body>
 </html>

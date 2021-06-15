@@ -3,7 +3,7 @@
 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="head(title)">
 	<link rel="stylesheet" th:href="@{/css/fragmentStyle.css}">
-	<title th:text="title"></title>
+	<title th:text="${title}"></title>
 	<link rel="icon" href="/images/svg/logo.svg" type="image/icon type">
 </head>
 <body>
@@ -16,6 +16,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 				<a href="/authentication/loginForm" th:href="@{/login}" sec:authorize="isAnonymous()">Login</a>
 				<a href="/authentication/registrationForm" th:href="@{/register}" sec:authorize="isAnonymous()"
 				th:text="#{tendina.registrati}">Registrati</a>
+				<a href="user" th:href="@{/utente}" sec:authorize="isAuthenticated()">Utente</a>
 				<a href="/ordini/gestisciOrdini" th:href="@{/gestisciOrdini}" sec:authorize="isAuthenticated()"
 				th:text="#{tendina.gestisciOrdini}">Gestisci ordini</a>
 				
@@ -27,7 +28,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 			<p>Caffe'<br>Bistrot<br>Aperitivi</p>
 		</div>
 		<div class="nameAndMenu">
-			<h1>HAMBURGERIA RAVA</h1>
+			<a href="home" th:href="@{/home}"><h1>HAMBURGERIA RAVA</h1></a>
 			<ul>
 				<li><a href="menu">Menu</a></li>
 				<li><a href="#" th:text="#{navbar.prenota}">Prenota</a></li>

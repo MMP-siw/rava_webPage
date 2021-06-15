@@ -1,6 +1,10 @@
 package it.uniroma3.siw.spring.rava.controller.validator;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +39,8 @@ public class PrenotazioneValidator implements Validator {
 	public void validate(Object o, Errors errors) {
 		Prenotazione prenotazione = (Prenotazione) o;
 		LocalDate data = prenotazione.getData();
+		
+		//controlla se c'è posto sufficiente per tutti i prenotanti
 		List<Prenotazione> tutte = prenotazioneService.getByDataAndOrario(data, prenotazione.getOrario());
 		int totaleDataOrario = 0;
 		for (Prenotazione p: tutte) {
@@ -44,6 +50,12 @@ public class PrenotazioneValidator implements Validator {
 		if (totaleDataOrario > Rava.postiMax) {
 			errors.rejectValue("orario", "numero");
 		}
+		
+		//controlla che la data scelta sia uguale o maggiore di quella di oggi
+		if (data.isBefore(LocalDate.now())) {
+			errors.rejectValue("data", "indietro");
+		}
+	
 	}
 
 }

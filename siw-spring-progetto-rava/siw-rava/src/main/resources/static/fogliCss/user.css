@@ -1,0 +1,36 @@
+* {
+	margin: 0;
+	font-family: adobe-gothic-std, sans-serif;
+}
+
+section {
+	padding: 50px 25px 25px 150px;
+}
+
+.title p {
+	text-align: center;
+	font-size: 30px;
+}
+
+.info {
+	padding-top: 50px;
+	padding-left: 500px;
+}
+
+.element {
+	padding: 5px;
+}
+
+.element p {
+	font-size: 17px;
+}
+
+.element a {
+	text-decoration: none;
+	color: black;
+}
+
+.element a:hover {
+	text-decoration: none;
+	color: #A9A9A9;
+}

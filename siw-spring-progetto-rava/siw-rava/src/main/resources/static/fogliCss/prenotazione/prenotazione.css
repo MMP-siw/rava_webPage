@@ -1,0 +1,29 @@
+* {
+	margin:0;
+	font-family: adobe-gothic-std, sans-serif; 
+}
+
+section {
+	padding: 50px;
+}
+
+.title {
+	text-align: center;
+}
+
+.title p {
+	font-size: 30px;
+}
+
+.row {
+	padding: 25px 25px 25px 650px;
+}
+
+.column {
+	padding: 5px;
+}
+
+span {
+	padding-left:10px;
+	font-size: 17px;
+}
