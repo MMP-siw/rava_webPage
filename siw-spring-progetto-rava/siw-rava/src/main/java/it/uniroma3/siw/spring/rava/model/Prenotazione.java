@@ -1,6 +1,7 @@
 package it.uniroma3.siw.spring.rava.model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,5 +49,11 @@ public class Prenotazione {
 	@ManyToOne
 	@JoinColumn(name = "slotcalendario_id")
 	private Slot slot;**/
+	
+	public boolean isCorrente() {
+		LocalTime ora = LocalTime.now();
+		LocalTime oraPren = LocalTime.parse(this.orario.getOraMax());
+		return ora.isBefore(oraPren);
+	}
 
 }

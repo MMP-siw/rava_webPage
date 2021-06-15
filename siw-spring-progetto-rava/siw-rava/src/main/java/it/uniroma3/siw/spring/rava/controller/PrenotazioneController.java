@@ -113,4 +113,24 @@ public class PrenotazioneController {
 	    model.addAttribute("prenotazioni", this.prenotazioneService.getByCliente(cliente));
 	    return "prenotazione/prenotazioni";
 	   }
+	
+	/**
+	 * l'utente vuole modificare una prenotazione
+	 */
+	@RequestMapping(value="/modifica/prenotazione/{id}", method=RequestMethod.GET) 
+	public String modificaPrenotazione(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("prenotazione", this.prenotazioneService.getById(id));
+		return "prenotazione/prenotazioneForm";
+	}
+	
+	@RequestMapping(value="/modifica/prenotazione/{id}", method=RequestMethod.POST) 
+	public String modificaPrenotazione(@PathVariable("id") Long id, @ModelAttribute("prenotazione") Prenotazione prenotazione, Model model) {
+		Prenotazione vecchia = this.prenotazioneService.getById(id);
+		if(!vecchia.equals(prenotazione)) {
+			this.prenotazioneService.inserisci(prenotazione);
+		}
+		Cliente cliente = getCliente();
+		model.addAttribute("prenotazioni", this.prenotazioneService.getByCliente(cliente));
+		return "prenotazione/prenotazioni";
+	}
 }

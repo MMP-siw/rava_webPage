@@ -15,7 +15,12 @@
 				<a href="prenotazione.html" 
 				   th:href="@{'/prenotazione' + '/' + ${prenotazione.id}}" 
 				   th:text="'Prenotazione del ' + ${prenotazione.data.toString()}">Titolo</a>
-				<span class ="elimina"><a th:href="@{'/elimina/prenotazione/' + ${prenotazione.id}}">Elimina</a></span>
+				<span class ="elimina">
+					<a th:if="${prenotazione.isCorrente()}" th:href="@{'/elimina/prenotazione/' + ${prenotazione.id}}" 
+						th:text="Elimina">Elimina</a></span>
+				<span class ="modifica">
+					<a th:if="${prenotazione.isCorrente()}" th:href="@{'/modifica/prenotazione/' + ${prenotazione.id}}" 
+						th:text="Modifica">Modifica</a></span>
 			</li>
 		</ul>
         </div>

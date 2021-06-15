@@ -40,6 +40,11 @@ public class PrenotazioneValidator implements Validator {
 		Prenotazione prenotazione = (Prenotazione) o;
 		LocalDate data = prenotazione.getData();
 		
+		//controlla che i prenotanti siano maggiori di 0
+		if(prenotazione.getNumeroPersone() <= 0) {
+			errors.rejectValue("negativo", "numeroPersone");
+		}
+		
 		//controlla se c'è posto sufficiente per tutti i prenotanti
 		List<Prenotazione> tutte = prenotazioneService.getByDataAndOrario(data, prenotazione.getOrario());
 		int totaleDataOrario = 0;
@@ -54,6 +59,13 @@ public class PrenotazioneValidator implements Validator {
 		//controlla che la data scelta sia uguale o maggiore di quella di oggi
 		if (data.isBefore(LocalDate.now())) {
 			errors.rejectValue("data", "indietro");
+		}
+		
+		//controlla che l'orario scelto sia valido
+		LocalTime ora = LocalTime.now();
+		LocalTime oraPren = LocalTime.parse(prenotazione.getOrario().getOraMax());
+		if((data.isEqual(LocalDate.now()) && (ora.isAfter(oraPren)))) {
+			errors.rejectValue("orario", "indietro");
 		}
 	
 	}

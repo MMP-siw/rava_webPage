@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.spring.rava.model.Cliente;
 import it.uniroma3.siw.spring.rava.model.FasciaOraria;
+import it.uniroma3.siw.spring.rava.model.Ordine;
 import it.uniroma3.siw.spring.rava.model.Prenotazione;
 import it.uniroma3.siw.spring.rava.model.Slot;
 import it.uniroma3.siw.spring.rava.repository.PrenotazioneRepository;
@@ -50,6 +51,15 @@ public class PrenotazioneService {
 	@Transactional
 	public void cancella(Long id) {
 		this.prenotazioneRepository.deleteById(id);		
+	}
+
+	@Transactional
+	public Prenotazione getById(Long id) {
+		Optional<Prenotazione> optional = this.prenotazioneRepository.findById(id);
+		if (optional.isPresent())
+			return optional.get();
+		else 
+			return null;
 	}
 
 }

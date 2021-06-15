@@ -24,7 +24,9 @@
 				<div class="col-2"><select id="orario" th:field="*{orario}">
 					<option th:each="orario : ${T(it.uniroma3.siw.spring.rava.model.FasciaOraria).values()}" 
 							th:value="${orario}" th:text="${orario.getValue()}"></option>
-      			</select></div>
+      			</select>
+      			<div th:if="${#fields.hasErrors('orario')}" th:errors="*{orario}"></div>
+      			</div>
       		</div>
       		<div class ="row">
 				<div class="col-1"><label>Numero Persone:</label></div>

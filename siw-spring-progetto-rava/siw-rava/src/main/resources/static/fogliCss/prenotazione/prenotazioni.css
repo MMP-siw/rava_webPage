@@ -19,6 +19,7 @@ ul {
 
 .elimina {
 	padding-left: 250px;
+	padding-right: 10px;
 }
 
 ul li a {
@@ -39,4 +40,12 @@ ul li a:hover {
 .elimina a:hover {
 	text-decoration: none;
 	color: #CD5C5C;
+}
+
+.modifica a {
+	color: #00CED1;
+}
+
+.modifica a:hover {
+	color: #7FFFD4;
 }
