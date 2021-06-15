@@ -33,35 +33,35 @@
 							</script>
 			<!--I primi campi sono rimepiti di default-->
 			<div id="title">
-				<p >Info fatturazione</p>
+				<p th:text="#{title.infoFatt}">Info fatturazione</p>
 			</div>
 			
 			<div id="elements">
 				<ul>
-					<li>Nome: <span class="nonModificabili" th:text="${cliente.nome}">Pietro</span></li>
-					<li>Cognome: <span class="nonModificabili" th:text="${cliente.cognome}">Quadrini</span></li>
-					<li>Indirizzo: <span class="nonModificabili" th:text="${domicilio}">Via del Corso 139 Roma 00145</span></li>
+					<li> <span th:text="#{ricapitolo.nome}">Nome:</span> <span class="nonModificabili" th:text="${cliente.nome}">Pietro</span></li>
+					<li> <span th:text="#{ricapitolo.cognome}">Cognome:</span><span class="nonModificabili" th:text="${cliente.cognome}">Quadrini</span></li>
+					<li> <span th:text="#{ricapitolo.indirizzo}">Indirizzo:</span><span class="nonModificabili" th:text="${domicilio}">Via del Corso 139 Roma 00145</span></li>
 					<form id="form" method="POST" th:action="@{@{'/ordine' + '/' + ${ordine.id} + '/' + 'infoFatt'}} ">
-						<li ><span th:if="${ordine.tipo} == 'Asporto'">Orario ritiro: </span>
-							<span th:if="${ordine.tipo} eq 'Domicilio'">Orario consegna: </span>
+						<li ><span th:if="${ordine.tipo} == 'Asporto'" th:text="#{infoFatt.orarioRitiro}">Orario ritiro: </span>
+							<span th:if="${ordine.tipo} eq 'Domicilio'" th:text="#{infoFatt.orarioConsegna}">Orario consegna: </span>
 							<span>
 								<input type="radio" value="Prima possibile" id="Prima possibile"  th:field="${ordine.tipologiaDiConsegna} "name="consegna" onclick="abilitaOrario()" >
-									<label for="Prima possibile">Prima possibile</label>
+									<label for="Prima possibile" th:text="#{infoFatt.prima}">Prima possibile</label>
 								<input type="radio" id="Pianifica" name="consegna"  value="Pianifica" th:field="${ordine.tipologiaDiConsegna}" onclick="abilitaOrario()">
-									<label for="Pianifica"> Pianifica</label>
+									<label for="Pianifica" th:text="#{infoFatt.pianifica}"> Pianifica</label>
 								<input type="time" class="clock"  th:field="${ordine.orarioConsegna}" name="orarioConsegna" id="PianificaOrario" min="9:00" max="23:00" disabled="disabled">
 								
 							</span>
 						</li>
 						<li>
-							<label for="commento">Commento:</label><br>
+							<label for="commento" th:text="#{infoFatt.commento}">Commento:</label><br>
 							<input  placeholder="info per il rider" type="text" id="commento" th:field="${ordine.commento}"></textarea>
 						</li>
 						<div class="buttons">
 							
-								<a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}"  class="submit" id="goBack" >Torna all'ordine</a>
+								<a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}"  class="submit" id="goBack" th:text="#{ricapitolo.tornaOrdine}">Torna all'ordine</a>
 
-								<input  type="submit"  id="conferma" class="submit"  value="Conferma"></a>
+								<input  type="submit"  id="conferma" class="submit"  th:value="#{ricapitolo.conferma}"></a>
 						</div>
 					</form>
 				</ul>

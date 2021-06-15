@@ -321,6 +321,9 @@ public class OrdineController
 		model.addAttribute("ordine",ordine);
 		this.ordineService.inserisci(ordine);
 		logger.debug("L'ORDINE NUMERO " + ordine.getId()+ "è STATO SETTATO A  asporto");
+		Credentials c=getCliente();
+		Cliente cliente=c.getUser();
+		model.addAttribute("cliente",cliente);	
 		return "ordine/infoFatturazione.html";
 	}
 	/*
@@ -362,7 +365,25 @@ public class OrdineController
 	@RequestMapping(value="/ordine/{id}/infoFatt", method=RequestMethod.GET)
 	public String infoFatturazione(Model model, @PathVariable("id")Long id)
 	{
-		model.addAttribute("ordine",new Ordine());	//uso un ordine fittizio per acquisite le info
+		//in questa sezione vi si accede sia per la creazione che per la modifica dell'ordine
+		//se l'orario è gia presente, allora è un ordine in modifica, altrimenti è un nuovo ordine
+		
+		Ordine ordine = this.ordineService.trovaPerId(id);
+		if(ordine.getOrarioConsegna()==null)	//nuovo ordine
+		{	
+			model.addAttribute("ordine",new Ordine());	//uso un ordine fittizio per acquisite le info
+		}
+		else
+		{   
+			
+						model.addAttribute("ordine",ordine);
+		}
+		Credentials c=getCliente();
+		Cliente cliente=c.getUser();
+		Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
+		model.addAttribute("domicilio",dom);
+		model.addAttribute("cliente",cliente);
+
 		return "ordine/infoFatturazione.html";
 	}
 	
@@ -417,6 +438,8 @@ public class OrdineController
 	/*
 	 * Un utente registrato può accedere ai suoi ordini e modificare gli ordini ancora in fase di esecuzione
 	 * Puo modificare le info di fatturazione precedentemente inserite
+	 * Si necessita la suddivisione degli ordini in : In corso [modificabili]
+	 * 												  Terminati [non modificabili]
 	 */
 	@RequestMapping(value="/gestisciOrdini", method=RequestMethod.GET)
 	public String storicoOrdini (Model model)
@@ -432,6 +455,10 @@ public class OrdineController
 		return "ordine/gestioneOrdini.html";
 		
 	}
+	/*
+	 * Per quanto riguarda gli ordini non modificabili, il cliente può visualizzarli, 
+	 * *possibilità di rirordinarli*
+	 */
 	
 	@RequestMapping(value="/visualizzaOrdine/{id}", method=RequestMethod.GET)
 	public String viewOrdine(Model model, @PathVariable("id")Long id)
@@ -451,6 +478,11 @@ public class OrdineController
 		
 		return "ordine/ordine.html";
 	}
+	/*
+	 * L'utetnte seleziona un ordine in corso per poterne modificare le info di fatturazione
+	 * (se possibile anche le modalità di consegna e domicilio di consegna)
+	 * oppure per eliminarlo
+	 */
 	@RequestMapping(value="/gestisciOrdine/{id}",method=RequestMethod.GET)
 	public String editOrdine(Model model, @PathVariable("id")Long id)
 	{
@@ -465,9 +497,24 @@ public class OrdineController
 		}
 			model.addAttribute("ordine", ordine);
 			model.addAttribute("lineeOrdine",lio);
+			Credentials c=getCliente();
+			Cliente cliente=c.getUser();
 			
+			model.addAttribute("cliente",cliente);
 		return "ordine/gestisciOrdine.html";
 		
+	}
+	
+	/*
+	 * Eliminazione di un ordine
+	 */
+	@RequestMapping(value="/ordine/{id}/elimina", method=RequestMethod.GET)
+	public String eliminaOrdine(Model model, @PathVariable("id")Long id)
+	{
+		Ordine eliminare= this.ordineService.trovaPerId(id);
+		
+		this.ordineService.elimina(eliminare);
+		return "home.html";
 	}
 	
 

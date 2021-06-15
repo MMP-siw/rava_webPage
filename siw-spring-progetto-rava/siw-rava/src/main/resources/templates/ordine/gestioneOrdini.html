@@ -17,14 +17,14 @@
 			<div class="ordiniTerminati">
 			<p th:text="#{gestisciOrdine.nonMod}">Non modificabili</p>
 			<ul th:each="ordine : ${ordiniTerminati}">
-				<li><a th:href="@{/visualizzaOrdine/{id} (id=ordine.id)}" th:text="${ordine}"></a>
+				<li><a th:href="@{/visualizzaOrdine/{id} (id=${ordine.id})}" th:text="${ordine}"></a>
 				</li>
 			</ul>
 			</div>
 			<div class="ordiniInCorso">
 			<p>Modificabili</p>
 			<ul th:each="ordine : ${ordiniInCorso}">
-				<li><a th:href="@{/gestisciOrdine/{id} (id=ordine.id)}" th:text="${ordine}"></a>
+				<li><a th:href="@{/gestisciOrdine/{id} (id=${ordine.id})}" th:text="${ordine}"></a>
 				</li>
 			</ul>
 			</div>

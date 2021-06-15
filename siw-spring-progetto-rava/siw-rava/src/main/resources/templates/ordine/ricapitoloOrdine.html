@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Home</title>
+	<title th:text="#{ricapitolo.titolo}">Home</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/esempioPopUp.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/ricapitoloOrdine.css}">
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
 	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
 </head>
 <body>
-
+<nav th:replace="fragments/fragment.html :: intestazione"></nav>
 <section>
 		<div id="container" th:if="${ordine}" th:object="${ordine}">
 			<div class="title">
-				<p>Ricapitolo ordine</p>
+				<p th:text="#{ricapitolo.titolo}">Ricapitolo ordine</p>
 			</div>
 			<div class="corpo">
 				<div id="lineeOrdine" class="elements">
 					<div id="intestazione">
 						<div class="empty"></div>
-						<div class="noEmp" > <p>Quantità</p></div>
-						<div class="noEmp" id="totInt"> <p>Tot</p></div>
+						<div class="noEmp" > <p th:text="#{ricapitolo.qnt}">Quantità</p></div>
+						<div class="noEmp" id="totInt"> <p th:text="#{ricapitolo.tot}">Tot</p></div>
 					</div>
 					<div id="linea" th:each = "lio : ${lineeOrdine}">
 						<div class="empty" id="prodotto" th:text="${lio.prodotto.nome}">Nome prodotto</div>
@@ -28,39 +29,38 @@
 
 					
 					<div id="totale">
-						<span>TOT €</span><span th:text="${ordine.totale}" id="tot">65</span>
+						<span>TOT €</span><span th:text ="${ordine.totale}" id="tot">65</span>
 					</div>
 				</div>
 				<div id="infoFatturazione" class="elements">
-					<ul>
-						<li>
-							<span>Nome: </span><span class="value"> Matteo</span>
+					<ul><li>
+							<span th:text="#{ricapitolo.nome}">Nome: </span><span class="value"> Matteo</span>
 						</li>
 						<li>
-							<span>Cognome: </span><span class="value"> Wissel</span>
+							<span th:text="#{ricapitolo.cognome}">Cognome: </span><span class="value"> Wissel</span>
 						</li>
 						<li>
-							<span>Indirizzo: </span><span th:text="${domicilio}"class="value"></span>
+							<span th:text="#{ricapitolo.indirizzo}">Indirizzo: </span><span th:text="${domicilio}"class="value"></span>
 						</li>
 						<li>
-							<span>Tipo: </span><span class="value" th:text="${ordine.tipo}"></span>
+							<span th:text="#{ricapitolo.tipo}">Tipo: </span><span class="value" th:text="${ordine.tipo}"></span>
 						</li>
 						<li>
-							<span>Orario: </span><span class="value" th:text="${ordine.orarioConsegna}"></span>
+							<span th:text="#{ricapitolo.orario}">Orario: </span><span class="value" th:if="${ordine.tipo=='Domicilio'}" th:text="${ordine.orarioConsegna}"></span>
 						</li>
-						<li>
-							<span>Commento: </span><span class="value" th:text="${ordine.commento}"> Citofono wissel, interno 20</span>
-						</li>
+						
 						
 					</ul>
 				</div>
 			</div>
-		</div>
+		</div>		
+				
 		<div id="piePagina">
 			
 		
-			<button class="submit" id="conferma" onclick="openForm()">Conferma</button>
-			<a  id ="goBack1" class="submit" th:href="@{/ordine +'/'+ ${ordine.id} + '/' + infoFatturazione}">Torna all'ordine</a>
+			<button class="submit" id="conferma" onclick="openForm()" th:text="#{ricapitolo.conferma}">Conferma</button>
+			<a  id ="goBack1" class="submit" th:href="@{/ordine +'/'+ ${ordine.id} + '/' + infoFatturazione}"
+			th:text="#{ricapitolo.tornaOrdine}">Torna all'ordine</a>
 		</div>
 	<script>
 		function openForm() //Apuretura del pop-up
@@ -80,7 +80,7 @@
 			
 			
 		<div class ="sectionPp"> 
-			<span>Nuovo ordine creato</span>
+			<span th:text="#{ricapitolo.nuovoOrdine}">Nuovo ordine creato</span>
 			<br>
 			<br>
 			<h2 th:text="${ordine.id}">Numero ordine</h2>
@@ -94,7 +94,7 @@
 				<img  id="imgConf" th:src="@{/images/png/checkSVG.png}">
 			</div>
 		<div class="footer">
-			<a th:href="@{/home}" class="btn"><b>Torna alla home</b></a>
+			<a th:href="@{/home}" class="btn"><b th:text="#{ricapitolo.tornaHome}">Torna alla home</b></a>
 		</div>
 
 	</section>

@@ -16,7 +16,7 @@ head
 section
 {
 	display: flex;
-	margin-top: 0;
+	margin-top: 3%;
 	width: 100%;
 	height: 100vh;
 	
@@ -33,10 +33,10 @@ section
 .title
 {
 	
-	 margin-top: 4vh;
-	 border-bottom: solid;
- 	border-width: 2px;
+	margin-top:3vh;
 	height: 10%;
+	border-bottom: solid;
+	border-width: 2px;;
 
 }
 .title p
@@ -47,6 +47,7 @@ section
 }
 .corpo
 {
+	margin-top:3vh;
 	margin-left: 1%;
 	height: 70%;
 	display: flex;
@@ -167,82 +168,71 @@ li
 	margin-top: 0%;
 	margin-left: 20%;
 }
-.submit {
-  margin-left: 8%;
-  margin-right: 20px;
-  
-  background-color: white;
-  border: none;
-  height: 50px;
-  font-size: 15px;
-  width: 150px;
-  margin-right: 10vh;
-  font-size: 1.3em;
-  
-}
 
-.submit:hover {
-  
-  
-  border-radius: 10px;
-
-}
-#conferma
+#orario
 {
-  color: rgb(51, 255, 51);
-  height:55px;
-  font-family: adobe-gothic-std, sans-serif;
-
+	appearance:button;
+	border:none;
+	text-align: center;
+	color:black;
 }
-#conferma:hover
+#back
 {
-  background-color: rgb(51, 255, 51);
-  color:white;
+	appearance:button;
+	text-align: center;
+	border:none;
+	color:black;
 }
+#consegna
+{ 
+	appearance:button;
+	text-align: center;
+	border:none;
+	color:black;
+	font-family: Market Deco;
+}
+#open
+{ 
+	text-align: center;
+	border:none;
+	color:black;	}
 
-#goBack1
+.bottone
 {
-  
-  appearance:button;
-  text-align: center;
-  color:red;
-  width: 210px;  
-  align-items: flex-start;
-  padding-top:1.2vh;
-  text-decoration: none;
+	height: auto;
+	width:auto;
+	margin-right: 5vh;
+	border-radius: 20px;
+	padding:2vh;
+	font-size: 1.2em;
+	text-decoration: none;
+	border-color:black;
+	background-color:white;
 }
-
-#goBack1:hover {
-  background-color: red;
-  
-  color: white;
-}
-
-.popUp 
+.bottone:hover
 {
-  visibility: hidden;
-  position: fixed;
-  bottom: 12%;
-  right: 33%;
-  width: 33.33%;
-  height: 60%;
-  
- }
-
- .container
- {
- 	display: flex;
- 	flex-direction: column;
- 	height: 100%;
- 	width: 100%; 	
-
-
- }
- .header p
- {
- 	font-size: 2em;
- }
- .sectionPp
+	
+	box-shadow: 0px 3px 2px 0;
+	
+	
+ 	transition: 0.3s; 
+}
+#orario:hover
+{
+	color:white;
+	background-color:  #ffdf6cff;
+}
+#back:hover
+{
+	color:white;
+	background-color:  rgb(255, 71, 26);
+}
+#open:hover
+{
+	background-color:   rgb(51, 255, 51);
+	color:white;
+}
+.sectionPp
  {
  	height: 40%;
  	width: 100%;
@@ -284,7 +274,7 @@ li
  	margin-left: 38%;
  	margin-top: 6%;
  }
- .footer
+  .footer
  {
  	
  	
@@ -299,18 +289,18 @@ li
 .btn
  {
  	appearance: button;
- 	height: 50%;
- 	width: 35%;
- 	
- 	border-radius: 20px;
- 	margin-left: 25vh;
- 	margin-top: 2vh;
- 	text-align: center;
- 	background-color: #ffdf6cff;
- 		padding-top: 2vh;
- 	text-decoration: none;
- 	color:black;
- }
+    width: 46%;
+    height: 20vh;
+    background-color: #ffdf6cff;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 15vh;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    border-radius: 12px;
+}
+
  
  
  .btn:hover
@@ -319,24 +309,3 @@ li
  	box-shadow: 0px 3px 2px 0;
  	transition: 0.2s; 
  }
- #torna
- {
-	appearance:button;
-	margin-left: 20vh;
-	text-decoration:none;
-	height: auto;
-	width:auto;
-	margin-right: 5vh;
-	border-radius: 20px;
-	padding:2vh;
-	font-size: 1.2em;
-	color:red;
-}
-#torna:hover
-{
-	background-color: red;
-	color:white;
-	box-shadow: 0px 3px 2px 0;
-	transition:0.3;
-}
- 
