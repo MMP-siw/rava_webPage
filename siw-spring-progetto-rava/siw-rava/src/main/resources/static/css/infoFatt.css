@@ -196,5 +196,11 @@ head
 	text-align: left;
 	padding: 0px;
 }
+.errors
+{
+	font-size: 1em;
+	color:red;
+}
+
 
 

@@ -42,15 +42,24 @@
 					<li> <span th:text="#{ricapitolo.cognome}">Cognome:</span><span class="nonModificabili" th:text="${cliente.cognome}">Quadrini</span></li>
 					<li> <span th:text="#{ricapitolo.indirizzo}">Indirizzo:</span><span class="nonModificabili" th:text="${domicilio}">Via del Corso 139 Roma 00145</span></li>
 					<form id="form" method="POST" th:action="@{@{'/ordine' + '/' + ${ordine.id} + '/' + 'infoFatt'}} ">
-						<li ><span th:if="${ordine.tipo} == 'Asporto'" th:text="#{infoFatt.orarioRitiro}">Orario ritiro: </span>
-							<span th:if="${ordine.tipo} eq 'Domicilio'" th:text="#{infoFatt.orarioConsegna}">Orario consegna: </span>
+						<li >
+							
 							<span>
+								<label th:if="${ordine.tipo} == 'Asporto'" th:text="#{infoFatt.orarioRitiro}">Orario ritiro
+								</label>
+								<label th:if="${ordine.tipo} eq 'Domicilio'" th:text="#{infoFatt.orarioConsegna}">Orario consegna
+								</label>
+								<label th:if="!${ordine.tipo}">Orario consegna: </label>
 								<input type="radio" value="Prima possibile" id="Prima possibile"  th:field="${ordine.tipologiaDiConsegna} "name="consegna" onclick="abilitaOrario()" >
-									<label for="Prima possibile" th:text="#{infoFatt.prima}">Prima possibile</label>
+									<label th:text="#{infoFatt.prima}">Prima possibile</label>
+									
 								<input type="radio" id="Pianifica" name="consegna"  value="Pianifica" th:field="${ordine.tipologiaDiConsegna}" onclick="abilitaOrario()">
-									<label for="Pianifica" th:text="#{infoFatt.pianifica}"> Pianifica</label>
-								<input type="time" class="clock"  th:field="${ordine.orarioConsegna}" name="orarioConsegna" id="PianificaOrario" min="9:00" max="23:00" disabled="disabled">
-								
+									<label  th:text="#{infoFatt.pianifica}"> Pianifica</label>
+								<input type="time" class="clock"  th:field="${ordine.orarioConsegna}" name="orarioConsegna" id="PianificaOrario" min="00:00" max="23:00" disabled="disabled">
+							</span>
+								<div th:if="${#fields.hasErrors('ordine.tipologiaDiConsegna')}" th:errors="${ordine.tipologiaDiConsegna}" class="errors"></div>
+								<div th:if="${#fields.hasErrors('ordine.orarioConsegna')}" th:errors="${ordine.orarioConsegna}" class="errors"></div>
+      
 							</span>
 						</li>
 						<li>

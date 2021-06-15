@@ -1,7 +1,11 @@
 package it.uniroma3.siw.spring.rava.controller;
  
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
+
+import org.apache.tomcat.jni.Time;
 import org.slf4j.Logger;  
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +13,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import it.uniroma3.siw.spring.rava.controller.validator.OrdineValidator;
 import it.uniroma3.siw.spring.rava.model.Cliente;
 import it.uniroma3.siw.spring.rava.model.Credentials;
 import it.uniroma3.siw.spring.rava.model.Domicilio;
@@ -52,6 +58,9 @@ public class OrdineController
 
 	@Autowired
 	private ClienteService clienteService;
+
+	@Autowired
+	private OrdineValidator ordineValidator;
 
 
 
@@ -383,13 +392,14 @@ public class OrdineController
 		Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
 		model.addAttribute("domicilio",dom);
 		model.addAttribute("cliente",cliente);
-
+		
 		return "ordine/infoFatturazione.html";
 	}
 	
 	
 	@RequestMapping(value="/ordine/{id}/infoFatt", method=RequestMethod.POST)
-	public String infoFatturazione(Model model,@PathVariable("id")Long id, @ModelAttribute("ordine")Ordine or)
+	public String infoFatturazione(Model model,@PathVariable("id")Long id, @ModelAttribute("ordine")Ordine or,
+			BindingResult bindingResult)
 	{
 		
 				
@@ -398,35 +408,48 @@ public class OrdineController
 		
 		//diversi settaggi
 		Ordine ordine=this.ordineService.trovaPerId(id);
-		ordine.setInfoFatturazione(or.getOrarioConsegna(), or.getCommento(), or.getTipologiaDiConsegna());
 		
-		
-		logger.debug("L'UTETNE LOGGATO HA ID : " +  cliente.getId());
-		
-		logger.debug("SI sta per confermare l'ordine"+ ordine.getId());
-		logger.debug("Modalitò di consegna: " + ordine.getTipo());
-		logger.debug("TIPO CONSEGNA: "+ ordine.getTipologiaDiConsegna());
-		logger.debug("ORARIO: "+ ordine.getOrarioConsegna());
-		logger.debug("COMMENTO: "+ ordine.getCommento());
-		logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
-		
-		
-		ordine.setStato("in corso");
-		
-		
-		List<LineaOrdine> lio=this.linea.prendiLineeOrdinePerOrdine( or);
-		//se l'ordine è d'asporto, non c'è necessita di inserire il domicilio
-		if(ordine.getTipo().equals("Domicilio"))
+		this.ordineValidator.validate(or,bindingResult);
+		if(!bindingResult.hasErrors())
 		{
-			Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
-			model.addAttribute("domicilio",dom);
-		}
+			ordine.setInfoFatturazione(or.getOrarioConsegna(), or.getCommento(), or.getTipologiaDiConsegna());
 			
-			model.addAttribute("ordine", ordine);
-			model.addAttribute("lineeOrdine",lio);
-			this.ordineService.inserisci(ordine);
+			
+			logger.debug("L'UTETNE LOGGATO HA ID : " +  cliente.getId());
+			
+			logger.debug("SI sta per confermare l'ordine"+ ordine.getId());
+			logger.debug("Modalitò di consegna: " + ordine.getTipo());
+			logger.debug("TIPO CONSEGNA: "+ ordine.getTipologiaDiConsegna());
+			logger.debug("ORARIO: "+ ordine.getOrarioConsegna());
+			logger.debug("COMMENTO: "+ ordine.getCommento());
+			logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
+			
+			
+			ordine.setStato("in corso");
+			
+			
+			List<LineaOrdine> lio=this.linea.prendiLineeOrdinePerOrdine( or);
+			//se l'ordine è d'asporto, non c'è necessita di inserire il domicilio
+			if(ordine.getTipo().equals("Domicilio"))
+			{
+				Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
+				model.addAttribute("domicilio",dom);
+			}
+				
+				model.addAttribute("ordine", ordine);
+				model.addAttribute("lineeOrdine",lio);
+				this.ordineService.inserisci(ordine);
+			
+			return "ordine/ricapitoloOrdine.html";
+		}
 		
-		return "ordine/ricapitoloOrdine.html";
+		Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
+		model.addAttribute("domicilio",dom);
+		model.addAttribute("cliente",cliente);
+		
+		
+		return "ordine/infoFatturazione.html";
+		
 	}
 	
 //===================================FINE CASO D'USO EFFETTUA ORDINE==============================================	
