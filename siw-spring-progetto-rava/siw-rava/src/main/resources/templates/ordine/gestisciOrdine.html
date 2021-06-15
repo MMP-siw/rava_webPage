@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Home</title>
+	<title th:text="#{gestisciOrdine.titolo}">Home</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/esempioPopUp.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/ricapitoloOrdine.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/gestisciOrdine.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/modalitaConsegna.css}">
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
 	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
 </head>
 <body>
-
+<nav th:replace="fragments/fragment.html :: intestazione"></nav>
 <section>
 		<div id="container" th:if="${ordine}" th:object="${ordine}">
 			<div class="title">
-				<p>Ricapitolo ordine</p>
+				<p th:text="#{gestisciOrdine.titolo}">Ricapitolo ordine</p>
 			</div>
 			<div class="corpo">
 				<div id="lineeOrdine" class="elements">
 					<div id="intestazione">
 						<div class="empty"></div>
-						<div class="noEmp" > <p>Quantità</p></div>
-						<div class="noEmp" id="totInt"> <p>Tot</p></div>
+						<div class="noEmp" > <p th:text="#{ricapitolo.qnt}">Quantità</p></div>
+						<div class="noEmp" id="totInt"> <p th:text="#{ricapitolo.tot}">Tot</p></div>
 					</div>
 					<div id="linea" th:each = "lio : ${lineeOrdine}">
 						<div class="empty" id="prodotto" th:text="${lio.prodotto.nome}">Nome prodotto</div>
@@ -34,19 +36,19 @@
 				<div id="infoFatturazione" class="elements">
 					<ul>
 						<li>
-							<span>Nome: </span><span class="value"> Matteo</span>
+							<span th:text="#{ricapitolo.nome}">Nome: </span><span class="value"> Matteo</span>
 						</li>
 						<li>
-							<span>Cognome: </span><span class="value"> Wissel</span>
+							<span th:text="#{ricapitolo.cognome}">Cognome: </span><span class="value"> Wissel</span>
 						</li>
 						<li>
-							<span>Indirizzo: </span><span th:text="${domicilio}"class="value"></span>
+							<span th:text="#{ricapitolo.indirizzo}">Indirizzo: </span><span th:text="${domicilio}"class="value"></span>
 						</li>
 						<li>
-							<span>Tipo: </span><span class="value" th:text="${ordine.tipo}"></span>
+							<span th:text="#{ricapitolo.tipo}">Tipo: </span><span class="value" th:text="${ordine.tipo}"></span>
 						</li>
 						<li>
-							<span>Orario: </span><span class="value" th:if="${ordine.tipo=='Domicilio'}" th:text="${ordine.orarioConsegna}"></span>
+							<span th:text="#{ricapitolo.orario}">Orario: </span><span class="value" th:if="${ordine.tipo=='Domicilio'}" th:text="${ordine.orarioConsegna}"></span>
 						</li>
 						
 						
@@ -55,8 +57,93 @@
 			</div>
 		</div>
 		<div id="piePagina">
-			<a th:href="/ordine/{id}/infoFatt" >Modifica Ordine</a>
+			<a th:href="@{/ordine/{id}/infoFatt (id=${ordine.id})}" id="orario" class="bottone" th:text="#{ricapitolo.modificaOrario}">Modifica orario</a>
+			<button th:if="${ordine.totale>0}" id="open" onclick="openForm()" class="bottone" th:text="#{ricapitolo.modificaModConsegna}">Modifica consegna</button>
+			<button id="back" class="bottone" th:text="#{ricapitolo.elimina}" onclick="openForm1()">Elimina</button>
 		</div>
+
+
+
+	<div class="br">
+
+		<script>
+			function openForm() //Apuretura del pop-up
+			{
+				document.getElementById("popUp").style.visibility = "visible";
+
+			}
+
+			function closeForm() //chiusura del pop-uè
+			{
+				document.getElementById("popUp").style.visibility = "hidden";
+
+			}
+		</script>
+	</div>
+	<div id="popUp" class="popUp">
+		<div class="container">
+			<div class="header">
+				<p>Seleziona opzione</p>
+			</div>
+			<div class="section">
+				<a th:href="@{'/ordine' + '/' + ${ordine.id} + '/' + 'settaDomicilio'}" class="btn">
+					<h2>A domicilio</h2>
+				</a>
+				<br>
+				<a th:href="@{'/ordine'+'/'+${ordine.id}+ '/'+ settaAsporto}" class="btn">
+					<h2>Asporto</h2>
+				</a>
+			</div>
+			<div class="footer">
+				<a onclick="closeForm()" id="closeForm">
+					<h2>Annulla</h2>
+				</a>
+			</div>
+			<script>
+				function goBack() {
+					window.history.back();	//torna indietro alla pagina precedente
+				}
+			</script>
+		</div>
+	</div>
+		</div>
+		
+		<!--Eliminazione ordine-->
+		<script>
+		function openForm1() //Apuretura del pop-up
+				{
+		  		document.getElementById("popUp1").style.visibility = "visible";
+				}
+		
+				function closeForm() //chiusura del pop-uè
+				{
+		  		document.getElementById("popUp1").style.visibility = "hidden";
+				}
+			</script>
+	<div  id="popUp1" class="popUp"> 
+	<div class = "container">
+			
+
+			
+			
+		<div class ="sectionPp"> 
+			<span th:text="#{ricapitolo.eliminaOrdine}">Ordine eliminato</span>
+			<br>
+			<br>
+			<h2 th:text="${ordine.id}">Numero ordine</h2>
+
+			
+			
+			
+			
+		</div>
+		<div id="img">
+				<img  id="imgConf" th:src="@{/images/png/checkSVG.png}">
+			</div>
+		<div class="footer">
+			<a th:href="@{/ordine/{id}/elimina (id=${ordine.id})}" class="btn"><b th:text="#{ricapitolo.tornaHome}">Torna alla home</b></a>
+		</div>
+
 
 	</section>
 </body>

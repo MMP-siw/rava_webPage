@@ -29,4 +29,14 @@ public class LineaOrdineService
 		return  this.lineaRepo.findByOrdine(or);
 	}
 
+	/*
+	 * eliminazione di tutte le linee ordine di un ordine x
+	 */
+	@Transactional
+	public void eliminaPerOrdine(Ordine eliminare) 
+	{
+		this.lineaRepo.deleteForOrdine(eliminare);
+		
+	}
+
 }

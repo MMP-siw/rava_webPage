@@ -39,23 +39,8 @@
  {
  	margin-left: 5vh;
  	margin-top: 3vh;
- 	padding-top: 2vh;
+ 	padding-top:  2vh;
  }
- #goBack1
-{
-  
-  appearance:button;
-  text-align: center;
-  color:red;
-  width: 210px;  
-  align-items: flex-start;
-  padding-top:1.2vh;
-}
-
-#goBack1:hover {
-  background-color: red;
-  
-  color: white;
-}
+ 
  
  

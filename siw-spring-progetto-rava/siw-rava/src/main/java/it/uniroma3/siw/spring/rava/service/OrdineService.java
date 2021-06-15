@@ -52,6 +52,12 @@ public class OrdineService
 	public List<Ordine> prendiOrdiniPerClienteEStato(Cliente cliente, String string) {
 		return this.ordineRepo.findAllByUtenteAndStato(cliente,string);
 	}
+
+	@Transactional
+	public void elimina(Ordine eliminare) {
+		this.ordineRepo.delete(eliminare);
+		
+	}
 	
 
 }

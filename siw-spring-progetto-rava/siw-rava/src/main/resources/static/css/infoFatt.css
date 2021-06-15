@@ -1,7 +1,7 @@
 body
 {
 	font-family: Market Deco;
-  margin-left: 1%;
+  margin-left:0;
   
   font-style: normal;
   font-weight: 700;
@@ -12,13 +12,16 @@ head
 {
   height: 100%;
   width: 100%;
+  margin-top:0;
 }
 
 #title
 {
+ border-bottom: solid;
+ border-width: 2px;
   font-size: 2em;
   margin-left: 5%;
-  
+  margin-top: 4vh;
   height: 10%;
 }
 
@@ -106,19 +109,11 @@ head
  font-size: 1em;  
    
 }
-textarea
-{
-  resize: none; /*rimozione del fattarello giu a sinistra*/
-  outline: none; /*rimozione del glow blu alla selezione*/
-  background-color: rgb(237, 242, 239);
-  border-radius: 5%;
-  width: 50%;
 
-}
 #elements
 {
   
-  margin-top: -2%;
+  margin-top: 5vh;
 }
 
 #elements li
@@ -164,9 +159,10 @@ textarea
 }
 #conferma
 {
-  color: rgb(51, 255, 51);
+  
   height:55px;
   font-family: adobe-gothic-std, sans-serif;
+  color:  rgb(51, 255, 51);
 
 }
 #conferma:hover
@@ -180,11 +176,12 @@ textarea
   
   appearance:button;
   text-align: center;
-  color:red;
+  
   width: 210px;  
   align-items: flex-start;
   padding-top:1.2vh;
   text-decoration: none;
+  color:red;
 }
 
 #goBack:hover {
