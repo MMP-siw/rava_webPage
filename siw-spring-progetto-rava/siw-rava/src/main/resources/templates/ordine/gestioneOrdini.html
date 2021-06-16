@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Home</title>
-	<link rel="stylesheet" th:herf="@{/fogliCss/gestisciOrdini.css}">
+	<title th:text="#{gestisciOrdini.titolo}">Home</title>
+	
 	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
 	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+	<link th:href="@{/fogliCss/gestisciOrdini.css}" rel="stylesheet">
 	
 </head>
 <body>
@@ -28,7 +29,10 @@
 				</li>
 			</ul>
 			</div>
-		<a th:href="@{/home}" id="goBack1"><b th:text="#{gestioneOrdine.vaiAllaHome}">Torna alla home</b></a>
+			<div class="piePagina">
+				
+				<a th:href="@{/home}" id="goBack1"><b th:text="#{gestioneOrdine.vaiAllaHome}">Torna alla home</b></a>
+			</div>
 	</header>
 	
 	

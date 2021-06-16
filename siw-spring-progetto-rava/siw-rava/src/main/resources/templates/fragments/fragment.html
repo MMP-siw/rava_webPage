@@ -28,7 +28,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 			<a href="home" th:href="@{/home}"><h1>HAMBURGERIA RAVA</h1></a>
 			<ul>
 				<li><a href="menu">Menu</a></li>
-				<li><a href="#" th:text="#{navbar.prenota}">Prenota</a></li>
+				<li><a th:href="@{/ordinaProdotto}" th:text="#{navbar.prenota}">Prenota</a></li>
 				<li><a href="#" th:text="#{navbar.dovesiamo}">Dove Siamo</a></li>
 				<li><a href="#" th:text="#{navbar.contattaci}">Contatti</a></li>
 			</ul>
