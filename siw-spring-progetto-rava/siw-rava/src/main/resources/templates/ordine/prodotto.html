@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	
+<head>
+<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+<link th:href="@{/fogliCss/prodotto.css}" rel="stylesheet">
+<title>Prodotto</title>
+</head>
 <body>
-	
-    <div>
+	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+    <div class="corpo">
     	
     	
-    	<div>
+    	<div class="testo">
     		<!--Nome del prodotto--><h4 th:text="${prodotto.nome}"></h4>
-			<span th:text="${prodotto.descrizione}">qui-va-titolo</span>
-			<span th:text="${prodotto.prezzo}">qui-va-cognome</span>
+			<div class="info"><p th:text="${prodotto.descrizione}">qui-va-titolo</p>
+			Prezzo: <span th:text="${prodotto.prezzo}">qui-va-cognome</span></div>
 			
    		</div>
     	
- 		  <span>
+    	<div class="buttons">
  		  <!--Potrebbero essere dei bottoni in un form-->
- 		  <a th:href="@{/ordine/{id}/prodotto/{id2}/inserisci (id=${ordine.id}, id2=${prodotto.id})}">Inserisci</a>
- 		  <a href="selezionaProdotto.html">Back</a> 
+ 		  <a th:href="@{/ordine/{id}/prodotto/{id2}/inserisci (id=${ordine.id}, id2=${prodotto.id})}">
+ 		  	<button type="button" class="inserisci">Inserisci</button></a>
+ 		  <a href="selezionaProdotto.html"><button type="button" class="indietro">Indietro</button></a> 
+ 	   </div>
  
     </div>
    

@@ -35,11 +35,11 @@
 				<div id="infoFatturazione" class="elements">
 					<ul><li>
 							<span th:text="#{ricapitolo.nome}">Nome: </span>
-								<span class="value" th:text="${ordine.cliente.getNome()}"> Matteo</span>
+								<span class="value" th:text="${ordine.utente.getNome()}"> Matteo</span>
 						</li>
 						<li>
 							<span th:text="#{ricapitolo.cognome}">Cognome: </span>
-								<span class="value" th:text="${ordine.cliente.getCognome()}"> Wissel</span>
+								<span class="value" th:text="${ordine.utente.getCognome()}"> Wissel</span>
 						</li>
 						<li>
 							<span th:text="#{ricapitolo.indirizzo}">Indirizzo: </span><span th:text="${domicilio}"class="value"></span>

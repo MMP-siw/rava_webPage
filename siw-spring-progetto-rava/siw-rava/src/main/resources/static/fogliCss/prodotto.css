@@ -1,0 +1,72 @@
+* {
+	margin:0;
+	font-family: Market Deco;
+}
+
+.corpo {
+	padding: 60px 20px;
+	font-size: 16px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: solid;
+	width: 50%;
+	margin: auto;
+}
+
+.buttons {
+	display: flex;
+	flex-direction: row;
+}
+
+.testo h4 {
+	font-size: 25px;
+	text-align: center;
+	padding: 15px;
+}
+
+.info {
+	padding: 15px;
+}
+
+.buttons a {
+	padding: 20px;
+}
+
+.indietro{
+	color: black;
+	text-decoration: none;
+	border-radius: 5px;
+	border:none;
+	background-color: white;
+	font-size: 16px;
+	height: 40px;
+	width: 80px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.indietro:hover {
+	color: white;
+	background-color: red;
+}
+
+.inserisci {
+	color: black;
+	text-decoration: none;
+	border-radius: 5px;
+	border:none;
+	background-color: white;
+	font-size: 16px;
+	height: 40px;
+	width: 80px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.inserisci:hover {
+	color:white;
+	background-color: #00FF7F;
+}
+ 
