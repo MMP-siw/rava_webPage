@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+	<link th:href="@{/css/formDomicilioStyle.css}" rel="stylesheet">
+	<link rel="icon" href="/images/svg/logo.svg" type="image/icon type">
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+	<form th:action="@{/aggiungiDomicilio}" method="POST">
+		<div class="content">
+		Inserisci Domicilio
+		<div class="row"><h1>Tipo</h1><input type="text" placeholder="Via, Piazza, ..." required th:field="${domicilio.tipo}"></div>
+		<div class="row"><h1>Indirizzo</h1><input type="text" placeholder="Indirizzo" required th:field="${domicilio.indirizzo}"></div>
+		<div class="row"><h1>Civico</h1><input type="text" placeholder="Civico" required th:field="${domicilio.civico}"></div>
+		<div class="row"><h1>CAP</h1><input type="text" placeholder="CAP" required th:field="${domicilio.cap}"></div>
+		
+		</div>
+		<div class="row" id="lastRow"><a href="#">indietro</a><input type="submit" value="aggiungi"></div>
+	</form>
+</body>
+
+</html>

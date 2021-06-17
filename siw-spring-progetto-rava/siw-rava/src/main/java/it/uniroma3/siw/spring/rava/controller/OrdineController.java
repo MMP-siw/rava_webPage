@@ -540,7 +540,31 @@ public class OrdineController
 		return "home.html";
 	}
 	
+	//PIERO
 
+	 @RequestMapping(value="/ordine/{id}/aggiungiDomicilio", method=RequestMethod.GET)
+     public String aggiungiDomicilio(Model model, @PathVariable("id") Long id) {
+  	   Domicilio domicilio= new Domicilio();
+  	   Ordine ordine= ordineService.trovaPerId(id);
+  	   model.addAttribute("ordine",ordine);
+
+  	   model.addAttribute("domicilio", domicilio);
+  	  return "formDomicilio.html";
+     }
+     @RequestMapping(value="/ordine/{id}/aggiungiDomicilio", method=RequestMethod.POST)
+     public String aggiungiDomicilio(@ModelAttribute("domicilio") Domicilio domicilio, Model model, @PathVariable("id") Long id) {
+        
+  	   Credentials c= getCliente();
+  	   Cliente cliente= c.getUser();
+  	   cliente.addDomicilio(domicilio);
+  	   domicilio.setUtente(cliente);
+  	  Ordine ordine= ordineService.trovaPerId(id);
+  	  domService.inserisci(domicilio);
+  	  clienteService.saveCliente(cliente);
+  	  model.addAttribute("domicili", domService.domiciliPerUtente(cliente));
+  	  model.addAttribute("ordine", ordine);
+  	  return "ordine/selezionaDomicilio.html";
+     }
 
 
 

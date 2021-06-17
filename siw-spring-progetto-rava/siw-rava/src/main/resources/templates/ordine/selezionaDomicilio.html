@@ -3,12 +3,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
    <head>
    	<link th:href="@{/css/selezionaDomicilio.css}" rel="stylesheet">	
+   	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+   	<link rel="icon" href="/images/svg/logo.svg" type="image/icon type">
   </head>
   <body>
   	
   	 <!----<nav th:replace="fragments/fragment.html :: intestazione"></nav>-->
   	
 	<!--Si ne cessita un validator per verificare che l'utente abbia effettivamente selezionato un domicilio-->
+	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
   	<header>
   	<div class="title">
   		<h2>Seleziona domicilio</h2>
@@ -22,7 +25,7 @@
                 <label  th:for="${domicilio.id}" th:text="${domicilioTemp}">Via u ue</label>
             </li>
         </ul>
-       		<div> <a href="#" id="newDom">+ Aggiungi domicilio...</a></div>
+       		<div> <a th:href="@{/aggiungiDomicilio}" id="newDom">+ Aggiungi domicilio...</a></div>
 		<div class ="buttons">
 			
 			<a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}" class="submit" id="goBack" >Indietro</a>

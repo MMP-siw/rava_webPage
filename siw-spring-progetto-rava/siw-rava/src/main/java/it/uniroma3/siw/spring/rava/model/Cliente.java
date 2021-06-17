@@ -49,6 +49,10 @@ public class Cliente {
 		this.ordiniEffettuati.add(o);
 	}
 	
+	public void addDomicilio(Domicilio domicilio) {
+		this.domicilio.add(domicilio);
+	}
+	
 	/*
 	 * Resitutuzione di un domiciolio specifico-->necessario per l'operazione di sistema
 	 *@selezionaDomiciolio
