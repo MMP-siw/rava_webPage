@@ -124,3 +124,13 @@ a {
 	color: white;
 }
 
+ul li a {
+	color:gray;
+	font-size: 3vh;
+	transition:0.2s;
+}
+
+ul li a:hover{
+	color: black;
+}
+

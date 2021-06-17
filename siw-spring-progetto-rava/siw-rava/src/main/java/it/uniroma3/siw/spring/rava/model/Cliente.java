@@ -53,6 +53,10 @@ public class Cliente {
 		this.domicilio.add(domicilio);
 	}
 	
+	public void removeDomicilio(Domicilio domicilio) {
+		this.domicilio.remove(domicilio);
+	}
+	
 	/*
 	 * Resitutuzione di un domiciolio specifico-->necessario per l'operazione di sistema
 	 *@selezionaDomiciolio

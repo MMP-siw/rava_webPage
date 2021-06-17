@@ -9,7 +9,7 @@
 
 <body>
 	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
-	<form th:action="@{ordine/{id}/aggiungiDomicilio (id=${ordine.id})}" method="POST">
+	<form th:action="@{/aggiungiDomicilio}" method="POST">
 		<div class="content">
 		Inserisci Domicilio
 		<div class="row"><h1>Tipo</h1><input type="text" placeholder="Via, Piazza, ..." required th:field="${domicilio.tipo}"></div>
