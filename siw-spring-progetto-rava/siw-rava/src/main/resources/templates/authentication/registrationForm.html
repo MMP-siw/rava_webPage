@@ -15,37 +15,37 @@
             <div><input type="text" placeholder="Username" required
                        th:field="${credentials.username}"/></div>
             <div th:if="${#fields.hasErrors('credentials.username')}"
-                th:errors="${credentials.username}" th:style="'color:red'"></div>
+                th:errors="${credentials.username}" ></div>
         </div>
         <div class = "element">
             <div><input type="password" placeholder="Password" required
                        th:field="${credentials.password}"/></div>
             <div th:if="${#fields.hasErrors('credentials.password')}"
-                th:errors="${credentials.password}" th:style="'color:red'"></div>
+                th:errors="${credentials.password}" ></div>
         </div>
         <div class = "element">
             <div><input type="text" placeholder="Nome" required
                        th:field="${user.nome}"/></div>
             <div th:if="${#fields.hasErrors('user.nome')}"
-                th:errors="${user.nome}" th:style="'color:red'"></div>
+                th:errors="${user.nome}" ></div>
         </div>
         <div class = "element">
             <div><input type="text" placeholder="Cognome" required
                        th:field="${user.cognome}"/></div>
             <div th:if="${#fields.hasErrors('user.cognome')}"
-                th:errors="${user.cognome}" th:style="'color:red'"></div>
+                th:errors="${user.cognome}" ></div>
         </div>
         <div class = "element">
             <div><input type="text" placeholder="Email" required
                        th:field="${user.email}"/></div>
             <div th:if="${#fields.hasErrors('user.email')}"
-                th:errors="${user.email}" th:style="'color:red'"></div>
+                th:errors="${user.email}" ></div>
         </div>
        <div class = "element">
             <div><input type="text" placeholder="Telefono" required
                        th:field="${user.telefono}"/></div>
             <div th:if="${#fields.hasErrors('user.telefono')}"
-                th:errors="${user.telefono}" th:style="'color:red'"></div> 
+                th:errors="${user.telefono}" ></div> 
         </div> 
         <div class = "element">
             <button type="submit">REGISTRA</button>
