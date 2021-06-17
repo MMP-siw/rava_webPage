@@ -42,7 +42,7 @@ public class PrenotazioneValidator implements Validator {
 		
 		//controlla che i prenotanti siano maggiori di 0
 		if(prenotazione.getNumeroPersone() <= 0) {
-			errors.rejectValue("negativo", "numeroPersone");
+			errors.rejectValue("numeroPersone", "negativo");
 		}
 		
 		//controlla se c'è posto sufficiente per tutti i prenotanti
