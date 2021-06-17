@@ -27,6 +27,11 @@ public class DomicilioService {
 		return this.domRep.save(dom);
 		
 	}
+	@Transactional
+	public void elimina(Domicilio dom) 
+	{
+		this.domRep.deleteById(dom.getId());
+	}
 	/*
 	 * Ricerca di un domicilio per id
 	 * Potrebbe essere migiorata andando a effettare la ricerca solo per i domicili del cliente loggato

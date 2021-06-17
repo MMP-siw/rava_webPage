@@ -26,7 +26,7 @@
    					<span><!-- qui va il riferimento all'operazione di eliminazione domicilio --></span>
    				</li>
    			</ul>
-   			<!-- qui andrà il riferimento all'operazione di creazione di un nuovo domicilio -->
+   			<!-- qui andrï¿½ il riferimento all'operazione di creazione di un nuovo domicilio -->
    		</div>
    		<div class ="element">
    			<a href="prenotazioni" th:href="@{/prenotazioni}">Visualizza le prenotazioni precedenti</a>
@@ -34,6 +34,10 @@
    		<div class ="element">
    			<a href="/ordini/gestisciOrdini" th:href="@{/gestisciOrdini}" sec:authorize="isAuthenticated()"
 				th:text="#{tendina.gestisciOrdini}">Gestisci ordini</a>
+   		</div>
+   		<div class ="element">
+   			<a href="/ordini/gestisciOrdini" th:href="@{/gestisciDomicili}" sec:authorize="isAuthenticated()"
+				th:text="#{tendina.gestisciDomicili}">Gestisci domicili</a>
    		</div>
    	</div>
    </section>

@@ -1,11 +1,15 @@
 package it.uniroma3.siw.spring.rava.controller;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -25,6 +29,7 @@ public class DomicilioController {
 	private CredentialsService credentialService;
 	@Autowired
 	private ClienteService clientService;
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
        @RequestMapping(value="/aggiungiDomicilio", method=RequestMethod.GET)
        public String aggiungiDomicilio(Model model) {
@@ -42,7 +47,7 @@ public class DomicilioController {
     	  domicilioService.inserisci(domicilio);
     	  clientService.saveCliente(cliente);
     	  model.addAttribute("domicili", domicilioService.domiciliPerUtente(cliente));
-    	  return "ordine/selezionaDomicilio.html";
+    	  return "gestisciDomicili.html";
        }
        
        private  Credentials getCliente() {
@@ -62,4 +67,28 @@ public class DomicilioController {
    				return c;
    	}
    	
+       
+       
+       //------------------------------------------------------------
+       
+       
+       @RequestMapping(value="/gestisciDomicili", method=RequestMethod.GET)
+       public String goGestisciDomicili(Model model) {
+    	   Credentials c= getCliente();
+    	   Cliente cliente= c.getUser();
+    	   model.addAttribute("domicili", domicilioService.domiciliPerUtente(cliente));
+    	   model.addAttribute("domicilio", new Domicilio());
+    	   return "gestisciDomicili.html";
+       }
+       
+       @RequestMapping(value="/eliminaDomicilio", method=RequestMethod.POST)
+       public String deleteAdd(Model model, @ModelAttribute("domicilio") Domicilio dom) {
+    	   Domicilio domicilio= this.domicilioService.domicilioPerId(dom.getId());
+    	   logger.debug("è stato selezionato il domicilio di "+ domicilio.getIndirizzo());
+    	   Credentials c=getCliente();
+   		   Cliente cliente=c.getUser();
+   		   cliente.removeDomicilio(domicilio);
+   		   this.domicilioService.elimina(domicilio);
+   		   return "gestisciDomicili.html";
+       }
 }
