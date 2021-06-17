@@ -156,3 +156,45 @@ nav{
 .logoSocial a:hover >img{
 	height: 110%;
 }
+footer
+{
+	height:40vh;
+	margin-bottom: 0;
+}
+#footerLinks
+{
+	height: 100%;
+	width: 100%;
+	margin-top: 0px;
+	display: flex;
+	background-color: black;
+	color: white;
+	
+
+}
+#footerLinks div
+{
+	width: 33%;
+	height: 100%;
+	padding: 10px;
+}
+
+#footerLinks div p
+{
+	margin-left: 5%;
+	color: white;
+	font-size: 1.5em;
+}
+#footerLinks div a
+{
+	margin-left: 0%;
+	color: white;
+}
+#footerLinks li
+{
+	padding: 8px;
+}
+#posizione
+{
+	margin-left: 0%;
+}

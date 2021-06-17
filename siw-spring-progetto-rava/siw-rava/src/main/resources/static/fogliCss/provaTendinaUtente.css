@@ -56,14 +56,14 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 55vh;
+	height: 100vh;
 	width: 100%;
-	border:solid;
+	
 }
 
 .box{
-	height: 90%;
-	width: 48vh;
+	height: 70%;
+	width: 60vh;
 	border:solid;
 	position: relative;
 	overflow: hidden;
