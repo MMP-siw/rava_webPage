@@ -374,12 +374,18 @@ public class OrdineController
 	}
 
 	@RequestMapping(value="/ordine/{id}/infoFatt", method=RequestMethod.GET)
-	public String infoFatturazione(Model model, @PathVariable("id")Long id)
+	public String infoFatturazione(Model model, @PathVariable("id")Long id, BindingResult results)
 	{
 		//in questa sezione vi si accede sia per la creazione che per la modifica dell'ordine
 		//se l'orario è gia presente, allora è un ordine in modifica, altrimenti è un nuovo ordine
 		
 		Ordine ordine = this.ordineService.trovaPerId(id);
+		this.ordineValidator.validate(ordine, results);
+		
+		if (results.hasErrors()) {
+			return ("/ordine/"+ ordine.getId() +"/infoFatt");
+		}
+		
 		if(ordine.getOrarioConsegna()==null)	//nuovo ordine
 		{	
 			model.addAttribute("ordine",new Ordine());	//uso un ordine fittizio per acquisite le info

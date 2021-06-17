@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
 import it.uniroma3.siw.spring.rava.controller.validator.PrenotazioneValidator;
 import it.uniroma3.siw.spring.rava.model.Cliente;
 import it.uniroma3.siw.spring.rava.model.Credentials;
@@ -88,6 +86,9 @@ public class PrenotazioneController {
 	@RequestMapping(value="/prenotazione/{id}", method=RequestMethod.GET) 
 	public String getPrenotazione(Model model, @PathVariable("id") Long id) {
 		Prenotazione p = this.prenotazioneService.prenotazionePerId(id);
+		if (!this.getCliente().equals(p.getCliente())) {
+			return "error";
+		}
 		model.addAttribute("prenotazione", p);
 		return "prenotazione/prenotazione";
 	}
@@ -111,6 +112,10 @@ public class PrenotazioneController {
 	@RequestMapping(value="/elimina/prenotazione/{id}", method=RequestMethod.GET) 
 	public String deletePrenotazione(@PathVariable("id") Long id, Model model) {
 	    Cliente cliente = getCliente();
+	    /*Prenotazione p = this.prenotazioneService.getById(id);
+	    if (!cliente.equals(p.getCliente()) || !p.isCorrente()) {
+	    	return "error";
+	    }*/
 	    this.prenotazioneService.cancella(id);
 	    model.addAttribute("prenotazioni", this.prenotazioneService.getByCliente(cliente));
 	    return "prenotazione/prenotazioni";
@@ -121,21 +126,33 @@ public class PrenotazioneController {
 	 */
 	@RequestMapping(value="/modifica/prenotazione/{id}", method=RequestMethod.GET) 
 	public String modificaPrenotazione(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("prenotazione", this.prenotazioneService.getById(id));
+		Cliente cliente = getCliente();
+	    Prenotazione p = this.prenotazioneService.getById(id);
+	    if (!cliente.equals(p.getCliente()) || !p.isCorrente()) {
+	    	return "error";
+	    }
+		model.addAttribute("prenotazione", p);
 		return "prenotazione/prenotazioneAggiorna";
 	}
 	
 	@RequestMapping(value="/modifica/prenotazione/{id}", method=RequestMethod.POST) 
 	public String modificaPrenotazione(@PathVariable("id") Long id, @ModelAttribute("prenotazione") Prenotazione prenotazione, Model model,
 			BindingResult bindingResult) {
-		//aggiorno la prenotazione
+		
+		Cliente cliente = getCliente();
 		Prenotazione vecchia = this.prenotazioneService.getById(id);
+		
+		/*if (!cliente.equals(vecchia.getCliente()) || !vecchia.isCorrente()) {
+			return "error.html";
+		}*/
+		
+		//aggiorno la prenotazione
 		this.prenotazioneValidator.validate(prenotazione, bindingResult);
 		if (!bindingResult.hasErrors()) {
 			vecchia.updatePrenotazione(prenotazione);
 			this.prenotazioneService.inserisci(vecchia);
 		}
-		Cliente cliente = getCliente();
+		
 		model.addAttribute("prenotazioni", this.prenotazioneService.getByCliente(cliente));
 		return "prenotazione/prenotazioni";
 	}
