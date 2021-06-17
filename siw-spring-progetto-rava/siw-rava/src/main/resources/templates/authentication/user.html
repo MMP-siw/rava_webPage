@@ -32,7 +32,8 @@
    			<a href="prenotazioni" th:href="@{/prenotazioni}">Visualizza le prenotazioni precedenti</a>
    		</div>
    		<div class ="element">
-   			<!-- qui andrà il riferimento allo storico ordini -->
+   			<a href="/ordini/gestisciOrdini" th:href="@{/gestisciOrdini}" sec:authorize="isAuthenticated()"
+				th:text="#{tendina.gestisciOrdini}">Gestisci ordini</a>
    		</div>
    	</div>
    </section>

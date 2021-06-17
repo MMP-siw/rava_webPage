@@ -272,7 +272,7 @@ public class OrdineController
 		lio.setSubTotale(p.getPrezzo());
 		lio.setQuantita(1);//creo la linea d'ordine e inserisco il prodotto
 		
-		ordine.setTotale(lio.getSubTotale());
+		ordine.setTotale(ordine.getTotale() + lio.getSubTotale());
 		ordine.aggoungiLineaOrdine(lio);
 		lio.setOrdine(ordine);
 		

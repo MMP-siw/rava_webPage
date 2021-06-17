@@ -1,10 +1,11 @@
 * {
 	margin:0;
-	font-family: adobe-gothic-std, sans-serif; 
 }
 
 section {
 	padding: 50px;
+	font-family: adobe-gothic-std, sans-serif;
+	font-size:18px;
 }
 
 .title {

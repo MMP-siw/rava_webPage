@@ -1,10 +1,11 @@
 * {
 	margin: 0;
-	font-family: adobe-gothic-std, sans-serif;
 }
 
 section {
 	padding: 30px;
+	font-family: adobe-gothic-std, sans-serif;
+	font-size:18px;
 }
 
 .title {
@@ -30,17 +31,34 @@ label {
 }
 
 button[type=submit] {
-  background-color: #1E90FF;
-  color: white;
+  background-color: white;
+  color: black;
   padding: 12px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6.5px;
   cursor: pointer;
-  
+  font-size:20px;
 }
 
 button[type=submit]:hover {
-  background-color: #00BFFF;
+  background-color: #7CFC00;
+  color: white;
+}
+
+button[type=button] {
+  background-color: white;
+  color: black;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6.5px;
+  cursor: pointer;
+  font-size:20px;
+}
+
+
+button[type=button]:hover {
+	background-color: red;
+	color: white;
 }
 
 .inserisci {

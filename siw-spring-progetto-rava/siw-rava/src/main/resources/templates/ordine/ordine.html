@@ -35,10 +35,10 @@
 				<div id="infoFatturazione" class="elements">
 					<ul>
 						<li>
-							<span>Nome: </span><span class="value"> Matteo</span>
+							<span>Nome: </span><span class="value" th:text="${ordine.utente.getNome()}"> Matteo</span>
 						</li>
 						<li>
-							<span>Cognome: </span><span class="value"> Wissel</span>
+							<span>Cognome: </span><span class="value" th:text="${ordine.utente.getCognome()}"> Wissel</span>
 						</li>
 						<li>
 							<span>Indirizzo: </span><span th:text="${domicilio}"class="value"></span>

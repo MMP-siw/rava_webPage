@@ -3,8 +3,7 @@
 
 <head>
 	<link th:href="@{/css/esempioPopUp.css}" rel="stylesheet">
-
-
+	<link th:href="@{/fogliCss/selezionaProdotto.css}" rel="stylesheet">
 	<link th:href="@{/css/modalitaConsegna.css}" rel="stylesheet">
 	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
 	<title>Prodotti</title>
@@ -13,23 +12,23 @@
 <body>
 	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
 	<!--Da stilizzare -->
-
-	<div>
+ <section>
+  <div class="box">
+	<div class="prodotti">
 		<h1 th:text="#{prodotti.titolo}">Seleziona Prodotti</h1>
 		<ul th:each="prodotto : ${prodotti}">
 			<li>
 				<a href="prodotto.html" th:href="@{/ordine/{id}/prodotto/{id2} (id=${ordine.id}, id2=${prodotto.id})}">
-					<span th:text="*{prodotto.nome}"></span>
-					<span th:text="*{prodotto.descrizione}"></span>
-					<span th:text="*{prodotto.prezzo}"></span>
+					<span th:text="*{prodotto.nome}" class="prod"></span>
 				</a>
+				<span class="prod">Prezzo: <span th:text="*{prodotto.prezzo}">xx</span></span>
 			</li>
 		</ul>
 	</div>
-	<div>
+	<div class="totale">
 
 		<span>
-			<h1>Total : </h1>
+			<h1>Totale : </h1>
 		</span>
 		<span>
 			<h1 th:text="${ordine.totale}">100</h1>
@@ -37,10 +36,11 @@
 		<!--Da stilizzare logica funziona-->
 
 	</div>
+	<div class="buttons">
 	<!--Potremmo inserire un if, cove se, l'ordine ha tot=0, allora non permette di andare avanti'-->
 	<button th:if="${ordine.totale>0}" class="open-button" onclick="openForm()">Conferma</button>
 
-	<a href="/home">Indietro</a>
+	<a href="/home" id="back"><button type="button">Indietro</button></a></div>
 
 
 
@@ -86,6 +86,8 @@
 			</script>
 		</div>
 	</div>
+	</div>
+	</section>
 </body>
 
 </html>

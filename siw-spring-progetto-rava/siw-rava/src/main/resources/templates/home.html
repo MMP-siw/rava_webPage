@@ -30,20 +30,20 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 		<a class="box" href="prenotazione/prenotazioneForm" th:href="@{/prenota}">
 			<img th:src="@{/images/png/rava.jpeg}">
 			<div class="bg"></div>
-			<h1>Menu</h1>
+			<h1 th:text="#{home.prenotaTavolo}">Menu</h1>
 			<p>Lorem Ipsum dolorit sit amet</p>
 			<div class="bottomBar">
-				<h1 th:text="#{box.scopri}">Scopri di piu' ></h1>
+				<h1 th:text="#{home.prenotaTavolo}">Prenota</h1>
 			</div>
 		</a>
 
 		<a th:href="ordinaProdotto" class="box">
 			<img th:src="@{/images/png/rava.jpeg}">
 			<div class="bg"></div>
-			<h1 th:text="#{box.Order2}">Prenota</h1>
+			<h1 th:text="#{box.Order2}">Ordina</h1>
 			<p>Lorem Ipsum dolorit sit amet</p>
 			<div class="bottomBar">
-				<h1 th:text="#{box.Order2}">Prenota</h1>
+				<h1 th:text="#{box.Order2}">Ordina</h1>
 			</div>
 		</a>
 	</div>
