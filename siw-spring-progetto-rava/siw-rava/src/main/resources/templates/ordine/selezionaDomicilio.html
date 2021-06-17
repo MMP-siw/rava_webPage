@@ -5,6 +5,7 @@
    	<link th:href="@{/css/selezionaDomicilio.css}" rel="stylesheet">	
    	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
    	<link rel="icon" href="/images/svg/logo.svg" type="image/icon type">
+   	<title th:text="#{selezionaDomicilio.title}"></title>
   </head>
   <body>
   	
@@ -14,18 +15,18 @@
 	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
   	<header>
   	<div class="title">
-  		<h2>Seleziona domicilio</h2>
+  		<h2 th:text="#{selezionaDomicilio.title}">Seleziona domicilio</h2>
   	</div>
   	
   	
-  		<form th:action="@{@{'/ordine' + '/' + ${ordine.id} + '/' + 'settaDomicilio'}}" method="POST"  th:object="${domicilio}" id="form">
+  		<form th:action="@{'/ordine' + '/' + ${ordine.id} + '/' + 'settaDomicilio'}" method="POST"  th:object="${domicilio}" id="form">
   			<ul>
             <li th:each="domicilioTemp : ${domicili}">
                 <input type="radio" th:field="${domicilio.id}" th:value="${domicilioTemp.id}" required/>
                 <label  th:for="${domicilio.id}" th:text="${domicilioTemp}">Via u ue</label>
             </li>
         </ul>
-       		<div> <a th:href="@{/aggiungiDomicilio}" id="newDom">+ Aggiungi domicilio...</a></div>
+       		
 		<div class ="buttons">
 			
 			<a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}" class="submit" id="goBack" >Indietro</a>
