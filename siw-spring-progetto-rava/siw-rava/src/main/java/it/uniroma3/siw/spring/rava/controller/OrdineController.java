@@ -374,7 +374,7 @@ public class OrdineController
 	}
 
 	@RequestMapping(value="/ordine/{id}/infoFatt", method=RequestMethod.GET)
-	public String infoFatturazione(Model model, @PathVariable("id")Long id, BindingResult results)
+	public String infoFatturazione(Model model, BindingResult results, @PathVariable("id")Long id)
 	{
 		//in questa sezione vi si accede sia per la creazione che per la modifica dell'ordine
 		//se l'orario è gia presente, allora è un ordine in modifica, altrimenti è un nuovo ordine
