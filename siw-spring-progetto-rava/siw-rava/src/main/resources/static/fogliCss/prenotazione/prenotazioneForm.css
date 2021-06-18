@@ -8,11 +8,20 @@ section {
 	font-size:18px;
 }
 
-.title {
-	text-align:center;
-	font-size: 30px;
-}
 
+.title
+{
+ border-bottom: solid;
+ border-width: 2px;
+  font-size: 2em;
+  margin-left: 5%;
+  margin-top: 4vh;
+  height: 10%;
+}
+form
+{
+	margin-left: 6%;
+}
 input[type=text], select, textarea {
   width: 50%;
   padding: 12px;
@@ -41,7 +50,7 @@ button[type=submit] {
 }
 
 button[type=submit]:hover {
-  background-color: #7CFC00;
+  background-color:  rgb(51, 255, 51);;
   color: white;
 }
 

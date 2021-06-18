@@ -67,122 +67,50 @@ public class OrdineController
 
 
 
-	//	/*
-	//	 * è il metodo inziale che permette di iniziare un nuovo ordine
-	//	 * Caso d'uso @NuovoOrdineDomicilio passo @CreaNuovoOrdine
-	//	 *Non si necessita la creazione dell'oggetto ordina, poichè è creato in automatico in quanto @ModelAtrribute
-	//	 *Passo 1) creazione di un nuovo ordine
-	//	 */
-	//
-	//	/*
-	//	 * Utile nel caso d'uso @OrdineADomicilio e @OrdineDaAsporto
-	//	 * passo 2) visualizzazione dei prodotti  offert
-	//	 * 
-	//	 */
-	//	@RequestMapping(value="/ordinaProdotto", method=RequestMethod.GET)
-	//	public String prendiTuttiIProdotti(Model model, @ModelAttribute("ordine")Ordine ordine)
-	//	{
-	//		model.addAttribute("ordine",ordine);
-	//	
-	//		model.addAttribute("prodotti", this.prodService.tutti());
-	//		logger.debug(model.getAttribute("prodotti").toString());
-	//		return "selezionaProdotto.html";
-	//	}
-	//	/*
-	//	 * 
-	//	 * Utile nel caso d'uso @OrdineADomicilio e @OrdineDaAsporto
-	//	 * passo 3)Scelta del prodotto
-	//	 * 
-	//	 */
-	//	@RequestMapping(value = "/prodotto/{id}", method = RequestMethod.GET)
-	//    public String getProdotto(@PathVariable("id") Long id, Model model,@ModelAttribute("prodotto") Prodotto prod,
-	//			RedirectAttributes attributes) {
-	//    	prod = this.prodService.prodottoPerId(id);
-	//		model.addAttribute("prodotto", prod);
-	//		
-	//		attributes.addAttribute(prod);		//lo metto in sessione
-	//		
-	//    	logger.debug("Hai selezionato il prodotto"+ prod.getId()+ "  Di PREZZO  "+prod.getPrezzo());
-	//    	
-	//    	return "prodotto.html";
-	//    }
-	//	
-	//	
-	//	
-	//	/*
-	//	 * Inserimento di un prodotto nell'ordine
-	//	 *passo 4)Inserimento del prodotto nell'ordine
-	//	 */
-	//	
-	//	/*
-	//	 * Problema-->Crea un ordine ad ogni nuovo prodotto selezionato
-	//	 */
-	//	@RequestMapping(value="/prodotto/inserisci", method=RequestMethod.GET)
-	//	public String addProdottoInOrdine(Model model, @ModelAttribute("ordine") Ordine ordine,@ModelAttribute("prodotto") Prodotto prod,
-	//			RedirectAttributes attributes)
-	//	{
-	//		
-	//		logger.debug("Info sul prodotto inserito"+ prod.toString());
-	//		LineaOrdine lio=ordine.creaLineaOrdine(prod, 1); 			//creo la linea d'ordine e inserisco il prodotto
-	//		model.addAttribute("prodotti",this.prodService.tutti());	//torno alla pagina di seleziona dei prodotti
-	//		
-	//		attributes.addFlashAttribute(ordine);//per la sessione
-	//		
-	//		this.ordineService.inserisci(ordine);
-	//		prod=(Prodotto)attributes.getAttribute("prodotto");
-	//		logger.debug("PRODOTTO ID="+ prod.getId());
-	//		logger.debug("TOTALE DELL'ORDINE "+ordine.getId().toString()+" è: " + ordine.getTotale());
-	//		logger.debug("INFO ORDINE: " +ordine.getLineeOrdine().toString());
-	//		logger.debug("ORDINE ID= "+ordine.toString());
-	//		return "selezionaProdotto.html";
-	//		
-	//	}
-	//	
-	//	@RequestMapping(value="/settaDomicilio", method=RequestMethod.GET)
-	//	public String settaModalitàDomicilio(Model model, @ModelAttribute("ordine") Ordine ordine, RedirectAttributes attributes)
-	//	{
-	//		ordine.setTipo("Domicilio");
-	//		model.addAttribute(ordine);
-	//		attributes.addFlashAttribute(ordine);
-	//		logger.debug("L'ORDINE NUMERO " + ordine.getId()+ "è STATO SETTATO A  domicilio");
-	//		
-	//		return "selezionaDomicilio.html";
-	//	}
-	//	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/*
-	 * Creo un metodo per la creazione nel model di un oggetto Ordine
-	 * Al momento dell'attivazione del server, inserira un oggetto ordine nel model
+	/**
+	 *Caso d'uso ordina (asporto o domiclio)
+	 * 1)un utente vuole effettuare un ordine a domicilio
+	 * 2)il cliente si logga al sistema
+	 * 3)Il cliente seleziona l'operaizone Ordine
+	 * ===========LOOP=========================
+	 * 4)Il sistema mostra l'elenco di prodotti che è possibile acquistare
+	 * 5)l'utetente seleziona un prodotto
+	 * 6)Il sistema mostra una descrizione del prodotto
+	 * 7)l'utetente lo inserisce nell'ordine
+	 * =====================================
+	 * 8)Il clinete termina la scelta
+	 * 9)Il sistema mostra le modalità di consegna
+	 * 10)il cliente seleziona modalità a Domicilio
+	 * 11)Il sistema mostra l'elenco di domicilio a disposizione del cliente
+	 * 12)Il cliente seleziona un domicilio
+	 * 13)Il Cliente inserisce le info di fatturazione (orario e commento)
+	 * 14)Il cliente conferma l'ordine
+	 * 
+	 * Estensione
+	 * 	9a)Il cliente seleziona modalità da asprto
+	 *     10)Il cliente inserisce le info di fatturazione
+	 * 
 	 */
-
-	//	@ModelAttribute("ordine")
-	//	public Ordine getOrdine()
-	//	{
-	//		return new Ordine();
-	//	}
-	//	@ModelAttribute("prodotto")
-	//	public Prodotto getProdotto()
-	//	{
-	//		return new Prodotto();
-	//	}
-
+	
+	/*
+	 * TO DO if needed
+	 * Update 20/06/2021
+	 * 
+	 * Per distinguere i diversi ordini->Se un ordine è in corso di creazione allora è in uno stato di "in corso"
+	 * 									 Se un ordine è stato piazzato e ancora non consegnato allora "in consegna"
+	 * 									 Se un ordine è stato consegnato allora è in stato "terminato"
+	 * SI introducono 3 costanti all'interno del model Ordina
+	 * 
+	 * Quando un cliente inizia un ordine-->setStatoInCorso()
+	 * Quando un cliente conferma l'ordine-->setStatoInConsegna()
+	 * Quando un cliente riceve l'ordine, l'admin lo setta a terminato-->setStatoInTerminato();
+	 * 
+	 * Utilità
+	 * 	
+	 * Se durante la navigazione, un utente modifica l'url, inserendo un numero differente da quello dato
+	 * allora: si controlla che l'ordine è in stato "in corso" se lo è si controlla che l'utente corrispondente sia 
+	 * lo stesso di quello loggato.
+	 * */
 
 	/*
 	 * SOLUZIONE 2, senza gestione della sessione ma con l'id dell'ordine memorizzato nel url

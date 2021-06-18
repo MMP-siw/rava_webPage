@@ -29,7 +29,7 @@ public class Prodotto {
 	@Column
 	private float prezzo;
 	@Column
-	private String path;
+	private String path;		//è il path del panino
 	@Override
 	public String toString()
 	{
