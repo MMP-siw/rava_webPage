@@ -28,7 +28,8 @@ public class Prodotto {
 	private String nome;
 	@Column
 	private float prezzo;
-	
+	@Column
+	private String path;
 	@Override
 	public String toString()
 	{

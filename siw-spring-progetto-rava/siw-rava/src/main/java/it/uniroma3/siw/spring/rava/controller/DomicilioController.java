@@ -89,6 +89,6 @@ public class DomicilioController {
    		   Cliente cliente=c.getUser();
    		   cliente.removeDomicilio(domicilio);
    		   this.domicilioService.elimina(domicilio);
-   		   return "gestisciDomicili.html";
+   		   return "user.html";
        }
 }

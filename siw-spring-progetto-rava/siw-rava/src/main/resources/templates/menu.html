@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link href="css/menuOrdineStyle.css" rel="stylesheet">
+
+<head>
+	<title> Menu </title>
+	<link th:href="@{/css/menuStyle.css}" rel="stylesheet">
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+	<link rel="icon" href="/images/svg/logo.svg" type="image/icon type">
+</head>
+
 <body>
 	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
-	<div class="content">
-	    <div class="item">
-	      <img src="images/panino.jpg">
-	      <h1>Nome Panino</h1>
-	      <h2>8.00</h2>
-	    </div>
-	</div>
+	<h1>MENU</h1>
+		<div class="row" th:each="panino : ${menu}">
+			<img th:src="@{${panino.path}}">
+			<label th:text="${panino.nome}"></label>
+			<p th:text="${panino.descrizione}"></p>
+			<label th:text="${panino.prezzo}+'$'"></label>
+		</div>
+
 </body>
 
 </html>
