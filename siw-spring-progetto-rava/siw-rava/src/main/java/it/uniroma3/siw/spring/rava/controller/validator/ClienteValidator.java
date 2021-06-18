@@ -35,12 +35,6 @@ public class ClienteValidator implements Validator {
         if(telefono.isEmpty())
         	errors.rejectValue("telefono", "required");
         
-        //controllo che il numero di telefono sia effettivamente numerico
-        try {
-            double d = Double.parseDouble(telefono);
-        } catch (NumberFormatException nfe) {
-            errors.rejectValue("telefono", "numerico");
-        }
     }
 
     @Override

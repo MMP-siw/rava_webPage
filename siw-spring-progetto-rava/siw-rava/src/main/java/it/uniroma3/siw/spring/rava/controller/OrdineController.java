@@ -388,12 +388,14 @@ public class OrdineController
 		else
 		{   
 			
-						model.addAttribute("ordine",ordine);
+			model.addAttribute("ordine",ordine);
 		}
 		Credentials c=getCliente();
 		Cliente cliente=c.getUser();
-		Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
-		model.addAttribute("domicilio",dom);
+		if (ordine.getTipo().equals("Domicilio")) {
+			Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
+			model.addAttribute("domicilio",dom);
+		}
 		model.addAttribute("cliente",cliente);
 		
 		return "ordine/infoFatturazione.html";

@@ -8,11 +8,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.uniroma3.siw.spring.rava.controller.validator.DomicilioValidator;
 import it.uniroma3.siw.spring.rava.model.Cliente;
 import it.uniroma3.siw.spring.rava.model.Credentials;
 import it.uniroma3.siw.spring.rava.model.Domicilio;
@@ -30,6 +32,8 @@ public class DomicilioController {
 	@Autowired
 	private ClienteService clientService;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private DomicilioValidator domicilioValidator;
 	
        @RequestMapping(value="/aggiungiDomicilio", method=RequestMethod.GET)
        public String aggiungiDomicilio(Model model) {
@@ -38,10 +42,14 @@ public class DomicilioController {
     	  return "formDomicilio.html";
        }
        @RequestMapping(value="/aggiungiDomicilio", method=RequestMethod.POST)
-       public String aggiungiDomicilio(@ModelAttribute("domicilio") Domicilio domicilio, Model model) {
+       public String aggiungiDomicilio(@ModelAttribute("domicilio") Domicilio domicilio, BindingResult bindingResult, Model model) {
           
     	   Credentials c= getCliente();
     	   Cliente cliente= c.getUser();
+    	   this.domicilioValidator.validate(domicilio, bindingResult);
+    	   if (bindingResult.hasErrors()) {
+    		   return "formDomicilio";
+    	   }
     	   cliente.addDomicilio(domicilio);
     	   domicilio.setUtente(cliente);
     	  domicilioService.inserisci(domicilio);
@@ -89,6 +97,7 @@ public class DomicilioController {
    		   Cliente cliente=c.getUser();
    		   cliente.removeDomicilio(domicilio);
    		   this.domicilioService.elimina(domicilio);
-   		   return "user.html";
+   		   model.addAttribute("domicili", this.domicilioService.domiciliPerUtente(cliente));
+   		   return "gestisciDomicili";
        }
 }

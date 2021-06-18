@@ -13,6 +13,11 @@ body{
 	justify-content: space-evenly;
 }
 
+.row img {
+	max-height: 9.5vh;
+	width: auto;
+}
+
 .row p{
 	font-size: 2vh;
 	height:100%;

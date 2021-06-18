@@ -84,21 +84,6 @@ a {
     justify-content: center;
 }
 
-button[type=button] {
-  background-color: white;
-  color: black;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 6.5px;
-  cursor: pointer;
-  font-size:20px;
-}
-
-button[type=button]:hover {
-  background-color: #7CFC00;
-  color: white;
-}
-
 button[type=submit] {
   background-color: white;
   color: black;
@@ -109,8 +94,23 @@ button[type=submit] {
   font-size:20px;
 }
 
-
 button[type=submit]:hover {
+  background-color: #7CFC00;
+  color: white;
+}
+
+button[type=button] {
+  background-color: white;
+  color: black;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6.5px;
+  cursor: pointer;
+  font-size:20px;
+}
+
+
+button[type=button]:hover {
 	background-color: red;
 	color: white;
 }

@@ -47,10 +47,10 @@
 								<label th:if="${ordine.tipo} eq 'Domicilio'" th:text="#{infoFatt.orarioConsegna}">Orario consegna
 								</label>
 								<label th:if="!${ordine.tipo}">Orario consegna: </label>
-								<input type="radio" value="Prima possibile" id="Prima possibile"  th:field="${ordine.tipologiaDiConsegna} "name="consegna" onclick="abilitaOrario()" >
+								<input type="radio" value="Prima possibile" id="Prima possibile"  th:field="${ordine.tipologiaDiConsegna} "name="consegna" onclick="abilitaOrario()" checked="checked" >
 									<label th:text="#{infoFatt.prima}">Prima possibile</label>
 									
-								<input type="radio" id="Pianifica" name="consegna"  value="Pianifica" th:field="${ordine.tipologiaDiConsegna}" onclick="abilitaOrario()" checked>
+								<input type="radio" id="Pianifica" name="consegna"  value="Pianifica" th:field="${ordine.tipologiaDiConsegna}" onclick="abilitaOrario()" >
 									<label  th:text="#{infoFatt.pianifica}"> Pianifica</label>
 								<input type="time" class="clock"  th:field="${ordine.orarioConsegna}" name="orarioConsegna" id="PianificaOrario" min="00:00" max="23:00" disabled="disabled" required>
 							</span>

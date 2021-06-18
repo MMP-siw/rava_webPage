@@ -11,13 +11,14 @@
 <body>
 	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
 	<h1>MENU</h1>
-		<div class="row" th:each="panino : ${menu}">
-			<img th:src="@{${panino.path}}">
+	<th:block th:each="panino : ${menu}">
+		<div class="row" >
+			<span><img th:src="@{${panino.path}}"></span>
 			<label th:text="${panino.nome}"></label>
 			<p th:text="${panino.descrizione}"></p>
-			<label th:text="${panino.prezzo}+'$'"></label>
+			<label th:text="${panino.prezzo}+'&euro;'"></label>
 		</div>
-
+	</th:block>
 </body>
 
 </html>
