@@ -76,22 +76,8 @@ a {
 	display: flex;
 	flex-direction: row;
 	margin-top: 5vh;
-    justify-content: center;
-}
-
-button[type=button] {
-  background-color: white;
-  color: black;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 6.5px;
-  cursor: pointer;
-  font-size:20px;
-}
-
-button[type=button]:hover {
-  background-color: #7CFC00;
-  color: white;
+	justify-content: center;
+    align-items: center
 }
 
 button[type=submit] {
@@ -104,8 +90,23 @@ button[type=submit] {
   font-size:20px;
 }
 
-
 button[type=submit]:hover {
+  background-color: #7CFC00;
+  color: white;
+}
+
+button[type=button] {
+  background-color: white;
+  color: black;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6.5px;
+  cursor: pointer;
+  font-size:20px;
+}
+
+
+button[type=button]:hover {
 	background-color: red;
 	color: white;
 }
