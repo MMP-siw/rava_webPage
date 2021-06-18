@@ -25,13 +25,12 @@
                 <input type="radio" th:field="${domicilio.id}" th:value="${domicilioTemp.id}" required/>
                 <label  th:for="${domicilio.id}" th:text="${domicilioTemp}">Via u ue</label>
             </li>
-            <div class="add"><a th:text="#{selezionDom.add}" href="formDomicilio" th:href="@{/aggiungiDomicilio}">xx</a></div>
         </ul>
        		
 		<div class ="buttons">
 			
-			<a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}" class="submit" id="goBack" >Indietro</a>
-			<input type ="submit" class="submit" value="Conferma" id="conferma">
+			<a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}" class="submit" id="goBack" ><button type="button">Indietro</button></a>
+			<button type ="submit" class="submit" value="Conferma" id="conferma">Conferma</button>
 				
 		</div>
 	</form>

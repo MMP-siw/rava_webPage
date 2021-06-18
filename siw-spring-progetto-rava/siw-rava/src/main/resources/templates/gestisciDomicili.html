@@ -19,10 +19,10 @@
   			<ul>
             <li th:each="domicilioTemp : ${domicili}">
                 <input type="radio" th:field="${domicilio.id}" th:value="${domicilioTemp.id}" required/>
-                <label  th:for="${domicilio.id}" th:text="${domicilioTemp}">Via u ue</label>
+                <label  th:for="${domicilio.id}" th:text="${domicilioTemp}" >Via u ue</label>
             </li>
             <li><a th:href="@{/aggiungiDomicilio}" th:text="#{selezionDom.add}"
-            	style="font-size: 25px"> + Aggiungi domicilio...</a></li>
+            	> + Aggiungi domicilio...</a></li>
         </ul>
        		
 		<div class ="buttons">

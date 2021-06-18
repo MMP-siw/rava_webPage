@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.spring.rava.model.Cliente;
+import it.uniroma3.siw.spring.rava.model.Domicilio;
 import it.uniroma3.siw.spring.rava.model.Ordine;
 import it.uniroma3.siw.spring.rava.model.Prodotto;
 import it.uniroma3.siw.spring.rava.repository.OrdineRepository;
@@ -57,6 +58,12 @@ public class OrdineService
 	public void elimina(Ordine eliminare) {
 		this.ordineRepo.delete(eliminare);
 		
+	}
+
+	@Transactional
+	public List<Ordine> getOrdinePerDomicilio(
+			Domicilio domicilio) {
+		return this.ordineRepo.findAllByIndirizzoConsegna(domicilio);
 	}
 	
 

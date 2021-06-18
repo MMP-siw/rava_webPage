@@ -48,7 +48,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 							<span th:text="#{ricapitolo.tipo}">Tipo: </span><span class="value" th:text="${ordine.tipo}"></span>
 						</li>
 						<li>
-							<span th:text="#{ricapitolo.orario}">Orario: </span><span class="value" th:if="${ordine.tipo=='Domicilio'}" th:text="${ordine.orarioConsegna}"></span>
+							<span th:text="#{ricapitolo.orario}">Orario: </span><span class="value"  th:text="${ordine.orarioConsegna}"></span>
 						</li>
 						
 						
