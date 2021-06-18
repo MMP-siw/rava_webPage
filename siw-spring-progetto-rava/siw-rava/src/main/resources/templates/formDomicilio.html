@@ -14,12 +14,20 @@
 		<h1>Inserisci Domicilio</h1>
 		<div class="row"><h1>Tipo</h1><input type="text" placeholder="Via, Piazza, ..." 
 			style="font-size: 16.5px" required th:field="${domicilio.tipo}"></div>
+		<div th:if="${#fields.hasErrors('domicilio.tipo')}"
+                th:errors="${domicilio.tipo}" ></div>
 		<div class="row"><h1>Indirizzo</h1><input type="text" placeholder="Indirizzo" 
 			style="font-size: 16.5px" required th:field="${domicilio.indirizzo}"></div>
+			<div th:if="${#fields.hasErrors('domicilio.indirizzo')}"
+                th:errors="${domicilio.indirizzo}" ></div>
 		<div class="row"><h1>Civico</h1><input type="text" placeholder="Civico" 
 			style="font-size: 16.5px" required th:field="${domicilio.civico}"></div>
+			<div th:if="${#fields.hasErrors('domicilio.civico')}"
+                th:errors="${domicilio.civico}" ></div>
 		<div class="row"><h1>CAP</h1><input type="text" placeholder="CAP" 
 			style="font-size: 16.5px" required th:field="${domicilio.cap}"></div>
+			<div th:if="${#fields.hasErrors('domicilio.cap')}"
+                th:errors="${domicilio.cap}" ></div>
 		
 		</div>
 		<div class="row" id="lastRow">

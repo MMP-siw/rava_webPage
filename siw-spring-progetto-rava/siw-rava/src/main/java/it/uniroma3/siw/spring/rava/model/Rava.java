@@ -14,7 +14,7 @@ public class Rava {
 	
 	private String nome;
 	private String indirizzo;
-	private List<String> capValidi = new ArrayList<>();
+	public final static List<Integer> cap = List.of(197, 198, 199);
 	private Menu menu;
 	private List<Prenotazione> prenotazioniTotali;
 	public final static int postiMax = 10;
