@@ -3,9 +3,15 @@
 	font-family: Market Deco;
 }
 
+html {
+	min-height:100%; 
+    position:relative; 
+}
+
 body{
 	font-family: Market Deco;
 	padding-top:15vh;
+    padding-bottom: 22vh;
 }
 
 nav{
@@ -158,8 +164,12 @@ nav{
 }
 footer
 {
-	height:40vh;
-	margin-bottom: 0;
+	height:22vh;
+	position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
 }
 #footerLinks
 {
@@ -189,7 +199,13 @@ footer
 {
 	margin-left: 0%;
 	color: white;
+	text-decoration: none;
 }
+
+#footerLinks div a:hover {
+	color: #696969;
+}
+
 #footerLinks li
 {
 	padding: 8px;

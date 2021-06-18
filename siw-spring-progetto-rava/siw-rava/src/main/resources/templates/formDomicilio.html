@@ -11,14 +11,21 @@
 	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
 	<form th:action="@{/aggiungiDomicilio}" method="POST">
 		<div class="content">
-		Inserisci Domicilio
-		<div class="row"><h1>Tipo</h1><input type="text" placeholder="Via, Piazza, ..." required th:field="${domicilio.tipo}"></div>
-		<div class="row"><h1>Indirizzo</h1><input type="text" placeholder="Indirizzo" required th:field="${domicilio.indirizzo}"></div>
-		<div class="row"><h1>Civico</h1><input type="text" placeholder="Civico" required th:field="${domicilio.civico}"></div>
-		<div class="row"><h1>CAP</h1><input type="text" placeholder="CAP" required th:field="${domicilio.cap}"></div>
+		<h1>Inserisci Domicilio</h1>
+		<div class="row"><h1>Tipo</h1><input type="text" placeholder="Via, Piazza, ..." 
+			style="font-size: 16.5px" required th:field="${domicilio.tipo}"></div>
+		<div class="row"><h1>Indirizzo</h1><input type="text" placeholder="Indirizzo" 
+			style="font-size: 16.5px" required th:field="${domicilio.indirizzo}"></div>
+		<div class="row"><h1>Civico</h1><input type="text" placeholder="Civico" 
+			style="font-size: 16.5px" required th:field="${domicilio.civico}"></div>
+		<div class="row"><h1>CAP</h1><input type="text" placeholder="CAP" 
+			style="font-size: 16.5px" required th:field="${domicilio.cap}"></div>
 		
 		</div>
-		<div class="row" id="lastRow"><a href="#">indietro</a><input type="submit" value="aggiungi"></div>
+		<div class="row" id="lastRow">
+			<span><button type="submit" id="invio">Invio</button></span>
+			<span><a href="utente" th:href="@{/utente}"><button type="button" id="goBack">Indietro</button></a></span>
+		</div>
 	</form>
 </body>
 

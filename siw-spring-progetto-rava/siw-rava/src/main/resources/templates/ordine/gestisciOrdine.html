@@ -67,42 +67,32 @@
 		</div>
 		
 		<!--Eliminazione ordine-->
-		<script>
-		function openForm1() //Apuretura del pop-up
-				{
-		  		document.getElementById("popUp1").style.visibility = "visible";
-				}
+	<script>
+		function openForm1() {
+		  	document.getElementById("popUp1").style.visibility = "visible";
+		}
 		
-				function closeForm() //chiusura del pop-uè
-				{
-		  		document.getElementById("popUp1").style.visibility = "hidden";
-				}
-			</script>
+		function closeForm1() //chiusura del pop-uè
+		{
+		  document.getElementById("popUp1").style.visibility = "hidden";
+		}
+	</script>
+	
 	<div  id="popUp1" class="popUp"> 
-	<div class = "container">
-			
-
-			
-			
-		<div class ="sectionPp"> 
-			<span th:text="#{ricapitolo.eliminaOrdine}">Ordine eliminato</span>
-			<br>
-			<br>
-			<h2 th:text="${ordine.id}">Numero ordine</h2>
-
-			
-			
-			
-			
-		</div>
-		<div id="img">
+		<div class = "container">	
+			<div class ="sectionPp"> 
+				<span th:text="#{ricapitolo.eliminaOrdine}">Ordine eliminato</span>
+				<br>
+				<br>
+				<h2 th:text="${ordine.id}">Numero ordine</h2>
+			</div>
+			<div id="img">
 				<img  id="imgConf" th:src="@{/images/png/checkSVG.png}">
 			</div>
-		<div class="footer">
-			<a th:href="@{/ordine/{id}/elimina (id=${ordine.id})}" class="btn"><b th:text="#{ricapitolo.tornaHome}">Torna alla home</b></a>
-		</div>
-
-
-	</section>
+			<div class="footer">
+				<a th:href="@{/ordine/{id}/elimina (id=${ordine.id})}" class="btn"><b th:text="#{ricapitolo.tornaHome}">Torna alla home</b></a>
+			</div>
+  		</div>
+  	</div>
 </body>
 </html>

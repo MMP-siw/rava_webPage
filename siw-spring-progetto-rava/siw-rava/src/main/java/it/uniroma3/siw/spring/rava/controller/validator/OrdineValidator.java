@@ -25,10 +25,6 @@ public class OrdineValidator  implements Validator
 		//controlla che l'orario di consegna sia almeno maggiore di 30 minuti l'ora corrente
 		Ordine ordine=(Ordine)o;
 		
-		if(ordine.getOrarioConsegna() == null) {
-			errors.rejectValue("orarioConsegna", "nonValido");
-		}
-		
 		//verifico che il cliente abbia scelto una delle modalità definite di ritiro
 		if(ordine.getTipologiaDiConsegna()==null)
 		{

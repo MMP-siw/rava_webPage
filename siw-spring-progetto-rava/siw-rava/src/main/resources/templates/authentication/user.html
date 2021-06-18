@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <link href="fogliCss/user.css" rel="stylesheet">
-<head th:replace="fragments/fragment.html :: head(title='Pagina utente')"></head>
+<head th:replace="fragments/fragment.html :: head(title='Pagina utente')">
+	<link rel="icon" href="/images/svg/logo.svg" type="image/icon type">
+</head>
 <body>
    <nav th:replace="fragments/fragment.html :: intestazione"></nav>
    
-   <section>
+   <section th:if="${utente}" th:object="${utente}">
    	<div class="title">
-   		<p><b>Pagina personale dell'utente</b></p>
+   		<p><b>Pagina personale di </b><b th:text="*{nome} + ' ' + *{cognome}">Mario Rossi</b></p>
    	</div>
-   	<div class="info" th:if="${utente}" th:object="${utente}">
+   	<div class="box">
+   	<div class="info">
    		<div class="element">
-   			<p th:text="*{nome} + ' ' + *{cognome}">Nome e Cognome</p> 
-   		</div>
-   		<div class="element">
-   			<p th:text="*{email}">email</p> 
+   			<b>Nome: </b><span th:text="*{nome} + ' ' + *{cognome}">Nome e Cognome</span> 
    		</div>
    		<div class="element">
-   			<p th:text="*{telefono}">telefono</p> 
+   			<b>E-mail: </b><span th:text="*{email}">email</span> 
    		</div>
-   		<div class="domicilii">
-   			<ul>
-   				<li th:each="dom : ${domicilio}">
-   					<p th:text="*{dom.tipo} + ' ' + *{dom.indirizzo} + ' ' + *{dom.civico} + ' ' + *{dom.cap}">indirizzo</p>
-   					<span><!-- qui va il riferimento all'operazione di eliminazione domicilio --></span>
-   				</li>
-   			</ul>
-   			<!-- qui andr� il riferimento all'operazione di creazione di un nuovo domicilio -->
-   		</div>
-   		<div class ="element">
-   			<a href="prenotazioni" th:href="@{/prenotazioni}">Visualizza le prenotazioni precedenti</a>
-   		</div>
-   		<div class ="element">
-   			<a href="/ordini/gestisciOrdini" th:href="@{/gestisciOrdini}" sec:authorize="isAuthenticated()"
-				th:text="#{tendina.gestisciOrdini}">Gestisci ordini</a>
-   		</div>
-   		<div class ="element">
-   			<a href="/ordini/gestisciOrdini" th:href="@{/gestisciDomicili}" sec:authorize="isAuthenticated()"
-				th:text="#{tendina.gestisciDomicili}">Gestisci domicili</a>
+   		<div class="element">
+   			<b>Telefono: </b><span th:text="*{telefono}">telefono</span> 
    		</div>
    	</div>
+   	<div class="info">
+   		<div class ="element">
+   			<a href="prenotazioni" th:href="@{/prenotazioni}">Gestisci le prenotazioni</a>
+   		</div>
+   		<div class ="element">
+   			<a href="/ordini/gestisciOrdini" th:href="@{/gestisciOrdini}" 
+				th:text="#{tendina.gestisciOrdini}">Gestisci gli ordini</a>
+   		</div>
+   		<div class ="element">
+   			<a href="/ordini/gestisciOrdini" th:href="@{/gestisciDomicili}" 
+				th:text="#{tendina.gestisciDomicili}">Gestisci i domicili</a>
+   		</div>
+   	</div>
+    </div>
    </section>
-   
 </body>
 </html>

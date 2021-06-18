@@ -11,13 +11,15 @@ body {
 header
 {
 	padding-left: 12vh;
+	padding-top: 5vh;
+	padding-bottom: 5vh;
+	text-align: center;
 }
 
 h2 {
 	padding: 25px 10px 0px 10px;
 	font-size: 35px;
 }
-
 
 
 form {
@@ -51,14 +53,13 @@ a {
 #newDom:hover {
 	text-decoration: none;
 	color:	rgb(51, 51, 51);
-	transaction: 0.2s;
+	transition: 0.2s;
 }
 
-.title
-{
-	
-	
+.box {
+	text-align: center
 }
+
 .title h2
 {
 	margin-bottom: 0;
@@ -75,54 +76,40 @@ a {
 	display: flex;
 	flex-direction: row;
 	margin-top: 5vh;
-    
+    justify-content: center;
 }
 
-.submit {
-	margin-left: 20px;
-	margin-right: 20px;
-	
-	background-color: white;
-	border: none;
-	height: 50px;
-	font-size: 15px;
-	width: 150px;
-	margin-right: 10vh;
-	font-size: 1.3em;
-	border-radius: 5px;
-	
+button[type=button] {
+  background-color: white;
+  color: black;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6.5px;
+  cursor: pointer;
+  font-size:20px;
 }
 
-.submit:hover {
-	
-	
-	border-radius: 5px;
-}
-#conferma
-{
-	color: rgb(51, 255, 51);
-	height:55px;
-}
-#conferma:hover
-{
-	background-color: rgb(51, 255, 51);
-	color:white;
+button[type=button]:hover {
+  background-color: #7CFC00;
+  color: white;
 }
 
-#goBack 
-{
-	
-	text-align: center;
-	color:red;	
-	align-items: flex-start;
-	padding-top:0.6vh;
+button[type=submit] {
+  background-color: white;
+  color: black;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6.5px;
+  cursor: pointer;
+  font-size:20px;
 }
 
-#goBack:hover {
+
+button[type=submit]:hover {
 	background-color: red;
-	
 	color: white;
 }
+
 
 ul li a {
 	color:gray;
@@ -134,3 +121,10 @@ ul li a:hover{
 	color: black;
 }
 
+.add {
+	padding: 15px 10px;
+}
+
+.add a:hover {
+	color: gray;
+}

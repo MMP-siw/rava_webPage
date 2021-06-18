@@ -7,32 +7,30 @@
    	<title th:text="#{selezionaDomicilio.title}"></title>
   </head>
   <body>
-  	
-  	 <!----<nav th:replace="fragments/fragment.html :: intestazione"></nav>-->
-  	
-	<!--Si ne cessita un validator per verificare che l'utente abbia effettivamente selezionato un domicilio-->
 	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
   	<header>
   	<div class="title">
-  		<h2 th:text="#{gestisciDomicilio.title}">Gestisci Domicilio</h2>
+  		<h2 th:text="#{gestisciDomicilio.title}">Gestisci i domicilii</h2>
   	</div>
+  	</header>
   	
+  	<div class="box">
   	     <form th:action="@{/eliminaDomicilio}" method="POST"  th:object="${domicilio}">
   			<ul>
             <li th:each="domicilioTemp : ${domicili}">
                 <input type="radio" th:field="${domicilio.id}" th:value="${domicilioTemp.id}" required/>
                 <label  th:for="${domicilio.id}" th:text="${domicilioTemp}">Via u ue</label>
             </li>
-            <li><a th:href="@{/aggiungiDomicilio}" th:text="#{selezionDom.add}"> + Aggiungi domicilio...</a></li>
-            </li>
+            <li><a th:href="@{/aggiungiDomicilio}" th:text="#{selezionDom.add}"
+            	style="font-size: 25px"> + Aggiungi domicilio...</a></li>
         </ul>
        		
 		<div class ="buttons">
 			
-			<a href="user.html" class="submit" id="goBack" >Indietro</a>
-			<input type="submit" value="Elimina">
+				<span><button type="submit" id="invio" value="Elimina">Elimina</button></span>
+				<span><a href="utente" th:href="@{/utente}"><button type="button" id="goBack">Indietro</button></a></span>
 				
 		</div>
   	     </form>
-	</header>
+  	  </div>
 </body>

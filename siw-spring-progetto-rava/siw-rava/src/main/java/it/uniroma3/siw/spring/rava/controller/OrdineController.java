@@ -451,8 +451,6 @@ public class OrdineController
 			return "ordine/ricapitoloOrdine.html";
 		}
 		
-		Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
-		model.addAttribute("domicilio",dom);
 		model.addAttribute("cliente",cliente);
 		
 		

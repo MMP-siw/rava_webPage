@@ -50,9 +50,9 @@
 								<input type="radio" value="Prima possibile" id="Prima possibile"  th:field="${ordine.tipologiaDiConsegna} "name="consegna" onclick="abilitaOrario()" >
 									<label th:text="#{infoFatt.prima}">Prima possibile</label>
 									
-								<input type="radio" id="Pianifica" name="consegna"  value="Pianifica" th:field="${ordine.tipologiaDiConsegna}" onclick="abilitaOrario()">
+								<input type="radio" id="Pianifica" name="consegna"  value="Pianifica" th:field="${ordine.tipologiaDiConsegna}" onclick="abilitaOrario()" checked>
 									<label  th:text="#{infoFatt.pianifica}"> Pianifica</label>
-								<input type="time" class="clock"  th:field="${ordine.orarioConsegna}" name="orarioConsegna" id="PianificaOrario" min="00:00" max="23:00" disabled="disabled">
+								<input type="time" class="clock"  th:field="${ordine.orarioConsegna}" name="orarioConsegna" id="PianificaOrario" min="00:00" max="23:00" disabled="disabled" required>
 							</span>
 								<div th:if="${#fields.hasErrors('ordine.tipologiaDiConsegna')}" th:errors="${ordine.tipologiaDiConsegna}" class="errors"></div>
 								<div th:if="${#fields.hasErrors('ordine.orarioConsegna')}" th:errors="${ordine.orarioConsegna}" class="errors"></div>
@@ -67,7 +67,7 @@
 							
 								<a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}"  class="submit" id="goBack" th:text="#{ricapitolo.tornaOrdine}">Torna all'ordine</a>
 
-								<input  type="submit"  id="conferma" class="submit"  th:value="#{ricapitolo.conferma}"></a>
+								<input  type="submit"  id="conferma" class="submit"  th:value="#{ricapitolo.conferma}">
 						</div>
 					</form>
 				</ul>

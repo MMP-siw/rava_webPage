@@ -42,7 +42,6 @@ import lombok.ToString;
 
 public class Ordine {
 	
-	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
