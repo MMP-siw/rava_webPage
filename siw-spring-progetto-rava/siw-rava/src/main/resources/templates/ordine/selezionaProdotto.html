@@ -18,7 +18,8 @@
 		<h1 th:text="#{prodotti.titolo}">Seleziona Prodotti</h1>
 		<ul th:each="prodotto : ${prodotti}">
 			<li>
-				<a href="prodotto.html" th:href="@{/ordine/{id}/prodotto/{id2} (id=${ordine.id}, id2=${prodotto.id})}">
+			<!--Modifica 3...l'url precedente era {/ordine/{id}/prodotto{id2})}'-->
+				<a href="prodotto.html" th:href="@{/ordine/prodotto/{id2} (id2=${prodotto.id})}">
 					<span th:text="*{prodotto.nome}" class="prod"></span>
 				</a>
 				<span class="prod">Prezzo: <span th:text="*{prodotto.prezzo}">xx</span></span>
@@ -40,7 +41,7 @@
 	<!--Potremmo inserire un if, cove se, l'ordine ha tot=0, allora non permette di andare avanti'-->
 	<button th:if="${ordine.totale>0}" class="open-button" onclick="openForm()">Conferma</button>
 
-	<a href="/home" id="back"><button type="button">Indietro</button></a></div>
+	<a th:href="@{/ordine/annulla}" id="back"><button type="button">Indietro</button></a></div>
 
 
 
@@ -66,11 +67,11 @@
 				<p>Seleziona opzione</p>
 			</div>
 			<div class="section">
-				<a th:href="@{'/ordine' + '/' + ${ordine.id} + '/' + 'settaDomicilio'}" class="btn">
+				<a th:href="@{/ordine/settaDomicilio}" class="btn">
 					<h2>A domicilio</h2>
 				</a>
 				<br>
-				<a th:href="@{'/ordine'+'/'+${ordine.id}+ '/'+ settaAsporto}" class="btn">
+				<a th:href="@{/ordine/settaAsporto}" class="btn">
 					<h2>Asporto</h2>
 				</a>
 			</div>

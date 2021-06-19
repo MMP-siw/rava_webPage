@@ -115,7 +115,7 @@ public class OrdineController
 	/*
 	 * SOLUZIONE 2, senza gestione della sessione ma con l'id dell'ordine memorizzato nel url
 	 */
-	private  Credentials getCliente() {
+	private  Credentials getCredentials() {
 		//Necessito delle info dell'utente loggato per inserirle in automatico
 				//retrieve current user
 				Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -131,6 +131,22 @@ public class OrdineController
 				
 				return c;
 	}
+	private Cliente getCliente()
+	{
+		//retrieve current user
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails)principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+				
+		Credentials c = this.credentialsService.getCredentials(username);
+		Cliente cliente = c.getUser();
+		return cliente;
+	}
 	
 	/*
 	 * l'utente desidera effettuare un nuovo ordine
@@ -139,7 +155,7 @@ public class OrdineController
 	@RequestMapping(value="/ordinaProdotto", method=RequestMethod.GET)
 	public String prendiTuttiIProdotti(Model model)
 	{
-		Credentials c=getCliente();
+		Credentials c=getCredentials();
 		//effuettuo un controllo per verificare che l'utente sia effettivamente loggato
 		if(c==null)
 		{
@@ -158,14 +174,31 @@ public class OrdineController
 		List<Prodotto> listaProdotti=this.prodService.tutti();
 		logger.debug("HAI CREATO l'ORDINE NUMERO : ", ordineCorrente.getId());
 		ordineCorrente.setUtente(cliente);
-		cliente.addOrdine(ordineCorrente);
+		//cliente.addOrdine(ordineCorrente);
 		
-		this.ordineService.inserisci(ordineCorrente);
+		//this.ordineService.inserisci(ordineCorrente);
+		ordineCorrente.setCommento("AAAAAAAA");
+		cliente.setOrdineCorrente(ordineCorrente);		//settimao che l'ordine corrente (transiente) è quello creato
+		
+		logger.debug("L'UTENTE HA CREATO L'ORDINE " + cliente.getOrdineCorrente().getCommento());
 		model.addAttribute("ordine",ordineCorrente);
 		model.addAttribute("prodotti",listaProdotti);
-		this.clienteService.saveCliente(cliente);
+		this.ordineService.inserisci(ordineCorrente);
 
+		this.clienteService.saveCliente(cliente);
+		
 		return "ordine/selezionaProdotto.html";
+	}
+	
+	@RequestMapping(value="ordine/annulla", method= RequestMethod.GET)
+	public String annullaOrdine(Model model)
+	{
+		Cliente c=getCliente();
+		Ordine ordine=c.getOrdineCorrente();
+		c.setOrdineCorrente(null);
+		this.clienteService.saveCliente(c);
+		this.ordineService.elimina(ordine);
+		return "home.html";
 	}
 	
 	
@@ -173,11 +206,12 @@ public class OrdineController
 	 * L'utente Seleziona il prodotto desiderato
 	 * Passo 2 caso d'uso Ordina
 	 */
-	@RequestMapping(value = "ordine/{id}/prodotto/{id2}", method = RequestMethod.GET)
-	public String getProdotto(@PathVariable("id") Long id, @PathVariable("id2")Long id2, Model model) {
+	@RequestMapping(value = "ordine/prodotto/{id2}", method = RequestMethod.GET)
+	public String getProdotto(@PathVariable("id2")Long id2, Model model) {
 
-		Ordine ordine=this.ordineService.trovaPerId(id);
-		logger.debug("STAI LAVORANDO CON L'ORDINE NUMERO:"+ ordine.getId());
+		Cliente c=getCliente();		//prendo il cliente corrente loggato
+		Ordine ordine=c.getOrdineCorrente(); // prendo l'0rdine corrente non salvato nel db
+		logger.debug("STAI LAVORANDO CON L'ORDINE NUMERO:"+ ordine.getCommento());
 		Prodotto prod = this.prodService.prodottoPerId(id2);
 		logger.debug("HAI SELEZIONATO IL PRODOTTO :"+ prod.getId());
 		model.addAttribute("prodotto", prod);
@@ -188,28 +222,30 @@ public class OrdineController
 	 * L'utetne inserisce il prodotto nell'ordine
 	 * Passo 3 caso d'uso
 	 */
-	@RequestMapping(value="/ordine/{id}/prodotto/{id2}/inserisci", method=RequestMethod.GET)
-	public String addProdottoInOrdine(Model model,@PathVariable("id") Long id, @PathVariable("id2")Long id2 )
+	@RequestMapping(value="/ordine/prodotto/{id2}/inserisci", method=RequestMethod.GET)
+	public String addProdottoInOrdine(Model model, @PathVariable("id2")Long id2 )
 	{
 
-		Ordine ordine=this.ordineService.trovaPerId(id);
+		Cliente c= getCliente();
+		
+		Ordine ordine=c.getOrdineCorrente();
+		
+		logger.debug("L'ORDINE DEL CLIENTE E' : " + c.getOrdineCorrente().getCommento());
 		Prodotto p=this.prodService.prodottoPerId(id2);
 
 		LineaOrdine lio= new LineaOrdine();
 		lio.setProdotto(p);
 		lio.setSubTotale(p.getPrezzo());
-		lio.setQuantita(1);//creo la linea d'ordine e inserisco il prodotto
+		lio.setQuantita(1);		//creo la linea d'ordine e inserisco il prodotto
 		
 		ordine.setTotale(ordine.getTotale() + lio.getSubTotale());
 		ordine.aggoungiLineaOrdine(lio);
 		lio.setOrdine(ordine);
 		
+		//anche le linee ordine non vengono memorizzate finche non viene memorizzato l'ordine
 		
 		
-		this.linea.inserisci(lio);
-		this.ordineService.inserisci(ordine);
-
-		logger.debug("TOTALE DELL'ORDINE "+ordine.getId().toString()+" è: " + ordine.getTotale());
+		logger.debug("TOTALE DELL'ORDINE è: " + ordine.getTotale());
 		logger.debug("INFO ORDINE: " +ordine.getLineeOrdine().toString());
 		logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
 		model.addAttribute("prodotti",this.prodService.tutti());		//torno alla pagina di seleziona dei prodotti
@@ -227,22 +263,23 @@ public class OrdineController
 	 * Per adesso per semplicità mostro tutti i domicili.
 	 * Quando andremo ad implementare il log-in dobbiamo cercare solo i domicili con id relativo all'utente
 	 */
-	@RequestMapping(value="/ordine/{id}/settaDomicilio", method=RequestMethod.GET)
-	public String settaModalitàDomicilio(Model model,@PathVariable("id")Long id)
+	@RequestMapping(value="/ordine/settaDomicilio", method=RequestMethod.GET)
+	public String settaModalitàDomicilio(Model model)
 	{
 		
-		Credentials c=getCliente();
 		
-		Cliente cliente=c.getUser();
 		
-		Ordine ordine=this.ordineService.trovaPerId(id);
+		Cliente cliente=getCliente();
+		
+		
+		Ordine ordine=cliente.getOrdineCorrente();
+		
 		ordine.setTipo("Domicilio");
 		model.addAttribute("ordine",ordine);
 		model.addAttribute("domicili",this.domService.domiciliPerUtente(cliente));	//prendiamo i domicili del solo cliente loggato
 		model.addAttribute("domicilio", new Domicilio());
 		logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
-		logger.debug("L'ORDINE NUMERO " + ordine.getId()+ "è STATO SETTATO A " + ordine.getTipo());
-		this.ordineService.inserisci(ordine);
+		logger.debug("L'ORDINE NUMERO "+ "è STATO SETTATO A " + ordine.getTipo());
 		
 
 		return "ordine/selezionaDomicilio.html";
@@ -252,17 +289,20 @@ public class OrdineController
 	/*
 	 * Selezione della modalità di consegna ad asporto
 	 */
-	@RequestMapping(value="/ordine/{id}/settaAsporto", method=RequestMethod.GET)
-	public String settaModalitàAsporto(Model model, @PathVariable("id")Long id)
+	@RequestMapping(value="/ordine/settaAsporto", method=RequestMethod.GET)
+	public String settaModalitàAsporto(Model model)
 	{
-		Ordine ordine=this.ordineService.trovaPerId(id);
+		Cliente cliente=getCliente();
+		
+		Ordine ordine=cliente.getOrdineCorrente();
 		ordine.setTipo("Asporto");
 		model.addAttribute("ordine",ordine);
 		this.ordineService.inserisci(ordine);
+		logger.debug("TOTALE ORDINE: "+ ordine.getTotale());
 		logger.debug("L'ORDINE NUMERO " + ordine.getId()+ "è STATO SETTATO A  asporto");
-		Credentials c=getCliente();
-		Cliente cliente=c.getUser();
+		
 		model.addAttribute("cliente",cliente);	
+		
 		return "ordine/infoFatturazione.html";
 	}
 	/*
@@ -270,30 +310,31 @@ public class OrdineController
 	 * Nota! @Mattia dovrà definre la gestione del 'nuovo domicilio'
 	 * GESTIONE DI INPUT DA RADIOBUTTON
 	 */
-	@RequestMapping(value="/ordine/{id}/settaDomicilio", method=RequestMethod.POST)
-	public String settaDomicilioDiConsegna (Model model, @ModelAttribute("domicilio")Domicilio dom, @PathVariable("id")Long id)
+	@RequestMapping(value="/ordine/settaDomicilio", method=RequestMethod.POST)
+	public String settaDomicilioDiConsegna (Model model, @ModelAttribute("domicilio")Domicilio dom)
 	{
 		
 		Domicilio domicilio=this.domService.domicilioPerId(dom.getId());
 		logger.debug("E' STATO SELEZIONATO IL DOMICILIO : "+ domicilio.getIndirizzo());
-		Ordine or=this.ordineService.trovaPerId(id);
+		Cliente cliente=getCliente();
+		Ordine or=cliente.getOrdineCorrente();
 		or.setIndirizzoConsegna(dom);
 		logger.debug("TOTALE ORDINE = "+ or.getTotale());
 		
 		this.ordineService.inserisci(or);
 		model.addAttribute("ordine",or);
 		model.addAttribute("domicilio",domicilio);
-		Credentials c=getCliente();
 		
-		Cliente cliente=c.getUser();
+		
+		
 		model.addAttribute("cliente",cliente);	
 		return "ordine/infoFatturazione.html";
 	}
-	@RequestMapping(value="/ordine/{id}/indietro", method=RequestMethod.GET)
-	public String goBak(Model model, @PathVariable("id")Long id)
+	@RequestMapping(value="/ordine/indietro", method=RequestMethod.GET)
+	public String goBak(Model model)
 	{
-		
-		Ordine or=this.ordineService.trovaPerId(id);
+		Cliente cliente=getCliente();
+		Ordine or=cliente.getOrdineCorrente();
 		List<Prodotto> listaProdotti=this.prodService.tutti();
 		model.addAttribute("prodotti",listaProdotti);
 		model.addAttribute("ordine",or);
@@ -301,13 +342,14 @@ public class OrdineController
 		return "ordine/selezionaProdotto.html";
 	}
 
-	@RequestMapping(value="/ordine/{id}/infoFatt", method=RequestMethod.GET)
-	public String infoFatturazione(Model model, @PathVariable("id")Long id)
+	@RequestMapping(value="/ordine/infoFatt", method=RequestMethod.GET)
+	public String infoFatturazione(Model model)
 	{
 		//in questa sezione vi si accede sia per la creazione che per la modifica dell'ordine
 		//se l'orario è gia presente, allora è un ordine in modifica, altrimenti è un nuovo ordine
 		
-		Ordine ordine = this.ordineService.trovaPerId(id);
+		Cliente c=getCliente();
+		Ordine ordine=c.getOrdineCorrente();
 		
 		if(ordine.getOrarioConsegna()==null)	//nuovo ordine
 		{	
@@ -318,29 +360,28 @@ public class OrdineController
 			
 			model.addAttribute("ordine",ordine);
 		}
-		Credentials c=getCliente();
-		Cliente cliente=c.getUser();
+		
 		if (ordine.getTipo().equals("Domicilio")) {
 			Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
 			model.addAttribute("domicilio",dom);
 		}
-		model.addAttribute("cliente",cliente);
+		model.addAttribute("cliente",c);
 		
 		return "ordine/infoFatturazione.html";
 	}
 	
 	
-	@RequestMapping(value="/ordine/{id}/infoFatt", method=RequestMethod.POST)
+	@RequestMapping(value="/ordine/infoFatt", method=RequestMethod.POST)
 	public String infoFatturazione(@ModelAttribute("ordine")Ordine or, BindingResult bindingResult, 
-			Model model,@PathVariable("id")Long id)
+			Model model)
 	{
 		
 				
-		Credentials c =getCliente();
+		Credentials c =getCredentials();
 		Cliente cliente = c.getUser();
 		
 		//diversi settaggi
-		Ordine ordine=this.ordineService.trovaPerId(id);
+		Ordine ordine=cliente.getOrdineCorrente();
 		
 		this.ordineValidator.validate(or,bindingResult);
 		if(!bindingResult.hasErrors())
@@ -356,12 +397,9 @@ public class OrdineController
 			logger.debug("ORARIO: "+ ordine.getOrarioConsegna());
 			logger.debug("COMMENTO: "+ ordine.getCommento());
 			logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
-			
-			
 			ordine.setStato("in corso");
 			
-			
-			List<LineaOrdine> lio=this.linea.prendiLineeOrdinePerOrdine( or);
+			List<LineaOrdine> lio=ordine.getLineeOrdine();
 			//se l'ordine è d'asporto, non c'è necessita di inserire il domicilio
 			if(ordine.getTipo().equals("Domicilio"))
 			{
@@ -371,7 +409,10 @@ public class OrdineController
 				
 				model.addAttribute("ordine", ordine);
 				model.addAttribute("lineeOrdine",lio);
+				
 				this.ordineService.inserisci(ordine);
+				cliente.setOrdineCorrente(null);
+				
 			
 			return "ordine/ricapitoloOrdine.html";
 		}
@@ -398,7 +439,7 @@ public class OrdineController
 	@RequestMapping(value="/gestisciOrdini", method=RequestMethod.GET)
 	public String storicoOrdini (Model model)
 	{
-		Credentials c=getCliente();		//prendo l'utente di sessione
+		Credentials c=getCredentials();		//prendo l'utente di sessione
 		Cliente cliente=c.getUser();
 		
 		List<Ordine> listaOrdiniClienteInCorso=this.ordineService.prendiOrdiniPerClienteEStato(cliente, "in corso");	//in corso
@@ -451,7 +492,7 @@ public class OrdineController
 		}
 			model.addAttribute("ordine", ordine);
 			model.addAttribute("lineeOrdine",lio);
-			Credentials c=getCliente();
+			Credentials c=getCredentials();
 			Cliente cliente=c.getUser();
 			
 			model.addAttribute("cliente",cliente);

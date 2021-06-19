@@ -38,7 +38,7 @@
 					<li> <span th:text="#{ricapitolo.nome}">Nome:</span> <span class="nonModificabili" th:text="${cliente.nome}">Pietro</span></li>
 					<li> <span th:text="#{ricapitolo.cognome}">Cognome:</span><span class="nonModificabili" th:text="${cliente.cognome}">Quadrini</span></li>
 					<li> <span th:text="#{ricapitolo.indirizzo}">Indirizzo:</span><span class="nonModificabili" th:text="${domicilio}">Via del Corso 139 Roma 00145</span></li>
-					<form id="form" method="POST" th:action="@{@{'/ordine' + '/' + ${ordine.id} + '/' + 'infoFatt'}} ">
+					<form id="form" method="POST" th:action="@{/ordine/infoFatt} ">
 						<li >
 							
 							<span>
@@ -65,7 +65,7 @@
 						</li>
 						<div class="buttons">
 							
-								<a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}"  class="submit" id="goBack" th:text="#{ricapitolo.tornaOrdine}">Torna all'ordine</a>
+								<a th:href="@{/ordine/indietro}"  class="submit" id="goBack" th:text="#{ricapitolo.tornaOrdine}">Torna all'ordine</a>
 
 								<input  type="submit"  id="conferma" class="submit"  th:value="#{ricapitolo.conferma}" style="font-family: Market-Deco; font-weight: 700">
 						</div>
