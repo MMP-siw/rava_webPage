@@ -19,7 +19,7 @@
   	</div>
   	
   	
-  		<form th:action="@{'/ordine' + '/' + ${ordine.id} + '/' + 'settaDomicilio'}" method="POST"  th:object="${domicilio}" id="form">
+  		<form th:action="@{'/ordine/settaDomicilio'}" method="POST"  th:object="${domicilio}" id="form">
   			<ul>
             <li th:each="domicilioTemp : ${domicili}">
                 <input type="radio" th:field="${domicilio.id}" th:value="${domicilioTemp.id}" required/>
@@ -29,9 +29,9 @@
        		
 		<div class ="buttons">
 			
-			<a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}" class="submit" id="goBack" ><button type="button">Indietro</button></a>
-			<button th:if="${domicili.size()} > 0" type ="submit" class="submit" value="Conferma" id="conferma">Conferma</button>
-				
+			<a th:href="@{/ordine/indietro}" class="submit" id="goBack" ><button type="button">Indietro</button></a>
+			<button type ="submit" class="submit" value="Conferma" id="conferma">Conferma</button>
+
 		</div>
 	</form>
 	</header>

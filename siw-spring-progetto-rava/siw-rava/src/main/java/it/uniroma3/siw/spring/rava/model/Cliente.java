@@ -7,7 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.*;
 
@@ -39,7 +41,13 @@ public class Cliente {
 	@OneToMany(mappedBy="utente")
 	private List<Ordine> ordiniEffettuati;
 	
-	
+	/*
+	 * Questo campo transiente memorizza l'ordine corrente su cui sta lavorando il cliente.
+	 * Un cliente può creare un solo ordine alla volta
+	 * 
+	 */
+	@OneToOne
+	private Ordine ordineCorrente;
 	
 	/*
 	 * Aggiunta di un ordine nella lista degli ordini

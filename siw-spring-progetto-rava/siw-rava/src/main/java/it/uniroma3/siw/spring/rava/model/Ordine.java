@@ -79,7 +79,7 @@ public class Ordine {
 	@ManyToOne
 	private Cliente utente;
 	
-	@OneToMany(fetch=FetchType.EAGER,cascade= {CascadeType.REMOVE}, mappedBy="ordine")	//in quanto è una composizione,
+	@OneToMany(fetch=FetchType.EAGER,cascade= {CascadeType.REMOVE, CascadeType.PERSIST}, mappedBy="ordine")	//in quanto è una composizione,
 	private List<LineaOrdine> lineeOrdine;												//le operaizoni devono riflettersi sulle linee
 	
 	
