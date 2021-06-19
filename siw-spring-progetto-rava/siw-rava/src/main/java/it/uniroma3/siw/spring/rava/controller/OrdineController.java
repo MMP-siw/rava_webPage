@@ -177,7 +177,7 @@ public class OrdineController
 		//cliente.addOrdine(ordineCorrente);
 		
 		//this.ordineService.inserisci(ordineCorrente);
-		ordineCorrente.setCommento("AAAAAAAA");
+		ordineCorrente.setCommento("");
 		cliente.setOrdineCorrente(ordineCorrente);		//settimao che l'ordine corrente (transiente) è quello creato
 		
 		logger.debug("L'UTENTE HA CREATO L'ORDINE " + cliente.getOrdineCorrente().getCommento());
@@ -190,7 +190,7 @@ public class OrdineController
 		return "ordine/selezionaProdotto.html";
 	}
 	
-	@RequestMapping(value="ordine/annulla", method= RequestMethod.GET)
+	@RequestMapping(value="/ordine/annulla", method= RequestMethod.GET)
 	public String annullaOrdine(Model model)
 	{
 		Cliente c=getCliente();
@@ -206,7 +206,7 @@ public class OrdineController
 	 * L'utente Seleziona il prodotto desiderato
 	 * Passo 2 caso d'uso Ordina
 	 */
-	@RequestMapping(value = "ordine/prodotto/{id2}", method = RequestMethod.GET)
+	@RequestMapping(value = "/ordine/prodotto/{id2}", method = RequestMethod.GET)
 	public String getProdotto(@PathVariable("id2")Long id2, Model model) {
 
 		Cliente c=getCliente();		//prendo il cliente corrente loggato
@@ -419,9 +419,10 @@ public class OrdineController
 		
 		model.addAttribute("cliente",cliente);
 		/**cosa da provare un attimo**/
-		Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
-		model.addAttribute("domicilio",dom);
-
+		if (ordine.getTipo().equals("Domicilio")) {
+			Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
+			model.addAttribute("domicilio",dom);
+		}
 		return "ordine/infoFatturazione.html";
 		
 	}
