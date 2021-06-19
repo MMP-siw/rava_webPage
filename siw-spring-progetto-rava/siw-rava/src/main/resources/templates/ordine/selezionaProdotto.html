@@ -38,9 +38,11 @@
 	</div>
 	<div class="buttons">
 	<!--Potremmo inserire un if, cove se, l'ordine ha tot=0, allora non permette di andare avanti'-->
-	<button th:if="${ordine.totale>0}" class="open-button" onclick="openForm()">Conferma</button>
+	<button th:if="${ordine.totale>0}" class="open-button" onclick="openForm()"
+		style="font-size: 18px; font-weight: 600">Conferma</button>
 
-	<a href="/home" id="back"><button type="button">Indietro</button></a></div>
+	<a href="/home" id="back"><button type="button"
+		style="font-size: 18px; font-weight: 600">Indietro</button></a></div>
 
 
 

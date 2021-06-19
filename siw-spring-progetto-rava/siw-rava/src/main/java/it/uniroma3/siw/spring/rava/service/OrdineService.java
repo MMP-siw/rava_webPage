@@ -56,7 +56,7 @@ public class OrdineService
 
 	@Transactional
 	public void elimina(Ordine eliminare) {
-		this.ordineRepo.delete(eliminare);
+		this.ordineRepo.deleteById(eliminare.getId());
 		
 	}
 

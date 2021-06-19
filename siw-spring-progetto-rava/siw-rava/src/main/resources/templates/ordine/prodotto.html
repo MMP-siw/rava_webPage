@@ -13,11 +13,11 @@
     	<div class="testo">
     		<!--Nome del prodotto--><h1 th:text="${prodotto.nome}" id="nomeProdotto"></h1>
 			<span>
-			<label th:text="#{prodotto.desctizione}"></label>
+			<label th:text="#{prodotto.descrizione}"></label>
 			
 			<label th:text="${prodotto.descrizione}" id="descrizione"></label>
 			</span>
-			Prezzo: <span th:text="${prodotto.prezzo}" id="prezzo"></span>
+			<span>Prezzo: <span th:text="${prodotto.prezzo}" id="prezzo"></span></span>
 			<div id="img"><img th:src="@{${prodotto.path}}"></div>
     	</div>
 			
@@ -26,8 +26,9 @@
     	<div class="buttons">
  		  <!--Potrebbero essere dei bottoni in un form-->
  		  <a th:href="@{/ordine/{id}/prodotto/{id2}/inserisci (id=${ordine.id}, id2=${prodotto.id})}">
- 		  	<button type="button" class="inserisci">Inserisci</button></a>
- 		  <a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}"><button type="button" class="indietro">Indietro</button></a> 
+ 		  	<button type="button" class="inserisci" style="font-size: 18px; font-weight: 600"><b>Inserisci</b></button></a>
+ 		  <a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}"><button type="button" 
+ 		  	class="indietro" style="font-size: 18px; font-weight: 600"><b>Indietro</b></button></a> 
  	   </div>
  
     </div>
