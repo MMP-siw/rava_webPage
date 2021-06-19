@@ -92,7 +92,7 @@
 				<img  id="imgConf" th:src="@{/images/png/checkSVG.png}">
 			</div>
 			<div class="footerElim">
-				<a th:href="@{/ordine/elimina}" id="confermaElim" class="btnElim" th:text="#{ricapitolo.confermaElim}">Conferma </a>
+				<a th:href="@{/ordine/{id}/elimina (id=${ordine.id})}" id="confermaElim" class="btnElim" th:text="#{ricapitolo.confermaElim}">Conferma </a>
 				<a class="btnElim" id="annulla" onClick="closeForm1()" th:text="#{ricapitolo.annulla}"></a>
 			</div>
   		</div>

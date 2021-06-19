@@ -513,7 +513,7 @@ public class OrdineController
 	{
 		Ordine eliminare= this.ordineService.trovaPerId(id);
 		Cliente cliente=getCliente();
-		cliente.setOrdineCorrente(eliminare);
+		cliente.setOrdineCorrente(null);
 		
 		this.ordineService.elimina(eliminare);
 		return "home.html";
