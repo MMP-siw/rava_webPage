@@ -407,8 +407,8 @@ public class OrdineController
 			model.addAttribute("lineeOrdine",lio);
 				
 			this.ordineService.inserisci(ordine);
-			cliente.setOrdineCorrente(null);
-			this.clienteService.saveCliente(cliente);
+			/**cliente.setOrdineCorrente(null);
+			this.clienteService.saveCliente(cliente);**/
 			
 			return "ordine/ricapitoloOrdine.html";
 		}
@@ -420,6 +420,30 @@ public class OrdineController
 			model.addAttribute("domicilio",dom);
 		}
 		return "ordine/infoFatturazione.html";
+		
+	}
+	
+	@RequestMapping(value="/ordine/confermaOrdine", method=RequestMethod.POST)
+	public void confermaOrdine(@ModelAttribute("ordine")Ordine or, BindingResult bindingResult, 
+			Model model)
+	{
+		Credentials c =getCredentials();
+		Cliente cliente = c.getUser();
+		Ordine ordine = cliente.getOrdineCorrente();
+		List<LineaOrdine> lio=ordine.getLineeOrdine();
+		//se l'ordine è d'asporto, non c'è necessita di inserire il domicilio
+		if(ordine.getTipo().equals("Domicilio"))
+		{
+			Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
+			model.addAttribute("domicilio",dom);
+		}
+			
+		model.addAttribute("ordine", ordine);
+		model.addAttribute("lineeOrdine",lio);
+			
+		this.ordineService.inserisci(ordine);
+		cliente.setOrdineCorrente(null);
+		this.clienteService.saveCliente(cliente);
 		
 	}
 	
