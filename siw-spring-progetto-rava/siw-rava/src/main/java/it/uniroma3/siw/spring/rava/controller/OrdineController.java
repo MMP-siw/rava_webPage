@@ -171,7 +171,6 @@ public class OrdineController
 
 
 		Ordine ordineCorrente=new Ordine();
-		
 		List<Prodotto> listaProdotti=this.prodService.tutti();
 		logger.debug("HAI CREATO l'ORDINE NUMERO : ", ordineCorrente.getId());
 		ordineCorrente.setUtente(cliente);
@@ -399,7 +398,6 @@ public class OrdineController
 			logger.debug("COMMENTO: "+ ordine.getCommento());
 			logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
 			ordine.setStato("in corso");
-			
 			List<LineaOrdine> lio=ordine.getLineeOrdine();
 			//se l'ordine è d'asporto, non c'è necessita di inserire il domicilio
 			if(ordine.getTipo().equals("Domicilio"))
