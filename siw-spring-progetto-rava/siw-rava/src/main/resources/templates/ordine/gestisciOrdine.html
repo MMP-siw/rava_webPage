@@ -15,7 +15,7 @@
 		
 </section>
 		<div id="piePagina">
-			<a th:href="@{/ordine/{id}/infoFatt (id=${ordine.id})}" id="orario" class="bottone" th:text="#{ricapitolo.modificaOrario}">Modifica orario</a>
+			<a th:href="@{/ordine/infoFatt}" id="orario" class="bottone" th:text="#{ricapitolo.modificaOrario}">Modifica orario</a>
 			<button th:if="${ordine.totale>0}" id="open" onclick="openForm()" class="bottone" th:text="#{ricapitolo.modificaModConsegna}"
 				style="font-family:Market-Deco; font-weight:700";>Modifica consegna</button>
 			<button id="back" class="bottone" th:text="#{ricapitolo.elimina}" onclick="openForm1()"
@@ -46,11 +46,11 @@
 				<p>Seleziona opzione</p>
 			</div>
 			<div class="section">
-				<a th:href="@{'/ordine' + '/' + ${ordine.id} + '/' + 'settaDomicilio'}" class="btn">
+				<a th:href="@{/ordine/settaDomicilio}" class="btn">
 					<h2>A domicilio</h2>
 				</a>
 				<br>
-				<a th:href="@{'/ordine'+'/'+${ordine.id}+ '/'+ settaAsporto}" class="btn">
+				<a th:href="@{ordine/settaAsporto}" class="btn">
 					<h2>Asporto</h2>
 				</a>
 			</div>

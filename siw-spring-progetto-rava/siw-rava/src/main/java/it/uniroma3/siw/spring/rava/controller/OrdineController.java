@@ -460,7 +460,10 @@ public class OrdineController
 	@RequestMapping(value="/visualizzaOrdine/{id}", method=RequestMethod.GET)
 	public String viewOrdine(Model model, @PathVariable("id")Long id)
 	{
+		
 		Ordine ordine=this.ordineService.trovaPerId(id);
+		Cliente cliente=getCliente();
+				cliente.setOrdineCorrente(ordine);
 		model.addAttribute("ordine",ordine);
 		List<LineaOrdine> lio=this.linea.prendiLineeOrdinePerOrdine( ordine);
 		//se l'ordine è d'asporto, non c'è necessita di inserire il domicilio
@@ -484,6 +487,8 @@ public class OrdineController
 	public String editOrdine(Model model, @PathVariable("id")Long id)
 	{
 		Ordine ordine=this.ordineService.trovaPerId(id);
+		Cliente cliente=getCliente();
+		cliente.setOrdineCorrente(ordine);
 		model.addAttribute("ordine",ordine);
 		List<LineaOrdine> lio=this.linea.prendiLineeOrdinePerOrdine( ordine);
 		//se l'ordine è d'asporto, non c'è necessita di inserire il domicilio
@@ -495,7 +500,7 @@ public class OrdineController
 			model.addAttribute("ordine", ordine);
 			model.addAttribute("lineeOrdine",lio);
 			Credentials c=getCredentials();
-			Cliente cliente=c.getUser();
+			
 			
 			model.addAttribute("cliente",cliente);
 		return "ordine/gestisciOrdine.html";
@@ -509,6 +514,8 @@ public class OrdineController
 	public String eliminaOrdine(Model model, @PathVariable("id")Long id)
 	{
 		Ordine eliminare= this.ordineService.trovaPerId(id);
+		Cliente cliente=getCliente();
+		cliente.setOrdineCorrente(null);
 		
 		this.ordineService.elimina(eliminare);
 		return "home.html";
