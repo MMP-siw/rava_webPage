@@ -9,14 +9,12 @@ body {
 	font-size: 1.2em;
 	display:flex;
 	flex-direction: column;
-	align-items: center;
 }
 header
 {
 	padding-left: 12vh;
 	padding-top: 5vh;
 	padding-bottom: 5vh;
-	text-align: center;
 }
 
 h2 {
@@ -27,6 +25,7 @@ h2 {
 
 form {
 	padding: 10px 25px;
+	margin-left: 3vh;
 }
 
 ul
@@ -39,6 +38,7 @@ ul
 li
 {
 	margin-left: 0px;
+	margin-top: 1vh;
 }
 a {
 	
@@ -64,11 +64,17 @@ a {
 	flex-direction: column;
 	align-items: left;
 }
-
+.title
+{
+	margin-top:-2vh;
+}
 .title h2
 {
 	margin-bottom: 0;
-	font-size: 2.5em;
+	font-size: 2em;
+	border-bottom: solid;
+	border-width: 1px;
+	
 }
 
 #form
@@ -81,38 +87,50 @@ a {
 	display: flex;
 	flex-direction: row;
 	margin-top: 5vh;
-    justify-content: center;
+    
 }
 
 button[type=submit] {
+   margin-left: 8%;
+  margin-right: 20px;
+  
   background-color: white;
-  color: black;
-  padding: 12px 20px;
   border: none;
-  border-radius: 6.5px;
-  cursor: pointer;
-  font-size:20px;
+  height: 50px;
+  font-size: 15px;
+  width: 150px;
+  margin-right: 10vh;
+  font-size: 1.3em;
+  cursor:pointer;
+  color:  rgb(51, 255, 51);
 }
 
 button[type=submit]:hover {
-  background-color: #7CFC00;
-  color: white;
+  background-color: rgb(51, 255, 51);
+  color:white;
+  border-radius: 10px;
 }
 
 button[type=button] {
+  margin-left: 8%;
+  margin-right: 20px;
+  
   background-color: white;
-  color: black;
-  padding: 12px 20px;
   border: none;
-  border-radius: 6.5px;
-  cursor: pointer;
-  font-size:20px;
+  height: 50px;
+  font-size: 15px;
+  width: 150px;
+  margin-right: 10vh;
+  font-size: 1.3em;
+  cursor:pointer;
+  color:red;
 }
 
 
 button[type=button]:hover {
 	background-color: red;
 	color: white;
+	border-radius: 10px;
 }
 
 

@@ -1,7 +1,7 @@
 package it.uniroma3.siw.spring.rava.controller;
 
 
-import org.slf4j.Logger;
+import org.slf4j.Logger; 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,9 +18,11 @@ import it.uniroma3.siw.spring.rava.controller.validator.DomicilioValidator;
 import it.uniroma3.siw.spring.rava.model.Cliente;
 import it.uniroma3.siw.spring.rava.model.Credentials;
 import it.uniroma3.siw.spring.rava.model.Domicilio;
+import it.uniroma3.siw.spring.rava.model.Rava;
 import it.uniroma3.siw.spring.rava.service.ClienteService;
 import it.uniroma3.siw.spring.rava.service.CredentialsService;
 import it.uniroma3.siw.spring.rava.service.DomicilioService;
+import static it.uniroma3.siw.spring.rava.model.Rava.cap;
 
 @Controller
 public class DomicilioController {
@@ -39,6 +41,7 @@ public class DomicilioController {
        public String aggiungiDomicilio(Model model) {
     	   Domicilio domicilio= new Domicilio();
     	   model.addAttribute("domicilio", domicilio);
+    	   model.addAttribute("capDis",cap);
     	  return "formDomicilio.html";
        }
        @RequestMapping(value="/aggiungiDomicilio", method=RequestMethod.POST)
@@ -48,6 +51,7 @@ public class DomicilioController {
     	   Cliente cliente= c.getUser();
     	   this.domicilioValidator.validate(domicilio, bindingResult);
     	   if (bindingResult.hasErrors()) {
+    		   model.addAttribute("capDis",cap);
     		   return "formDomicilio";
     	   }
     	   cliente.addDomicilio(domicilio);
