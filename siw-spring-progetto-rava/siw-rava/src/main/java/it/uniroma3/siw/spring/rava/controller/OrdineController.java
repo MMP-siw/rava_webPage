@@ -423,8 +423,8 @@ public class OrdineController
 		
 	}
 	
-	@RequestMapping(value="/ordine/confermaOrdine", method=RequestMethod.POST)
-	public void confermaOrdine(@ModelAttribute("ordine")Ordine or, BindingResult bindingResult, 
+	@RequestMapping(value="/ordine/confermaOrdine", method=RequestMethod.GET)
+	public String confermaOrdine(@ModelAttribute("ordine")Ordine or, BindingResult bindingResult, 
 			Model model)
 	{
 		Credentials c =getCredentials();
@@ -444,6 +444,8 @@ public class OrdineController
 		this.ordineService.inserisci(ordine);
 		cliente.setOrdineCorrente(null);
 		this.clienteService.saveCliente(cliente);
+		
+		return "home";
 		
 	}
 	

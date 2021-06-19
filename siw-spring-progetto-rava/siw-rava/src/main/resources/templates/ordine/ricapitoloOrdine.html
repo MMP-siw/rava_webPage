@@ -13,8 +13,8 @@
 <section th:replace="fragments/ordine.html :: corpo"> </section>	
 		<div id="piePagina">
 			
-		
-			<button class="submit" id="conferma" th:action="@{'/ordine/confermaOrdine'}" onclick="openForm()" th:text="#{ricapitolo.conferma}" style="font-family: Market-Deco; font-weight: 700">Conferma</button>
+			<button class="submit" id="conferma" onclick="openForm()" th:text="#{ricapitolo.conferma}" 
+				style="font-family: Market-Deco; font-weight: 700">Conferma</button>
 			<a  id ="goBack1" class="submit" th:href="@{'/ordine/infoFatt'}"
 			th:text="#{ricapitolo.tornaOrdine}">Annulla ordine</a>
 		</div>
@@ -50,7 +50,7 @@
 				<img  id="imgConf" th:src="@{/images/png/checkSVG.png}">
 			</div>
 		<div class="footer">
-			<a th:href="@{/home}" href="home" class="btn"><b th:text="#{ricapitolo.tornaHome}">Torna alla home</b></a>
+			<a th:href="@{/ordine/confermaOrdine}" href="home" class="btn"><b th:text="#{ricapitolo.tornaHome}">Torna alla home</b></a>
 		</div>
 
 	
