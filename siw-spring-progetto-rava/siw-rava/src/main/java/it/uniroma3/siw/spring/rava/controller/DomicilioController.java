@@ -12,10 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import it.uniroma3.siw.spring.rava.controller.validator.DomicilioValidator;
 import it.uniroma3.siw.spring.rava.model.Cliente;
 import it.uniroma3.siw.spring.rava.model.Credentials;
@@ -25,10 +23,6 @@ import it.uniroma3.siw.spring.rava.service.ClienteService;
 import it.uniroma3.siw.spring.rava.service.CredentialsService;
 import it.uniroma3.siw.spring.rava.service.DomicilioService;
 import it.uniroma3.siw.spring.rava.service.OrdineService;
-import it.uniroma3.siw.spring.rava.model.Rava;
-import it.uniroma3.siw.spring.rava.service.ClienteService;
-import it.uniroma3.siw.spring.rava.service.CredentialsService;
-import it.uniroma3.siw.spring.rava.service.DomicilioService;
 import static it.uniroma3.siw.spring.rava.model.Rava.cap;
 
 @Controller

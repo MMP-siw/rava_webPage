@@ -112,10 +112,10 @@ public class PrenotazioneController {
 	@RequestMapping(value="/elimina/prenotazione/{id}", method=RequestMethod.GET) 
 	public String deletePrenotazione(@PathVariable("id") Long id, Model model) {
 	    Cliente cliente = getCliente();
-	    /*Prenotazione p = this.prenotazioneService.getById(id);
+	    Prenotazione p = this.prenotazioneService.getById(id);
 	    if (!cliente.equals(p.getCliente()) || !p.isCorrente()) {
 	    	return "error";
-	    }*/
+	    }
 	    this.prenotazioneService.cancella(id);
 	    model.addAttribute("prenotazioni", this.prenotazioneService.getByCliente(cliente));
 	    return "prenotazione/prenotazioni";
@@ -141,10 +141,6 @@ public class PrenotazioneController {
 		
 		Cliente cliente = getCliente();
 		Prenotazione vecchia = this.prenotazioneService.getById(id);
-		
-		/*if (!cliente.equals(vecchia.getCliente()) || !vecchia.isCorrente()) {
-			return "error.html";
-		}*/
 		
 		//aggiorno la prenotazione
 		this.prenotazioneValidator.validate(prenotazione, bindingResult);

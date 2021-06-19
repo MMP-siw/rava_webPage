@@ -15,8 +15,8 @@
 			
 		
 			<button class="submit" id="conferma" onclick="openForm()" th:text="#{ricapitolo.conferma}" style="font-family: Market-Deco; font-weight: 700">Conferma</button>
-			<a  id ="goBack1" class="submit" th:href="@{/ordine/infoFatt}"
-			th:text="#{ricapitolo.tornaOrdine}">Torna all'ordine</a>
+			<a  id ="goBack1" class="submit" th:href="@{'/ordine/' + ${ordine.id} + '/elimina'}"
+			th:text="#{ricapitolo.tornaOrdine}">Annulla ordine</a>
 		</div>
 	<script>
 		function openForm() //Apuretura del pop-up
