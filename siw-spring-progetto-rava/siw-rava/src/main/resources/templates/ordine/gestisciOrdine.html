@@ -83,7 +83,7 @@
 	<div  id="popUp1" class="popUp"> 
 		<div class = "container">	
 			<div class ="sectionPp"> 
-				<span th:text="#{ricapitolo.eliminaOrdine}">Ordine eliminato</span>
+				<span th:text="#{ricapitolo.eliminaOrdine}">Vuoi elimiare il tuo ordine?</span>
 				<br>
 				<br>
 				<h2 th:text="${ordine.id}">Numero ordine</h2>
@@ -91,8 +91,9 @@
 			<div id="img">
 				<img  id="imgConf" th:src="@{/images/png/checkSVG.png}">
 			</div>
-			<div class="footer">
-				<a th:href="@{/ordine/{id}/elimina (id=${ordine.id})}" class="btn"><b th:text="#{ricapitolo.tornaHome}">Torna alla home</b></a>
+			<div class="footerElim">
+				<a th:href="@{/ordine/{id}/elimina (id=${ordine.id})}" id="confermaElim" class="btnElim" th:text="#{ricapitolo.confermaElim}">Conferma </a>
+				<a class="btnElim" id="annulla" onClick="closeForm1()" th:text="#{ricapitolo.annulla}"></a>
 			</div>
   		</div>
   	</div>

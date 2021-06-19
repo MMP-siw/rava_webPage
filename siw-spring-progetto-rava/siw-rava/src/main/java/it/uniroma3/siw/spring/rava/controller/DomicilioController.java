@@ -25,6 +25,11 @@ import it.uniroma3.siw.spring.rava.service.ClienteService;
 import it.uniroma3.siw.spring.rava.service.CredentialsService;
 import it.uniroma3.siw.spring.rava.service.DomicilioService;
 import it.uniroma3.siw.spring.rava.service.OrdineService;
+import it.uniroma3.siw.spring.rava.model.Rava;
+import it.uniroma3.siw.spring.rava.service.ClienteService;
+import it.uniroma3.siw.spring.rava.service.CredentialsService;
+import it.uniroma3.siw.spring.rava.service.DomicilioService;
+import static it.uniroma3.siw.spring.rava.model.Rava.cap;
 
 @Controller
 public class DomicilioController {
@@ -45,6 +50,7 @@ public class DomicilioController {
        public String aggiungiDomicilio(Model model) {
     	   Domicilio domicilio= new Domicilio();
     	   model.addAttribute("domicilio", domicilio);
+    	   model.addAttribute("capDis",cap);
     	  return "formDomicilio.html";
        }
        
@@ -56,6 +62,7 @@ public class DomicilioController {
     	   
     	   this.domicilioValidator.validate(domicilio, bindingResult);
     	   if (bindingResult.hasErrors()) {
+    		   model.addAttribute("capDis",cap);
     		   return "formDomicilio";
     	   }
     	   

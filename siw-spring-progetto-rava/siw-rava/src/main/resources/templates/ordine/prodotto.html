@@ -11,17 +11,23 @@
     	
     	
     	<div class="testo">
-    		<!--Nome del prodotto--><h4 th:text="${prodotto.nome}"></h4>
-			<div class="info"><p th:text="${prodotto.descrizione}">qui-va-titolo</p>
-			Prezzo: <span th:text="${prodotto.prezzo}">qui-va-cognome</span></div>
+    		<!--Nome del prodotto--><h1 th:text="${prodotto.nome}" id="nomeProdotto"></h1>
+			<span>
+			<label th:text="#{prodotto.desctizione}"></label>
 			
-   		</div>
+			<label th:text="${prodotto.descrizione}" id="descrizione"></label>
+			</span>
+			Prezzo: <span th:text="${prodotto.prezzo}" id="prezzo"></span>
+			<div id="img"><img th:src="@{${prodotto.path}}"></div>
+    	</div>
+			
+
     	
     	<div class="buttons">
  		  <!--Potrebbero essere dei bottoni in un form-->
  		  <a th:href="@{/ordine/{id}/prodotto/{id2}/inserisci (id=${ordine.id}, id2=${prodotto.id})}">
  		  	<button type="button" class="inserisci">Inserisci</button></a>
- 		  <a href="selezionaProdotto.html"><button type="button" class="indietro">Indietro</button></a> 
+ 		  <a th:href="@{/ordine/{id}/indietro (id=${ordine.id})}"><button type="button" class="indietro">Indietro</button></a> 
  	   </div>
  
     </div>

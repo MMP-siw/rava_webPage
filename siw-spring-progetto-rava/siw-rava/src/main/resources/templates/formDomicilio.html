@@ -9,6 +9,7 @@
 
 <body>
 	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+	<section>
 	<form th:action="@{/aggiungiDomicilio}" method="POST">
 		<div class="content">
 		<h1>Inserisci Domicilio</h1>
@@ -35,6 +36,12 @@
 			<span><a href="utente" th:href="@{/utente}"><button type="button" id="goBack">Indietro</button></a></span>
 		</div>
 	</form>
+	<div id="capDisp">
+	<p>Lista cap disponibili alla consegna(197, 198, 199)</p>
+		
+		
+	</div>
+	</section>
 </body>
 
 </html>
