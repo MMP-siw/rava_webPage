@@ -17,7 +17,7 @@
 			
 			<label th:text="${prodotto.descrizione}" id="descrizione"></label>
 			</span>
-			Prezzo: <span th:text="${prodotto.prezzo}" id="prezzo"></span>
+			<span>Prezzo: <span th:text="${prodotto.prezzo}" id="prezzo"></span></span>
 			<div id="img"><img th:src="@{${prodotto.path}}"></div>
     	</div>
 			
@@ -25,9 +25,11 @@
     	
     	<div class="buttons">
  		  <!--Potrebbero essere dei bottoni in un form-->
+
  		  <a th:href="@{/ordine/prodotto/{id2}/inserisci (id2=${prodotto.id})}">
  		  	<button type="button" class="inserisci">Inserisci</button></a>
  		  <a th:href="@{/ordine/indietro}"><button type="button" class="indietro">Indietro</button></a> 
+
  	   </div>
  
     </div>
