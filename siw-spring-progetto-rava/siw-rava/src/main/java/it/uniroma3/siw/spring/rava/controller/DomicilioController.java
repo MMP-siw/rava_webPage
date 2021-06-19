@@ -1,6 +1,8 @@
 package it.uniroma3.siw.spring.rava.controller;
 
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,11 @@ import it.uniroma3.siw.spring.rava.controller.validator.DomicilioValidator;
 import it.uniroma3.siw.spring.rava.model.Cliente;
 import it.uniroma3.siw.spring.rava.model.Credentials;
 import it.uniroma3.siw.spring.rava.model.Domicilio;
+import it.uniroma3.siw.spring.rava.model.Ordine;
 import it.uniroma3.siw.spring.rava.service.ClienteService;
 import it.uniroma3.siw.spring.rava.service.CredentialsService;
 import it.uniroma3.siw.spring.rava.service.DomicilioService;
+import it.uniroma3.siw.spring.rava.service.OrdineService;
 
 @Controller
 public class DomicilioController {
@@ -34,6 +38,8 @@ public class DomicilioController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private DomicilioValidator domicilioValidator;
+	@Autowired
+	private OrdineService ordineService;
 	
        @RequestMapping(value="/aggiungiDomicilio", method=RequestMethod.GET)
        public String aggiungiDomicilio(Model model) {
@@ -41,17 +47,20 @@ public class DomicilioController {
     	   model.addAttribute("domicilio", domicilio);
     	  return "formDomicilio.html";
        }
+       
        @RequestMapping(value="/aggiungiDomicilio", method=RequestMethod.POST)
        public String aggiungiDomicilio(@ModelAttribute("domicilio") Domicilio domicilio, BindingResult bindingResult, Model model) {
           
     	   Credentials c= getCliente();
     	   Cliente cliente= c.getUser();
+    	   
     	   this.domicilioValidator.validate(domicilio, bindingResult);
     	   if (bindingResult.hasErrors()) {
     		   return "formDomicilio";
     	   }
-    	   cliente.addDomicilio(domicilio);
-    	   domicilio.setUtente(cliente);
+    	   
+    	  cliente.addDomicilio(domicilio);
+    	  domicilio.setUtente(cliente);
     	  domicilioService.inserisci(domicilio);
     	  clientService.saveCliente(cliente);
     	  model.addAttribute("domicili", domicilioService.domiciliPerUtente(cliente));
@@ -95,6 +104,15 @@ public class DomicilioController {
     	   logger.debug("è stato selezionato il domicilio di "+ domicilio.getIndirizzo());
     	   Credentials c=getCliente();
    		   Cliente cliente=c.getUser();
+   		   
+   		   //controllo che il domicilio non sia associato a nessun ordine
+   		   List<Ordine> ordini = this.ordineService.getOrdinePerDomicilio(domicilio);
+   		   //se il domicilio è già associato a un ordine impedisco l'eliminazione
+   		   if (ordini.size() > 0) {
+   			   model.addAttribute("domicili", this.domicilioService.domiciliPerUtente(cliente));
+    		   return "gestisciDomicili";
+   		   }
+   		   
    		   cliente.removeDomicilio(domicilio);
    		   this.domicilioService.elimina(domicilio);
    		   model.addAttribute("domicili", this.domicilioService.domiciliPerUtente(cliente));

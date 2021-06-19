@@ -65,5 +65,5 @@ public class DomicilioService {
 	{
 		return (List<Domicilio>) this.domRep.findAll();
 	}
-
+	
 }
