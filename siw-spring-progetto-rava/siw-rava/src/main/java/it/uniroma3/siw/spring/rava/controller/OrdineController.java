@@ -418,8 +418,10 @@ public class OrdineController
 		}
 		
 		model.addAttribute("cliente",cliente);
-		
-		
+		/**cosa da provare un attimo**/
+		Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
+		model.addAttribute("domicilio",dom);
+
 		return "ordine/infoFatturazione.html";
 		
 	}
