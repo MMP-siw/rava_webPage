@@ -304,7 +304,7 @@ public class OrdineController
 	}
 	/*
 	 * L'utetnte seleziona un domicilio precedentemente inserito 
-	 * Nota! @Mattia dovrà definre la gestione del 'nuovo domicilio'
+	 * 
 	 * GESTIONE DI INPUT DA RADIOBUTTON
 	 */
 	@RequestMapping(value="/ordine/settaDomicilio", method=RequestMethod.POST)
