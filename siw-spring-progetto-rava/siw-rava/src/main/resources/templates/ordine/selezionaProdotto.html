@@ -12,83 +12,87 @@
 <body>
 	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
 	<!--Da stilizzare -->
- <section>
-  <div class="box">
-	<div class="prodotti">
-		<h1 th:text="#{prodotti.titolo}">Seleziona Prodotti</h1>
-		<ul th:each="prodotto : ${prodotti}">
-			<li>
-			<!--Modifica 3...l'url precedente era {/ordine/{id}/prodotto{id2})}'-->
-				<a href="prodotto.html" th:href="@{/ordine/prodotto/{id2} (id2=${prodotto.id})}">
-					<span th:text="*{prodotto.nome}" class="prod"></span>
-				</a>
-				<span class="prod">Prezzo: <span th:text="*{prodotto.prezzo}">xx</span></span>
-			</li>
-		</ul>
-	</div>
-	<div class="totale">
+	<section>
 
-		<span>
-			<h1>Totale : </h1>
-		</span>
-		<span>
-			<h1 th:text="${ordine.totale}">100</h1>
-		</span>
-		<!--Da stilizzare logica funziona-->
+		<div class="box">
+			<div class="prodotti">
+				<h1 th:text="#{prodotti.titolo}">Seleziona Prodotti</h1>
+				<th:block th:each="prodotto : ${prodotti}">
 
-	</div>
-	<div class="buttons">
+					<div class="row">
+						<a href="prodotto.html" th:href="@{/ordine/prodotto/{id2} (id2=${prodotto.id})}">
+							<div class="boxImg"><img th:src="@{${prodotto.path}}"></div>
+							<label th:text="${prodotto.nome}"></label>
+							<p th:text="${prodotto.descrizione}"></p>
+							<label th:text="${prodotto.prezzo}+'&euro;'"></label>
+						</a>
+					</div>
 
-	<button th:if="${ordine.totale>0}" class="open-button" onclick="openForm()"
-		style="font-size: 18px; font-weight: 600">Conferma</button>
-
-	<a th:href="@{/ordine/annulla}" id="back"><button type="button"
-		style="font-size: 18px; font-weight: 600">Annulla</button></a></div>
-
-
-	<div class="br">
-
-		<script>
-			function openForm() //Apuretura del pop-up
-			{
-				document.getElementById("popUp").style.visibility = "visible";
-
-			}
-
-			function closeForm() //chiusura del pop-uè
-			{
-				document.getElementById("popUp").style.visibility = "hidden";
-
-			}
-		</script>
-	</div>
-	<div id="popUp" class="popUp">
-		<div class="container">
-			<div class="header">
-				<p>Seleziona opzione</p>
+				</th:block>
 			</div>
-			<div class="section">
-				<a th:href="@{/ordine/settaDomicilio}" class="btn">
-					<h2>A domicilio</h2>
-				</a>
-				<br>
-				<a th:href="@{/ordine/settaAsporto}" class="btn">
-					<h2>Asporto</h2>
-				</a>
+			<div class="totale">
+
+				<span>
+					<h1>Totale : </h1>
+				</span>
+				<span>
+					<h1 th:text="${ordine.totale}">100</h1>
+				</span>
+				<!--Da stilizzare logica funziona-->
+
 			</div>
-			<div class="footer">
-				<a onclick="closeForm()" id="closeForm">
-					<h2>Annulla</h2>
-				</a>
+			<div class="buttons">
+
+				<button th:if="${ordine.totale>0}" class="open-button" onclick="openForm()"
+					style="font-size: 18px; font-weight: 600">Conferma</button>
+
+				<a th:href="@{/ordine/annulla}" id="back"><button type="button"
+						style="font-size: 18px; font-weight: 600">Annulla</button></a></div>
+
+
+			<div class="br">
+
+				<script>
+					function openForm() //Apuretura del pop-up
+					{
+						document.getElementById("popUp").style.visibility = "visible";
+
+					}
+
+					function closeForm() //chiusura del pop-uè
+					{
+						document.getElementById("popUp").style.visibility = "hidden";
+
+					}
+				</script>
 			</div>
-			<script>
-				function goBack() {
-					window.history.back();	//torna indietro alla pagina precedente
-				}
-			</script>
+			<div id="popUp" class="popUp">
+				<div class="container">
+					<div class="header">
+						<p>Seleziona opzione</p>
+					</div>
+					<div class="section">
+						<a th:href="@{/ordine/settaDomicilio}" class="btn">
+							<h2>A domicilio</h2>
+						</a>
+						<br>
+						<a th:href="@{/ordine/settaAsporto}" class="btn">
+							<h2>Asporto</h2>
+						</a>
+					</div>
+					<div class="footer">
+						<a onclick="closeForm()" id="closeForm">
+							<h2>Annulla</h2>
+						</a>
+					</div>
+					<script>
+						function goBack() {
+							window.history.back();	//torna indietro alla pagina precedente
+						}
+					</script>
+				</div>
+			</div>
 		</div>
-	</div>
-	</div>
 	</section>
 </body>
 

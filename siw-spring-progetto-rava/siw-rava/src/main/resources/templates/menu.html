@@ -12,12 +12,16 @@
 	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
 	<h1 th:text="#{menu.title}" class="title">MENU</h1>
 	<th:block th:each="panino : ${menu}">
-		<div class="row" >
-			<span><img th:src="@{${panino.path}}"></span>
-			<label th:text="${panino.nome}"></label>
-			<p th:text="${panino.descrizione}"></p>
-			<label th:text="${panino.prezzo}+'&euro;'"></label>
-		</div>
+
+			<div class="row">
+			<a href="prodotto.html" th:href="@{/menu/prodotto/{id2} (id2=${panino.id})}">
+				<div class="boxImg"><img th:src="@{${panino.path}}"></div>
+				<label th:text="${panino.nome}"></label>
+				<p th:text="${panino.descrizione}"></p>
+				<label th:text="${panino.prezzo}+'&euro;'"></label>
+			</a>
+			</div>
+
 	</th:block>
 </body>
 

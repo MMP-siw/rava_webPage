@@ -13,9 +13,29 @@ body{
 	justify-content: space-evenly;
 }
 
-.row img {
-	max-height: 9.5vh;
-	width: auto;
+.row a{
+	height:10vh;
+	width:100%;
+	display:flex;
+	align-items: center;
+	justify-content: space-evenly;
+	color:black;
+	text-decoration: none;
+}
+
+.row a .boxImg {
+	height: 10vh;
+	width: 11.5vh;
+	position:relative;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	overflow:hidden;
+}
+
+.row a .boxImg img{
+	position: relative;
+	height:10vh;
 }
 
 .row p{
