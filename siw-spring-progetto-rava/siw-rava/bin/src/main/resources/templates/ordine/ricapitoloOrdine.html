@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title th:text="#{ricapitolo.titolo}">Home</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/esempioPopUp.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/ricapitoloOrdine.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/ordineFragment.css}">
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
+</head>
+<body>
+<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+<section th:replace="fragments/ordine.html :: corpo"> </section>	
+		<div id="piePagina">
+			
+		
+			<button class="submit" id="conferma" onclick="openForm()" th:text="#{ricapitolo.conferma}" style="font-family: Market-Deco; font-weight: 700">Conferma</button>
+			<a  id ="goBack1" class="submit" th:href="@{/ordine/infoFatt}"
+			th:text="#{ricapitolo.tornaOrdine}">Torna all'ordine</a>
+		</div>
+	<script>
+		function openForm() //Apuretura del pop-up
+				{
+		  		document.getElementById("popUp").style.visibility = "visible";
+				}
+		
+				function closeForm() //chiusura del pop-uè
+				{
+		  		document.getElementById("popUp").style.visibility = "hidden";
+				}
+			</script>
+	<div  id="popUp" class="popUp"> 
+	<div class = "container">
+			
+
+			
+			
+		<div class ="sectionPp"> 
+			<span th:text="#{ricapitolo.nuovoOrdine}">Nuovo ordine creato</span>
+			<br>
+			<br>
+			<h2 th:text="${ordine.id}">Numero ordine</h2>
+
+			
+			
+			
+			
+		</div>
+		<div id="img">
+				<img  id="imgConf" th:src="@{/images/png/checkSVG.png}">
+			</div>
+		<div class="footer">
+			<a th:href="@{/home}" class="btn"><b th:text="#{ricapitolo.tornaHome}">Torna alla home</b></a>
+		</div>
+
+	
+</body>
+</html>

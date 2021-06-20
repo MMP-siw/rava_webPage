@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:fragment="head(title)">
+	<link rel="stylesheet" th:href="@{/css/fragmentStyle.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/ricapitoloOrdine.css}">
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
+	<link rel="icon" href="/images/svg/logo.svg" type="image/icon type">
+</head>
+<body>
+	<section th:fragment="corpo"><section>
+		<div id="container" th:if="${ordine}" th:object="${ordine}">
+			<div class="title">
+				<p th:text="#{ricapitolo.titolo}">Ricapitolo ordine</p>
+			</div>
+			<div class="corpo">
+				<div id="lineeOrdine" class="elements">
+					<div id="intestazione">
+						<div class="empty"></div>
+						<div class="noEmp" > <p th:text="#{ricapitolo.qnt}">Quantità</p></div>
+						<div class="noEmp" id="totInt"> <p th:text="#{ricapitolo.tot}">Tot</p></div>
+					</div>
+					<div id="linea" th:each = "lio : ${lineeOrdine}">
+						<div class="empty" id="prodotto" th:text="${lio.prodotto.nome}">Nome prodotto</div>
+						<div class="noEmpLinea" th:text="${lio.quantita}">1</div>
+						<div  class="noEmpLinea" th:text="${lio.subTotale}">8</div>
+					</div>
+
+					
+					<div id="totale">
+						<span>TOT €</span><span th:text ="${ordine.totale}" id="tot">65</span>
+					</div>
+				</div>
+				<div id="infoFatturazione" class="elements">
+					<ul><li>
+							<span th:text="#{ricapitolo.nome}">Nome: </span>
+								<span class="value" th:text="${ordine.utente.getNome()}"> Matteo</span>
+						</li>
+						<li>
+							<span th:text="#{ricapitolo.cognome}">Cognome: </span>
+								<span class="value" th:text="${ordine.utente.getCognome()}"> Wissel</span>
+						</li>
+						<li>
+							<span th:text="#{ricapitolo.indirizzo}">Indirizzo: </span><span th:text="${domicilio}"class="value"></span>
+						</li>
+						<li>
+							<span th:text="#{ricapitolo.tipo}">Tipo: </span><span class="value" th:text="${ordine.tipo}"></span>
+						</li>
+						<li>
+							<span th:text="#{ricapitolo.orario}">Orario: </span><span class="value"  th:text="${ordine.orarioConsegna}"></span>
+						</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		</div>		
+		
+	
+	</section>
+</body>
+
+</html>

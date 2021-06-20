@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title th:text="#{gestisciOrdine.titolo}">Home</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/esempioPopUp.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/gestisciOrdine.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/ordineFragment.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/modalitaConsegna.css}">
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
+</head>
+<body>
+<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+<section th:replace="fragments/ordine.html :: corpo">
+		
+</section>
+		<div id="piePagina">
+			<a th:href="@{/ordine/infoFatt}" id="orario" class="bottone" th:text="#{ricapitolo.modificaOrario}">Modifica orario</a>
+			<button th:if="${ordine.totale>0}" id="open" onclick="openForm()" class="bottone" th:text="#{ricapitolo.modificaModConsegna}"
+				style="font-family:Market-Deco; font-weight:700";>Modifica consegna</button>
+			<button id="back" class="bottone" th:text="#{ricapitolo.elimina}" onclick="openForm1()"
+				style="font-family:Market-Deco; font-weight:700";>Elimina</button>
+		</div>
+
+
+
+	<div class="br">
+
+		<script>
+			function openForm() //Apuretura del pop-up
+			{
+				document.getElementById("popUp").style.visibility = "visible";
+
+			}
+
+			function closeForm() //chiusura del pop-uè
+			{
+				document.getElementById("popUp").style.visibility = "hidden";
+
+			}
+		</script>
+	</div>
+	<div id="popUp" class="popUp">
+		<div class="container">
+			<div class="header">
+				<p>Seleziona opzione</p>
+			</div>
+			<div class="section">
+				<a th:href="@{/ordine/settaDomicilio}" class="btn">
+					<h2>A domicilio</h2>
+				</a>
+				<br>
+				<a th:href="@{ordine/settaAsporto}" class="btn">
+					<h2>Asporto</h2>
+				</a>
+			</div>
+			<div class="footer">
+				<a onclick="closeForm()" id="closeForm">
+					<h2>Annulla</h2>
+				</a>
+			</div>
+			<script>
+				function goBack() {
+					window.history.back();	//torna indietro alla pagina precedente
+				}
+			</script>
+		</div>
+	</div>
+		</div>
+		
+		<!--Eliminazione ordine-->
+	<script>
+		function openForm1() {
+		  	document.getElementById("popUp1").style.visibility = "visible";
+		}
+		
+		function closeForm1() //chiusura del pop-uè
+		{
+		  document.getElementById("popUp1").style.visibility = "hidden";
+		}
+	</script>
+	
+	<div  id="popUp1" class="popUp"> 
+		<div class = "container">	
+			<div class ="sectionPp"> 
+				<span th:text="#{ricapitolo.eliminaOrdine}">Vuoi elimiare il tuo ordine?</span>
+				<br>
+				<br>
+				<h2 th:text="${ordine.id}">Numero ordine</h2>
+			</div>
+			<div id="img">
+				<img  id="imgConf" th:src="@{/images/png/checkSVG.png}">
+			</div>
+			<div class="footerElim">
+				<a th:href="@{/ordine/{id}/elimina (id=${ordine.id})}" id="confermaElim" class="btnElim" th:text="#{ricapitolo.confermaElim}">Conferma </a>
+				<a class="btnElim" id="annulla" onClick="closeForm1()" th:text="#{ricapitolo.annulla}"></a>
+			</div>
+  		</div>
+  	</div>
+</body>
+</html>

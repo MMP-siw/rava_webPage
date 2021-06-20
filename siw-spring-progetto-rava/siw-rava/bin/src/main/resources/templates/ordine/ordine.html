@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/esempioPopUp.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/ricapitoloOrdine.css}">
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/css/ordineFragment.css}">
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
+</head>
+<body>
+<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+<section th:replace="fragments/ordine.html :: corpo"></section>
+	
+		<div id="piePagina">
+			<a href="/home" id="torna">torna alla home</a>
+		</div>
+
+</body>
+</html>

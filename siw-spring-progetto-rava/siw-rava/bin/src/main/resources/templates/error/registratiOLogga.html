@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+	<link th:href="@{/fogliCss/registratiOLogga.css}" rel="stylesheet">
+</head>
+<body>
+   <nav th:replace="fragments/fragment.html :: intestazione"></nav>
+
+    <div class="header">
+    	<div id="titolo">
+    	<p>Area risevate</p>
+    	</div>
+    	<div id="corpo">
+    	<p th:text="#{areaRiservata.msg}"> Noi di rava vogliamo offrire il miglior servizio possibile.
+    	<br>
+    	</p>
+    	<p th:text="#{areaRiservate.msg2}">Per poter usufruire delle comodità prensenti nel sito e delle nostre delize è necessario 
+    	registrasi o accedere al proprio profilo.
+    	</p>
+    	<p th:text="#{areaRiservata.msg3}">
+    	</p>
+    	</div>
+    	<div id="link">
+    	<span>
+    			<a  id="login" th:href="@{/login}">Log-in</a>
+    			<a th:href="@{/register}">Registrati</a>
+    	</span>
+    	</div>
+    	
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!--Info di fatturazione-->
+<!--Qui il cliente inserisce i dati relativi all'ordine, ovvero, l'orario di consegna/ritiro e un commento sull'ordine-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!--Da modificare, rendere i title dinamico-->
+	<title th:text="#{title.infoFatt}">Info Fatturazione</title>
+	<link th:href="@{/css/infoFatt.css}" rel="stylesheet">
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+	
+</head>
+<body>
+		
+				
+		<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+<!--Lo scrpit abilita la scelta dell'orario solo se è stato selezionato il radioBotton Pianifica-->
+<script type="text/javascript">
+
+										
+   	function abilitaOrario() {
+       	var radio = document.getElementById("Pianifica");	//prendi la radio orario
+       	var orario = document.getElementById("PianificaOrario");	//prendi il l'input time 
+        orario.disabled = radio.checked ? false : true;	//abilita orario in base a radio (se checked o meno)
+        if (!orario.disabled) {	//se non è disabilitato
+           	orario.focus();		//abilitalo
+       	}
+    }
+
+</script>
+			<!--I primi campi sono rimepiti di default-->
+			<div id="title">
+				<p th:text="#{title.infoFatt}">Info fatturazione</p>
+			</div>
+			
+			<div id="elements">
+				<ul>
+					<li> <span th:text="#{ricapitolo.nome}">Nome:</span> <span class="nonModificabili" th:text="${cliente.nome}">Pietro</span></li>
+					<li> <span th:text="#{ricapitolo.cognome}">Cognome:</span><span class="nonModificabili" th:text="${cliente.cognome}">Quadrini</span></li>
+					<li> <span th:text="#{ricapitolo.indirizzo}">Indirizzo:</span><span class="nonModificabili" th:text="${domicilio}">Via del Corso 139 Roma 00145</span></li>
+					<form id="form" method="POST" th:action="@{/ordine/infoFatt} ">
+						<li >
+							
+							<span>
+								<label th:if="${ordine.tipo} == 'Asporto'" th:text="#{infoFatt.orarioRitiro}">Orario ritiro
+								</label>
+								<label th:if="${ordine.tipo} eq 'Domicilio'" th:text="#{infoFatt.orarioConsegna}">Orario consegna
+								</label>
+								<label th:if="!${ordine.tipo}">Orario consegna: </label>
+								<input type="radio" value="Prima possibile" id="Prima possibile"  th:field="${ordine.tipologiaDiConsegna} "name="consegna" onclick="abilitaOrario()" checked="checked" >
+									<label th:text="#{infoFatt.prima}">Prima possibile</label>
+									
+								<input type="radio" id="Pianifica" name="consegna"  value="Pianifica" th:field="${ordine.tipologiaDiConsegna}" onclick="abilitaOrario()" >
+									<label  th:text="#{infoFatt.pianifica}"> Pianifica</label>
+								<input type="time" class="clock"  th:field="${ordine.orarioConsegna}" name="orarioConsegna" id="PianificaOrario" min="00:00" max="23:00" disabled="disabled" required>
+							</span>
+								<div th:if="${#fields.hasErrors('ordine.tipologiaDiConsegna')}" th:errors="${ordine.tipologiaDiConsegna}" class="errors"></div>
+								<div th:if="${#fields.hasErrors('ordine.orarioConsegna')}" th:errors="${ordine.orarioConsegna}" class="errors"></div>
+      
+							</span>
+						</li>
+						<li>
+							<label for="commento" th:text="#{infoFatt.commento}">Commento:</label><br>
+							<textarea placeholder="informazioni..." id="commento" th:field="${ordine.commento}" style="font-size: 17px"></textarea>
+						</li>
+						<div class="buttons">
+							
+								<a th:href="@{/ordine/indietro}" href="ordine/selezionaProdotto" class="submit" id="goBack" th:text="#{ricapitolo.tornaOrdine}">Torna all'ordine</a>
+
+								<input  type="submit"  id="conferma" class="submit"  th:value="#{ricapitolo.conferma}" style="font-family: Market-Deco; font-weight: 700">
+						</div>
+					</form>
+				</ul>
+			</div>
+			
+		</head>
+</body>
+</html>

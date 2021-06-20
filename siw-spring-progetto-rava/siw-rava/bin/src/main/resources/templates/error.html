@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <link th:href="@{/css/error.css}" rel="stylesheet">
+   </head>
+  <body>
+   <h1>Error!</h1>
+   <div class="errorPage">
+      <br />
+      <p th:text="#{error.messaggio}" id="msg">
+         Qualcosa è andato storto
+(
+         <span th:text="${path}">x</span>
+         ).
+      </p>
+      <p th:text="${'Details: ' + message}" class="diagnosi"></p>
+      <p th:text="${'Status: ' + status}" class="diagnosi"></p>
+      <img th:src="@{/images/png/errore3.jpg}" id="img">
+   </div>
+  </body>
+</html>

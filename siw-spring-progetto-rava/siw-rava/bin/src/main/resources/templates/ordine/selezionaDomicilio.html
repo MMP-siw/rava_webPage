@@ -1,0 +1,41 @@
+<!--Seleziona domicilio-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+   	<link th:href="@{/css/selezionaDomicilio.css}" rel="stylesheet">	
+   	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
+   	<link rel="icon" href="/images/svg/logo.svg" type="image/icon type">
+   	<title th:text="#{selezionaDomicilio.title}"></title>
+  </head>
+  <body>
+  	
+  	 <!----<nav th:replace="fragments/fragment.html :: intestazione"></nav>-->
+  	
+	<!--Si ne cessita un validator per verificare che l'utente abbia effettivamente selezionato un domicilio-->
+	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
+  	<header>
+  	<div class="title">
+  		<h2 th:text="#{selezionaDomicilio.title}">Seleziona domicilio</h2>
+  	</div>
+  	
+  	
+  		<form th:action="@{'/ordine/settaDomicilio'}" method="POST"  th:object="${domicilio}" id="form">
+  			<ul>
+            <li th:each="domicilioTemp : ${domicili}">
+                <input type="radio" th:field="${domicilio.id}" th:value="${domicilioTemp.id}" required/>
+                <label  th:for="${domicilio.id}" th:text="${domicilioTemp}">Via u ue</label>
+            </li>
+        </ul>
+       		
+		<div class ="buttons">
+			
+			<a th:href="@{/ordine/indietro}" class="submit" id="goBack" ><button type="button">Indietro</button></a>
+			<button type ="submit" class="submit" value="Conferma" id="conferma">Conferma</button>
+
+		</div>
+	</form>
+	</header>
+</body>
+
+
+

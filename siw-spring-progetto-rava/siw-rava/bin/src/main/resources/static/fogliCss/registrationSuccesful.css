@@ -1,0 +1,16 @@
+* {
+	margin: 0;
+}
+
+body {
+	font-family: adobe-gothic-std, sans-serif;
+}
+
+.container {
+	text-align : center;
+	padding: 25vh;
+}
+
+.container p {
+	font-size: 25px;
+}
