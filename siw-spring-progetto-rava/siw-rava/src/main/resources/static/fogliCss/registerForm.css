@@ -4,7 +4,7 @@
 
 
 body {
-	font-family: adobe-gothic-std, sans-serif;
+	font-family: Market Deco;
 }
 
 .form {
@@ -39,6 +39,14 @@ input {
 	border-color: #DCDCDC;
 	background-color: inherit;
 	outline: none;
+}
+
+input[type=password] {
+	font-family: sans-serif;
+}
+
+input[type=password]::placeholder {
+	font-family: Market Deco;
 }
 
 button {

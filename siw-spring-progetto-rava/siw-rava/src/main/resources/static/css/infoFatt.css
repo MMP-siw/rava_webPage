@@ -161,7 +161,6 @@ head
 {
   
   height:55px;
-  font-family: adobe-gothic-std, sans-serif;
   color:  rgb(51, 255, 51);
 
 }
@@ -178,6 +177,7 @@ head
   text-align: center;
   
   width: 210px;  
+  height: 80px;
   align-items: flex-start;
   padding-top:1.2vh;
   text-decoration: none;

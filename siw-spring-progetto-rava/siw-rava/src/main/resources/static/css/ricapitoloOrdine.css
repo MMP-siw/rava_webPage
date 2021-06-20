@@ -23,7 +23,6 @@
 
 .submit:hover {
   
-  
   border-radius: 10px;
 
 }
@@ -31,7 +30,7 @@
 {
   color: rgb(51, 255, 51);
   height:55px;
-  font-family: adobe-gothic-std, sans-serif;
+  font-family: Market Deco;
 
 }
 #conferma:hover
@@ -45,8 +44,10 @@
   
   appearance:button;
   text-align: center;
+  vertical-align: middle;
   color:red;
   width: 210px;  
+  height: 80px;
   align-items: flex-start;
   padding-top:1.2vh;
   text-decoration: none;

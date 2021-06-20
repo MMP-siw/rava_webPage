@@ -16,12 +16,12 @@
 		<div class="inserisci">
 			<div class ="row">
 				<div class="col-1"><label>Data:</label></div>
-				<div class="col-2"><input type="date" th:field="*{data}" style="font-size:16.5px"/></div>
+				<div class="col-2"><input type="date" th:field="*{data}" style="font-size:16.5px" required/></div>
 				<div th:if="${#fields.hasErrors('data')}" th:errors="*{data}"></div>
 			</div>	
 			<div class="row">
 				<div class="col-1"><label>Fascia oraria:</label></div>
-				<div class="col-2"><select id="orario" th:field="*{orario}">
+				<div class="col-2"><select id="orario" th:field="*{orario}" required>
 					<option th:each="orario : ${T(it.uniroma3.siw.spring.rava.model.FasciaOraria).values()}" 
 							th:value="${orario}" th:text="${orario.getValue()}" style="font-size:16.5px"></option>
       			</select>
@@ -30,7 +30,7 @@
       		</div>
       		<div class ="row">
 				<div class="col-1"><label>Numero Persone:</label></div>
-				<div class="col-2"><input type="number" th:field="*{numeroPersone}" style="font-size:16.5px"/></div>
+				<div class="col-2"><input type="number" th:field="*{numeroPersone}" style="font-size:16.5px" required/></div>
 				<div th:if="${#fields.hasErrors('numeroPersone')}" th:errors="*{numeroPersone}"></div>
 			</div>
 			<div class ="row">

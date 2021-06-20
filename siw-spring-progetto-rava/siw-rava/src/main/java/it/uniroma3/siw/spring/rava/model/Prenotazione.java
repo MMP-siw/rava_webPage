@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.rava.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,13 +56,14 @@ public class Prenotazione {
 	 * @return boolean
 	 */
 	public boolean isCorrente() {
+		//DateTimeFormatter formatter =DateTimeFormatter.ofPattern("HH:mm");
 		LocalTime ora = LocalTime.now();
 		LocalTime oraPren = LocalTime.parse(this.orario.getOraMax());
 		LocalDate oggi = LocalDate.now();
-		if (ora.isAfter(oraPren)) {
-			return !(oggi.isEqual(this.data));
+		if (this.data.isEqual(oggi)) {
+			return ora.isBefore(oraPren);
 		}
-		return true;
+		return this.data.isAfter(oggi);
 	}
 	
 	public void updatePrenotazione(Prenotazione p) {
