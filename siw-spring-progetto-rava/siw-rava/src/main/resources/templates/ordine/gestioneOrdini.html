@@ -4,13 +4,13 @@
 	<title th:text="#{gestisciOrdini.titolo}">Home</title>
 	
 	<link rel="icon" th:href="@{/images/svg/logo.svg}" type="image/icon type">
-	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
 	<link th:href="@{/fogliCss/gestisciOrdini.css}" rel="stylesheet">
+	<link th:href="@{/css/fragmentStyle.css}" rel="stylesheet">
 	
 </head>
 <body>
 	<nav th:replace="fragments/fragment.html :: intestazione"></nav>
-	<header>
+	<section>
 			<div class="gestioneTitle">
 			<p> <b th:text="#{gestioneOrdine.title}">Gli ordini di</b> <b th:text="${cliente.nome}">Matteo Wissel</b> </p>
 			</div>
@@ -33,7 +33,7 @@
 				
 				<a th:href="@{/home}" id="goBack1"><b th:text="#{gestioneOrdine.vaiAllaHome}">Torna alla home</b></a>
 			</div>
-	</header>
+	</section>
 	
 	
 		

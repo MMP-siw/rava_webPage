@@ -30,7 +30,7 @@
 		<div class ="buttons">
 			
 			<a th:href="@{/ordine/indietro}" class="submit" id="goBack" ><button type="button">Indietro</button></a>
-			<button type ="submit" class="submit" value="Conferma" id="conferma">Conferma</button>
+			<button th:if="${domicili.size()>0}" type ="submit" class="submit" value="Conferma" id="conferma">Conferma</button>
 
 		</div>
 	</form>

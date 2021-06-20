@@ -27,7 +27,7 @@
        		
 		<div class ="buttons">
 			
-				<span><button type="submit" id="invio" value="Elimina">Elimina</button></span>
+				<span><button th:if="${domicili.size()>0}" type="submit" id="invio" value="Elimina">Elimina</button></span>
 				<span><a href="utente" th:href="@{/utente}"><button type="button" id="goBack">Indietro</button></a></span>
 				
 		</div>

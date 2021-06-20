@@ -66,5 +66,10 @@ public class OrdineService
 		return this.ordineRepo.findAllByIndirizzoConsegna(domicilio);
 	}
 	
+	@Transactional
+	public List<Ordine> tutti() {
+		return (List<Ordine>)this.ordineRepo.findAll();
+	}
+	
 
 }

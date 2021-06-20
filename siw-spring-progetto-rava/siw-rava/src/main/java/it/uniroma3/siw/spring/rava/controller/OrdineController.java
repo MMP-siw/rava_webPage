@@ -1,11 +1,6 @@
 package it.uniroma3.siw.spring.rava.controller;
  
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
-
-import org.apache.tomcat.jni.Time;
 import org.slf4j.Logger;  
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 import it.uniroma3.siw.spring.rava.controller.validator.OrdineValidator;
 import it.uniroma3.siw.spring.rava.model.Cliente;
 import it.uniroma3.siw.spring.rava.model.Credentials;
@@ -168,9 +162,11 @@ public class OrdineController
 		logger.debug("L'UTETNE LOGGATO HA ID : " +  cliente.getId());
 		logger.debug("NOME: " +cliente.getNome() + "COGNOME: "+ cliente.getCognome());
 				
-
-
-		Ordine ordineCorrente=new Ordine();
+		/**modifica da testare**/
+		Ordine ordineCorrente = new Ordine();
+		if (cliente.getOrdineCorrente()!=null) {
+			ordineCorrente = cliente.getOrdineCorrente();
+		}
 		
 		List<Prodotto> listaProdotti=this.prodService.tutti();
 		logger.debug("HAI CREATO l'ORDINE NUMERO : ", ordineCorrente.getId());
@@ -178,7 +174,7 @@ public class OrdineController
 		//cliente.addOrdine(ordineCorrente);
 		
 		//this.ordineService.inserisci(ordineCorrente);
-		ordineCorrente.setCommento("AAAAAAAA");
+		ordineCorrente.setCommento("");
 		cliente.setOrdineCorrente(ordineCorrente);		//settimao che l'ordine corrente (transiente) è quello creato
 		
 		logger.debug("L'UTENTE HA CREATO L'ORDINE " + cliente.getOrdineCorrente().getCommento());
@@ -191,7 +187,7 @@ public class OrdineController
 		return "ordine/selezionaProdotto.html";
 	}
 	
-	@RequestMapping(value="ordine/annulla", method= RequestMethod.GET)
+	@RequestMapping(value="/ordine/annulla", method= RequestMethod.GET)
 	public String annullaOrdine(Model model)
 	{
 		Cliente c=getCliente();
@@ -207,7 +203,7 @@ public class OrdineController
 	 * L'utente Seleziona il prodotto desiderato
 	 * Passo 2 caso d'uso Ordina
 	 */
-	@RequestMapping(value = "ordine/prodotto/{id2}", method = RequestMethod.GET)
+	@RequestMapping(value = "/ordine/prodotto/{id2}", method = RequestMethod.GET)
 	public String getProdotto(@PathVariable("id2")Long id2, Model model) {
 
 		Cliente c=getCliente();		//prendo il cliente corrente loggato
@@ -399,7 +395,6 @@ public class OrdineController
 			logger.debug("COMMENTO: "+ ordine.getCommento());
 			logger.debug("TOTALE ORDINE = "+ ordine.getTotale());
 			ordine.setStato("in corso");
-			
 			List<LineaOrdine> lio=ordine.getLineeOrdine();
 			//se l'ordine è d'asporto, non c'è necessita di inserire il domicilio
 			if(ordine.getTipo().equals("Domicilio"))
@@ -408,22 +403,49 @@ public class OrdineController
 				model.addAttribute("domicilio",dom);
 			}
 				
-				model.addAttribute("ordine", ordine);
-				model.addAttribute("lineeOrdine",lio);
+			model.addAttribute("ordine", ordine);
+			model.addAttribute("lineeOrdine",lio);
 				
-				this.ordineService.inserisci(ordine);
-				cliente.setOrdineCorrente(null);
-				
+			this.ordineService.inserisci(ordine);
+			/**cliente.setOrdineCorrente(null);
+			this.clienteService.saveCliente(cliente);**/
 			
 			return "ordine/ricapitoloOrdine.html";
 		}
 		
 		model.addAttribute("cliente",cliente);
-		/**cosa da provare un attimo**/
-		Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
-		model.addAttribute("domicilio",dom);
-
+		
+		if (ordine.getTipo().equals("Domicilio")) {
+			Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
+			model.addAttribute("domicilio",dom);
+		}
 		return "ordine/infoFatturazione.html";
+		
+	}
+	
+	@RequestMapping(value="/ordine/confermaOrdine", method=RequestMethod.GET)
+	public String confermaOrdine(@ModelAttribute("ordine")Ordine or, BindingResult bindingResult, 
+			Model model)
+	{
+		Credentials c =getCredentials();
+		Cliente cliente = c.getUser();
+		Ordine ordine = cliente.getOrdineCorrente();
+		List<LineaOrdine> lio=ordine.getLineeOrdine();
+		//se l'ordine è d'asporto, non c'è necessita di inserire il domicilio
+		if(ordine.getTipo().equals("Domicilio"))
+		{
+			Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
+			model.addAttribute("domicilio",dom);
+		}
+			
+		model.addAttribute("ordine", ordine);
+		model.addAttribute("lineeOrdine",lio);
+			
+		this.ordineService.inserisci(ordine);
+		cliente.setOrdineCorrente(null);
+		this.clienteService.saveCliente(cliente);
+		
+		return "home";
 		
 	}
 	
@@ -464,18 +486,21 @@ public class OrdineController
 		
 		Ordine ordine=this.ordineService.trovaPerId(id);
 		Cliente cliente=getCliente();
-				cliente.setOrdineCorrente(ordine);
+		if (!ordine.getUtente().equals(cliente)) {
+			return "error.html";
+		}
+		cliente.setOrdineCorrente(ordine);
 		model.addAttribute("ordine",ordine);
 		List<LineaOrdine> lio=this.linea.prendiLineeOrdinePerOrdine( ordine);
 		//se l'ordine è d'asporto, non c'è necessita di inserire il domicilio
+		
 		if(ordine.getTipo().equals("Domicilio"))
 		{
 			Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
 			model.addAttribute("domicilio",dom);
 		}
-			model.addAttribute("ordine", ordine);
-			model.addAttribute("lineeOrdine",lio);
-			
+		model.addAttribute("ordine", ordine);
+		model.addAttribute("lineeOrdine",lio);			
 		
 		return "ordine/ordine.html";
 	}
@@ -489,6 +514,10 @@ public class OrdineController
 	{
 		Ordine ordine=this.ordineService.trovaPerId(id);
 		Cliente cliente=getCliente();
+		if (!ordine.getUtente().equals(cliente) || !ordine.getStato().equals("in corso")) {
+			return "error.html";
+		}
+		
 		cliente.setOrdineCorrente(ordine);
 		model.addAttribute("ordine",ordine);
 		List<LineaOrdine> lio=this.linea.prendiLineeOrdinePerOrdine( ordine);
@@ -498,12 +527,11 @@ public class OrdineController
 			Domicilio dom=this.domService.domicilioPerId(ordine.getIndirizzoConsegna().getId());
 			model.addAttribute("domicilio",dom);
 		}
-			model.addAttribute("ordine", ordine);
-			model.addAttribute("lineeOrdine",lio);
-			Credentials c=getCredentials();
-			
-			
-			model.addAttribute("cliente",cliente);
+		
+		model.addAttribute("ordine", ordine);
+		model.addAttribute("lineeOrdine",lio);
+		Credentials c=getCredentials();	
+		model.addAttribute("cliente",cliente);
 		return "ordine/gestisciOrdine.html";
 		
 	}
@@ -516,6 +544,9 @@ public class OrdineController
 	{
 		Ordine eliminare= this.ordineService.trovaPerId(id);
 		Cliente cliente=getCliente();
+		if (!eliminare.getUtente().equals(cliente) || !eliminare.getStato().equals("in corso")) {
+			return "error.html";
+		}
 		cliente.setOrdineCorrente(null);
 		
 		this.ordineService.elimina(eliminare);
