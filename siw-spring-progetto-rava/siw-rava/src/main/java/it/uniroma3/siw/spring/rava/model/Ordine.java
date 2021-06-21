@@ -8,7 +8,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -128,8 +130,18 @@ public class Ordine {
 	
 	public void aggoungiLineaOrdine(LineaOrdine lio) 
 	{
-		
-		this.lineeOrdine.add(lio);
+		boolean x=false;
+		for(LineaOrdine linea : this.lineeOrdine)
+		{
+			if(lio.getProdotto().equals(linea.getProdotto()))
+			{
+				linea.setQuantita(lio.getQuantita()+1);
+				linea.setSubTotale(linea.getSubTotale()+lio.getSubTotale());
+				x=true;
+			}
+		}
+		if(!x)
+			this.lineeOrdine.add(lio);
 		
 		
 	}

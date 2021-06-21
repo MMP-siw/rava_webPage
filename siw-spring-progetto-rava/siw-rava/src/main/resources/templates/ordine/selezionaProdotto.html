@@ -30,6 +30,14 @@
 
 				</th:block>
 			</div>
+		</div>
+			<div class="ricapitolo">
+				<div class="lineeOrdine">
+					<h1 th:text="#{ricapitolo.titolo}">Ricapitolo ordine</h1>
+						<ul th:if="${ordine.lineeOrdine.size()>0}" th:each="lio : ${ordine.lineeOrdine}">
+							<li th:text="${lio}"></li>
+						</ul>
+			
 			<div class="totale">
 
 				<span>
@@ -38,18 +46,20 @@
 				<span>
 					<h1 th:text="${ordine.totale}">100</h1>
 				</span>
-				<!--Da stilizzare logica funziona-->
+				
 
 			</div>
 			<div class="buttons">
 
 				<button th:if="${ordine.totale>0}" class="open-button" onclick="openForm()"
-					style="font-size: 18px; font-weight: 600">Conferma</button>
+					style="font-size: 18px; font-weight: 1000">Conferma</button>
 
 				<a th:href="@{/ordine/annulla}" id="back"><button type="button"
-						style="font-size: 18px; font-weight: 600">Annulla</button></a></div>
+						style="font-size: 18px; font-weight: 1000">Annulla</button></a>
+			</div>
+			
 
-
+			</div>
 			<div class="br">
 
 				<script>
@@ -92,7 +102,7 @@
 					</script>
 				</div>
 			</div>
-		</div>
+		
 	</section>
 </body>
 
