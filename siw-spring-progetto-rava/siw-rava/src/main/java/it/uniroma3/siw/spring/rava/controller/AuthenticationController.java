@@ -28,6 +28,7 @@ public class AuthenticationController {
 	@Autowired
 	private ClienteValidator clienteValidator;
 	
+	@SuppressWarnings("unused")
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());	//per le stampe di log
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET) 

@@ -548,7 +548,7 @@ public class OrdineController
 			return "error.html";
 		}
 		cliente.setOrdineCorrente(null);
-		
+		eliminare.setIndirizzoConsegna(null);
 		this.ordineService.elimina(eliminare);
 		return "home.html";
 	}
